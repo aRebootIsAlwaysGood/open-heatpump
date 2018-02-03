@@ -10,7 +10,7 @@
  #ifndef WPCONTROL_H
 #define WPCONTROL_H
 
-/** Struct welcher für alle Digitaleingänge ein Statusbit beinhaltet */
+/** Struct-Objekt welches für alle digitalen Steuereingänge ein Statusbit beinhaltet */
 struct DI_STATES
   {
     uint8_t status_nd:1;		/**< Statusbit0 ND-Schalter */
@@ -23,7 +23,7 @@ struct DI_STATES
     uint8_t status_reserve2:1;	/**< Statusbit7 Reserve */
     };
 
-/** Struct mit Informationen zum Systemzustand durch Ausgabe eines binären Wertes */
+/** Struct-Objekt mit Informationen zum Systemzustand durch Ausgabe eines binären Wertes */
 struct SYSTEMZUSTAND 
 	{
 	uint16_t sumpfheizung:1;	/**< Bit0 Kurbelwannenheizung: 0= AUS, 1= EIN */

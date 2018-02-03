@@ -29,7 +29,7 @@ void setupSteuerIO(){
 	digitalWrite(PIN_MISCHER_AUF,LOW);
 	digitalWrite(PIN_MISCHER_ZU,LOW);
 	digitalWrite(PIN_SAMMELALARM,LOW);
-	digitalWrite(PIN_SUMPFHEIZUNG,HIGH);
+	digitalWrite(PIN_SUMPFHEIZUNG,HIGH); // Sumpfheizung in Standby immer aktiv
 
 }
 
@@ -37,8 +37,11 @@ void setupSteuerIO(){
 /**
 *	@brief Einlesen der Digitalen Eingänge.
 *
-*	Einlesen aller Digitalen Eingänge bei Aufruf. Eingänge sind active-low
-*	und werden demensprechend negiert.
+*	Einlesen der digitalen Steuereingängen, die Eingänge der Nutzerbedienung jedoch nicht.
+*	Alle Eingänge sind mittels Pullup-Widerstand ausgerüstet, sind also active-low
+*	und werden demensprechend negiert bevor sie in der globalen Struktur DiStates
+*	eingetragen werden . Debouncing ist hardwareseitig mittels RC-Tiefpass
+*	implementiert.
 */
 /************************************************************************/
 void getInputstates(){
@@ -48,6 +51,7 @@ void getInputstates(){
 	DiStates.status_k_start= !digitalRead(PIN_ZUST_KSTART);
 	DiStates.status_k_run= !digitalRead(PIN_ZUST_KBETR);
 	DiStates.status_tarif= !digitalRead(PIN_TARIFSPERRE);
+	return;
 }
 
 /************************************************************************/

@@ -73,6 +73,24 @@ float calcTvorlauf(int8_t tAussen, uint8_t kurvenstufe, int8_t parallelver, int8
 	return (tvorlauf /100.0);					// divide trough 100 to return value in °C, treat 100 as floating constant
 }
 
+
+/************************************************************************/
+/** 
+*	@brief	Zustandsautomat für den Heizungsvorlauf-Temperaturregler.
+*			Der Regler kann verschiedene Zustände annehmen, welche die stetige Vorlauf-
+*			Temperaturregelung beeinflussen beziehungsweise diese ausser Kraft setzen.
+*			Im Zustand OFF wird der Regler ganz ausgeschalten, beispielsweise im Sommer.
+*			Im Zustand AUTO wird die Vorlauftemperatur stetig geregelt.
+*			Im Zustand MANUAL nimmt der Regler keinen Einfluss auf seine Steuerausgänge
+*			(Mischer auf/zu und Heizkreislaufpumpe). Somit können diese von anderen
+*			Modulen angesteuert werden ohne dass es zu Konflikten kommt.
+*			Die Zustände LADEN und ENTEISEN initialisieren den Regler gegebenfalls mit
+*			neuen Regelparametern, falls es durch die schnellen Temperaturwechsel zum
+*			instabilen Regelverhalten kommt. 
+*			
+*	@param	[in] reglerState Variable für die Anwahl des Reglerzustandes.
+*/
+/************************************************************************/
 void reglerStatemachine(reglerState_t reglerState){
 
 	switch (reglerState)
