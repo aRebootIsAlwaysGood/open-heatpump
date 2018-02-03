@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Atmel Studio Solution File, Format Version 11.00
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "wpMain", "wpMain.cppproj", "{C8E0BE25-8945-4670-961A-0F9787F5E8ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C8E0BE25-8945-4670-961A-0F9787F5E8ED}.Debug|AVR.ActiveCfg = Debug|AVR
+		{C8E0BE25-8945-4670-961A-0F9787F5E8ED}.Debug|AVR.Build.0 = Debug|AVR
+		{C8E0BE25-8945-4670-961A-0F9787F5E8ED}.Release|AVR.ActiveCfg = Release|AVR
+		{C8E0BE25-8945-4670-961A-0F9787F5E8ED}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
