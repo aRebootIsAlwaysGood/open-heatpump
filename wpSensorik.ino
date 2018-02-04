@@ -24,16 +24,16 @@
  *			Mittels bekannter ADC-Auflösung entspricht -50°C einem linearisierten Wert
  *			von 287 und +100°C einem Rückgabewert von 576. 
  *			Durch Einsatz der Funktion map() wird der ADC-Ausgangswert in Grad Celsius
- *			ausgegeben und mittels char() in eine vorzeichenbehaftete 8bit Ganzzahl
- *			übersetzt.
+ *			ausgegeben. Die Ausgabe erfolgt als 16bit Integer, demzufolge nur ganzzahlige
+ *			Werte.
  *
  *	@return	gemessene Aussentemperatur in Grad Celsius (ganzzahlig).
  */
  /************************************************************************/
- int8_t getAussentemp(){
+ int16_t getAussentemp(){
 	int16_t sensorval= analogRead(PIN_T_AUSSEN);
 	sensorval= map(sensorval,287,576,-50,100);
-	return char(sensorval);
+	return sensorval;
  }
 
   /************************************************************************/
@@ -52,16 +52,16 @@
  *			Mittels bekannter ADC-Auflösung entspricht -50°C einem linearisierten Wert
  *			von 287 und +100°C einem Rückgabewert von 576. 
  *			Durch Einsatz der Funktion map() wird der ADC-Ausgangswert in Grad Celsius
- *			ausgegeben und mittels char() in eine vorzeichenbehaftete 8bit Ganzzahl
- *			übersetzt.
+ *			ausgegeben. Die Ausgabe erfolgt als 16bit Integer, demzufolge nur ganzzahlige
+ *			Werte.
  *
  *	@return	gemessene Kondensatorrücklauf-Temperatur in Grad Celsius (ganzzahlig).
  */
  /************************************************************************/
- int8_t getKondenstemp(){
+ int16_t getKondenstemp(){
 	int16_t sensorval= analogRead(PIN_T_KONDENSATOR);
 	sensorval= map(sensorval,287,576,-50,100);
-	return char(sensorval);
+	return sensorval;
  }
 
   /************************************************************************/
@@ -80,16 +80,16 @@
  *			Mittels bekannter ADC-Auflösung entspricht -50°C einem linearisierten Wert
  *			von 287 und +100°C einem Rückgabewert von 576. 
  *			Durch Einsatz der Funktion map() wird der ADC-Ausgangswert in Grad Celsius
- *			ausgegeben und mittels char() in eine vorzeichenbehaftete 8bit Ganzzahl
- *			übersetzt.
+ *			ausgegeben. Die Ausgabe erfolgt als 16bit Integer, demzufolge nur ganzzahlige
+ *			Werte.
  *
  *	@return	gemessene Speichertemperatur in Grad Celsius (ganzzahlig).
  */
  /************************************************************************/
- int8_t getSpeichertemp(){
+ int16_t getSpeichertemp(){
 	int16_t sensorval= analogRead(PIN_T_SPEICHER);
 	sensorval= map(sensorval,287,576,-50,100);
-	return char(sensorval);
+	return sensorval;
  }
 
   /************************************************************************/
@@ -108,16 +108,16 @@
  *			Mittels bekannter ADC-Auflösung entspricht -50°C einem linearisierten Wert
  *			von 287 und +100°C einem Rückgabewert von 576. 
  *			Durch Einsatz der Funktion map() wird der ADC-Ausgangswert in Grad Celsius
- *			ausgegeben und mittels char() in eine vorzeichenbehaftete 8bit Ganzzahl
- *			übersetzt.
+ *			ausgegeben. Die Ausgabe erfolgt als 16bit Integer, demzufolge nur ganzzahlige
+ *			Werte.
  *
  *	@return	gemessene Vorlauftemperatur nach dem Mischer in Grad Celsius (ganzzahlig).
  */
  /************************************************************************/
- int8_t getVorlauftemp(){
+ int16_t getVorlauftemp(){
 	int16_t sensorval= analogRead(PIN_T_VORLAUF);
 	sensorval= map(sensorval,287,576,-50,100);
-	return char(sensorval);
+	return sensorval;
  }
 
 

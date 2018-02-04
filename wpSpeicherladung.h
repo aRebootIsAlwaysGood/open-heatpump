@@ -9,6 +9,6 @@
 #ifndef WPSPEICHERLADUNG_H
 #define WPSPEICHERLADUNG_H
 
-void speicherladung();
+void speicherladung(float t_vorlaufsoll);
 
 #endif

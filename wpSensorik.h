@@ -10,9 +10,9 @@
 #define WPSENSORIK_H
 
 
-int8_t getAussentemp();
-int8_t getKondenstemp();
-int8_t getSpeichertemp();
-int8_t getVorlauftemp();
+int16_t getAussentemp();
+int16_t getKondenstemp();
+int16_t getSpeichertemp();
+int16_t getVorlauftemp();
 
 #endif

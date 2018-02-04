@@ -65,7 +65,7 @@ struct HEIZKURVE heizkurve[11]=
  *  Steigung und Verschiebung in y-Richtung sind im Array #heizkurve definiert
  */
  /***************************************************************************************/
-float calcTvorlauf(int8_t tAussen, uint8_t kurvenstufe, int8_t parallelver, int8_t reduziert){
+float calcTvorlauf(int16_t tAussen, int8_t kurvenstufe, int8_t parallelver, int8_t reduziert){
 	// function of Tvorlauf, calculate with integer math instead of float to increase speed
 	int16_t tvorlauf= heizkurve[kurvenstufe].steigung *tAussen +heizkurve[kurvenstufe].verschiebung +(parallelver *100);
 	if(reduziert){tvorlauf -=1000;}	

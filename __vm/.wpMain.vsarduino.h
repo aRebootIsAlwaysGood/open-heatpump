@@ -24,13 +24,13 @@ void setupSteuerIO();
 void getInputstates();
 void wpStatemachine(wpReqFunc_t wpReqFunc);
 void enteisung();
-float calcTvorlauf(int8_t tAussen, uint8_t kurvenstufe, int8_t parallelver, int8_t reduziert);
+float calcTvorlauf(int16_t tAussen, int8_t kurvenstufe, int8_t parallelver, int8_t reduziert);
 void reglerStatemachine(reglerState_t reglerState);
-int8_t getAussentemp();
-int8_t getKondenstemp();
-int8_t getSpeichertemp();
-int8_t getVorlauftemp();
-void speicherladung();
+int16_t getAussentemp();
+int16_t getKondenstemp();
+int16_t getSpeichertemp();
+int16_t getVorlauftemp();
+void speicherladung(float t_vorlaufsoll);
 
 #include "pins_arduino.h" 
 #include "arduino.h"

@@ -35,7 +35,7 @@ typedef enum REGLER_STATE{
 
 
 
-float calcTvorlauf(int8_t tAussen, uint8_t kurvenstufe, int8_t parallelver, int8_t reduziert);
+float calcTvorlauf(int16_t tAussen, int8_t kurvenstufe, int8_t parallelver, int8_t reduziert);
 
 void reglerStatemachine(reglerState_t reglerState);
 
