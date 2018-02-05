@@ -1,4 +1,4 @@
-/**
+﻿/**
  *  @file wpManuell.ino
  *  @brief Manueller Betriebsmodus.
  *  

@@ -19,7 +19,6 @@ typedef enum LADEN_STATE
 	LADEN_STATE_GESPERRT,
 } ladenState_t;
 
-
 void speicherladung(float t_vorlaufsoll);
 
 #endif

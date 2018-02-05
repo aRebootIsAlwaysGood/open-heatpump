@@ -1,4 +1,4 @@
-/**
+ï»¿/**
  *  @file wpSpeicherladung.ino
  *  @brief Aufladen des Pufferspeichers.
  *  
@@ -9,30 +9,30 @@
  #include "wpSpeicherladung.h"
 
 // Stufenladung Speicher monovalent RAVEL Empfehlung: Siehe RAVEL Standardschaltungen S16
-// Temperaturdiff über Verflüssiger = 0.5...0.7*Tempdiff VL/RL im Auslegepunkt(45-35=10°C)
-// -> Ausschalten WP wenn Tspeicher - Tkondensatorrücklauf < 5...7°C
+// Temperaturdiff Ã¼ber VerflÃ¼ssiger = 0.5...0.7*Tempdiff VL/RL im Auslegepunkt(45-35=10Â°C)
+// -> Ausschalten WP wenn Tspeicher - TkondensatorrÃ¼cklauf < 5...7Â°C
 // 
 // Einstellregeln:
 // 1. Speichertemp bei WP-Start(Einschalttemp) <= Speichertemp bei WP-Stop(Ausschalttemp)
-// 2. Ausschalttemp <= max. zul. Verflüssiger-Austrittstemp - max Tempdiff über Verfl.
-// 3. Bedingung: Einschalttemp >= max. auftretende Rücklauftemp
+// 2. Ausschalttemp <= max. zul. VerflÃ¼ssiger-Austrittstemp - max Tempdiff Ã¼ber Verfl.
+// 3. Bedingung: Einschalttemp >= max. auftretende RÃ¼cklauftemp
 // 
-// -Festlegen max zul. Verflüssigeraustrittstemp auf <=50°C (R502)
-//	ND: 2bar= -19°C, HD: 26bar= 60°C
-// -Vor-&Nachlauf Ladepumpe normalerweise unnötig
-// -Tempdiff über Verbraucher: 10K
+// -Festlegen max zul. VerflÃ¼ssigeraustrittstemp auf <=50Â°C (R502)
+//	ND: 2bar= -19Â°C, HD: 26bar= 60Â°C
+// -Vor-&Nachlauf Ladepumpe normalerweise unnÃ¶tig
+// -Tempdiff Ã¼ber Verbraucher: 10K
 
  void speicherladung(float t_vorlaufsoll){
 	 
 	 static uint32_t laufzeit;
-	 uint32_t defrostzeit= 180000; // Enteisungszeitdauer abhängig von Aussentemp
+	 uint32_t defrostzeit= 180000; // Enteisungszeitdauer abhÃ¤ngig von Aussentemp
 	 int16_t t_vorlauf= int(t_vorlaufsoll); // Umwandlung Float zu signed int	 
 	 int16_t tmax_ruecklauf= t_vorlauf;
 	 int16_t tspeicher= getSpeichertemp();
 	 int16_t tkondens= getKondenstemp();
 	 int16_t taussen= getAussentemp();
 	 
-	 // Einschaltbedingung (Tspeicher > Tmax_rücklauf) festlegen
+	 // Einschaltbedingung (Tspeicher > Tmax_rÃ¼cklauf) festlegen
 	 if (t_vorlauf>40){
 		 tmax_ruecklauf -= 5;
 	 }
@@ -65,7 +65,7 @@
 	switch (ladenState)
 		{
 		case LADEN_STATE_IDLE:
-			// Einschaltbedingung prüfen(Speichertemp höher als Rücklaufmax + über 20°C)
+			// Einschaltbedingung prÃ¼fen(Speichertemp hÃ¶her als RÃ¼cklaufmax + Ã¼ber 20Â°C)
 			 if (((tspeicher- tmax_ruecklauf)<= 1) || (tspeicher< 20)){
 				 laufzeit= millis(); // Startzeit festhalten
 				 ladenState= LADEN_STATE_LADEN;
@@ -73,13 +73,13 @@
 			break;
 			
 		case LADEN_STATE_LADEN:			
-			// max Verflüssigertemp - 0.5*Tempdiff über Verflüssiger Auslegepunkt zu hoch
+			// max VerflÃ¼ssigertemp - 0.5*Tempdiff Ã¼ber VerflÃ¼ssiger Auslegepunkt zu hoch
 			if ((tspeicher>= 45) || (tkondens >= 50)){
 				ladenState= LADEN_STATE_STOP;
 			}
 			
 			 // Ausschaltbedingung (Speicher bis unten warm)
-			 // Bedingung 1: Speichertemp > 15°C ansonsten zu Beginn Heizperiode ständiges aus
+			 // Bedingung 1: Speichertemp > 15Â°C ansonsten zu Beginn Heizperiode stÃ¤ndiges aus
 			 else if ((tspeicher> 15) && ((tspeicher-tkondens)<= 6)){				 
 				 // Anschliessende Enteisung falls Aussentemp kritisch
 				 if (taussen<= T_DEFROST_REQUIRED){
@@ -89,6 +89,7 @@
 				 else{
 					 ladenState= LADEN_STATE_STOP;
 				 }
+			 }
 			
 			// falls Vereisungsgefahr Laden pausieren um zu Enteisen, ansonsten Timerreset
 			else if ((millis()-laufzeit)> MAX_LADEZEIT){
@@ -108,7 +109,7 @@
 			// Laden beenden, Sperrzeit initiieren
 			wpStatemachine(WP_REQ_FUNC_HALT);
 			laufzeit= millis();
-			ladenState= LADEN_STATE_GESPERRT
+			ladenState= LADEN_STATE_GESPERRT;
 			break;
 			
 		case LADEN_STATE_DEFROST:

@@ -1,4 +1,4 @@
-/**
+﻿/**
  *  @file wpSensorik.h
  *  @brief Header zum Sensorikmodul.
  *   

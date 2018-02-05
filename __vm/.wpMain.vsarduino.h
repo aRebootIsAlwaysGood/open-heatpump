@@ -32,7 +32,6 @@ int16_t getKondenstemp();
 int16_t getSpeichertemp();
 int16_t getVorlauftemp();
 void speicherladung(float t_vorlaufsoll);
-void speicherladung(float t_vorlaufsoll);
 int8_t getKurvenstufe();
 int8_t getParallelvs();
 int8_t modeReduziert();
