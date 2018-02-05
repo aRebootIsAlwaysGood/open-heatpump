@@ -26,14 +26,20 @@
  *			Durch Einsatz der Funktion map() wird der ADC-Ausgangswert in Grad Celsius
  *			ausgegeben. Die Ausgabe erfolgt als 16bit Integer, demzufolge nur ganzzahlige
  *			Werte.
+ *			Um genauere Messwerte zu erhalten, erfolgen drei Messungen deren Mittelwert
+ *			der neue Messwert wird.
  *
  *	@return	gemessene Aussentemperatur in Grad Celsius (ganzzahlig).
  */
  /************************************************************************/
  int16_t getAussentemp(){
-	int16_t sensorval= analogRead(PIN_T_AUSSEN);
-	sensorval= map(sensorval,287,576,-50,100);
-	return sensorval;
+	int16_t adc_val;
+	for (uint8_t i = 0; i < 3; i++){   // 3 fache Messung und Mittelung
+		adc_val += analogRead(PIN_T_AUSSEN);
+	}
+	adc_val = adc_val / 3;  // Mittelwert der drei Messungen
+	adc_val= map(adc_val,287,576,-50,100);
+	return adc_val;
  }
 
   /************************************************************************/
@@ -54,14 +60,20 @@
  *			Durch Einsatz der Funktion map() wird der ADC-Ausgangswert in Grad Celsius
  *			ausgegeben. Die Ausgabe erfolgt als 16bit Integer, demzufolge nur ganzzahlige
  *			Werte.
- *
+ *			Um genauere Messwerte zu erhalten, erfolgen drei Messungen deren Mittelwert
+ *			der neue Messwert wird.
+ *			
  *	@return	gemessene Kondensatorrücklauf-Temperatur in Grad Celsius (ganzzahlig).
  */
  /************************************************************************/
  int16_t getKondenstemp(){
-	int16_t sensorval= analogRead(PIN_T_KONDENSATOR);
-	sensorval= map(sensorval,287,576,-50,100);
-	return sensorval;
+	int16_t adc_val;
+	for (uint8_t i = 0; i < 3; i++){   // 3 fache Messung und Mittelung
+		adc_val += analogRead(PIN_T_KONDENSATOR);
+	}
+	adc_val = adc_val / 3;  // Mittelwert der drei Messungen
+	adc_val= map(adc_val,287,576,-50,100);
+	return adc_val;
  }
 
   /************************************************************************/
@@ -82,14 +94,20 @@
  *			Durch Einsatz der Funktion map() wird der ADC-Ausgangswert in Grad Celsius
  *			ausgegeben. Die Ausgabe erfolgt als 16bit Integer, demzufolge nur ganzzahlige
  *			Werte.
+ *			Um genauere Messwerte zu erhalten, erfolgen drei Messungen deren Mittelwert
+ *			der neue Messwert wird.
  *
  *	@return	gemessene Speichertemperatur in Grad Celsius (ganzzahlig).
  */
  /************************************************************************/
  int16_t getSpeichertemp(){
-	int16_t sensorval= analogRead(PIN_T_SPEICHER);
-	sensorval= map(sensorval,287,576,-50,100);
-	return sensorval;
+	int16_t adc_val;
+	for (uint8_t i = 0; i < 3; i++){   // 3 fache Messung und Mittelung
+		adc_val += analogRead(PIN_T_SPEICHER);
+	}
+	adc_val = adc_val / 3;  // Mittelwert der drei Messungen
+	adc_val= map(adc_val,287,576,-50,100);
+	return adc_val;
  }
 
   /************************************************************************/
@@ -110,14 +128,20 @@
  *			Durch Einsatz der Funktion map() wird der ADC-Ausgangswert in Grad Celsius
  *			ausgegeben. Die Ausgabe erfolgt als 16bit Integer, demzufolge nur ganzzahlige
  *			Werte.
+ *			Um genauere Messwerte zu erhalten, erfolgen drei Messungen deren Mittelwert
+ *			der neue Messwert wird.
  *
  *	@return	gemessene Vorlauftemperatur nach dem Mischer in Grad Celsius (ganzzahlig).
  */
  /************************************************************************/
  int16_t getVorlauftemp(){
-	int16_t sensorval= analogRead(PIN_T_VORLAUF);
-	sensorval= map(sensorval,287,576,-50,100);
-	return sensorval;
+	int16_t adc_val;
+	for (uint8_t i = 0; i < 3; i++){   // 3 fache Messung und Mittelung
+		adc_val += analogRead(PIN_T_VORLAUF);
+	}
+	adc_val = adc_val / 3;  // Mittelwert der drei Messungen
+	adc_val= map(adc_val,287,576,-50,100);
+	return adc_val;
  }
 
 

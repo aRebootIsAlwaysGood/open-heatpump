@@ -69,7 +69,8 @@ float calcTvorlauf(int16_t tAussen, int8_t kurvenstufe, int8_t parallelver, int8
 	// function of Tvorlauf, calculate with integer math instead of float to increase speed
 	int16_t tvorlauf= heizkurve[kurvenstufe].steigung *tAussen +heizkurve[kurvenstufe].verschiebung +(parallelver *100);
 	if(reduziert){tvorlauf -=1000;}	
-	tvorlauf= constrain(tvorlauf, 2200, 5000); // limits the output (Tvorlauf) between 22 to 50°C
+	tvorlauf += parallelver*100; // add parallelverschiebung (1K/ Stufe)
+	tvorlauf= constrain(tvorlauf, 2200, 4500); // limits the output (Tvorlauf) between 22 to 45°C
 	return (tvorlauf /100.0);					// divide trough 100 to return value in °C, treat 100 as floating constant
 }
 

@@ -58,6 +58,7 @@ struct SYSTEMZUSTAND Systemzustand; /** Systeminfos über Betriebszustand. */
 wpState_t wpState= WP_STATE_IDLE;		/** Switch-Case Variable für WP Betriebszustände. */
 wpReqFunc_t wpReqFunc= WP_REQ_FUNC_IDLE;	/** Betriebswahl-Anforderung an WP-Kontrollmodul. */
 reglerState_t reglerState;			/** Regler Betriebszustand Steuerung. */
+ladenState_t ladenState; /** Speicherladung Zustandsautomaten-Variable. */
 
 uint8_t blink1Hz;	/** Globale Blinkvariable gesteuert durch blinkFunction(). */
 

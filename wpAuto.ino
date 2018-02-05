@@ -8,4 +8,8 @@
 
  #include "wpAuto.h"
  
- 
+ void autoBetrieb(){
+	 
+	 float vorlaufsoll= calcTvorlauf(getAussentemp(), getKurvenstufe(),getParallelvs(),modeReduziert());
+	 speicherladung(vorlaufsoll);
+ }
