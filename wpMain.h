@@ -55,9 +55,10 @@
 #define T_ANLASS 3000		/**< Anlassdauer Kompressormotor in ms */
 #define T_MISCHERSTELLZEIT 180000	/**< Fahrzeit Mischventil von 100% -> 0% in ms */
 #define T_NACHLAUF 100000 /**< Nachlaufzeit Ladepumpe nach Ende der Speicherladung */
-#define T_DEFROST_REQUIRED 10 /**< Grenze Aussentemperatur für periodische Enteisung */
-#define MAX_LADEZEIT 2400000 /**< maximale Ladedauer bis Enteisung erfolgen muss */
-#define WIEDERANLAUF_SPERRZEIT 900000 /**< Anlaufsperre WP um Taktung gering zu halten */
+#define TEMP_DEFROST_REQUIRED 10 /**< Grenze Aussentemperatur für periodische Enteisung */
+#define T_MAX_LADEN 2400000 /**< maximale Ladedauer bis Enteisung erfolgen muss */
+#define T_WIEDERANLAUFSPERRE 900000 /**< Anlaufsperre WP um Taktung gering zu halten */
+#define T_DEFROSTSPERRE 210000 /**< Enteisungs-Sperrzeit nach Anlauf für Druckaufbau */
 
 void blinkFunction();
 

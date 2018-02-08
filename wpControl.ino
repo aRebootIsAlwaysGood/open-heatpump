@@ -45,8 +45,8 @@ void setupSteuerIO(){
 */
 /************************************************************************/
 void getInputstates(){
-	DiStates.status_nd= !digitalRead(PIN_ND);
-	DiStates.status_hd= !digitalRead(PIN_HD);
+	DiStates.status_nd= digitalRead(PIN_ND); // bei Ansprechen DI=HIGH -> keine Negation
+	DiStates.status_hd= digitalRead(PIN_HD); // bei Ansprechen DI=HIGH ->  keine Negation
 	DiStates.status_motprotect= !digitalRead(PIN_MOTPROTECT);
 	DiStates.status_k_start= !digitalRead(PIN_ZUST_KSTART);
 	DiStates.status_k_run= !digitalRead(PIN_ZUST_KBETR);
@@ -109,19 +109,20 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 		}
 
 		else if (millis()-starttime <= (T_ANLASS+ T_MISCHERSTELLZEIT)){	// Anlassen
-			digitalWrite(PIN_BYPASS, LOW);
+			digitalWrite(PIN_BYPASS, HIGH);
 			digitalWrite(PIN_K_ANLAUF, HIGH);
-			digitalWrite(PIN_K_BETRIEB, HIGH);
+			digitalWrite(PIN_K_BETRIEB, LOW);
 			digitalWrite(PIN_SUMPFHEIZUNG, LOW);
 		}
 
 		else{										// Anlassen komplett
-			digitalWrite(PIN_K_ANLAUF, LOW);
+			digitalWrite(PIN_K_ANLAUF, HIGH);
 			digitalWrite(PIN_K_BETRIEB, HIGH);
-			digitalWrite(PIN_BYPASS, HIGH);
+			digitalWrite(PIN_BYPASS, LOW);
 			digitalWrite(PIN_MISCHER_AUF,LOW);
-			if (wpReqFunc== WP_REQ_FUNC_DEFROST){	// Enteisung angefordert, gehe zu Ent.
-				wpState= WP_STATE_DEFROST;
+			starttime=millis();						//Reset Laufzeittimer auf RUN
+			if (wpReqFunc== WP_REQ_FUNC_DEFROST){	// Enteisung angefordert				
+				wpState= WP_STATE_DEFROST;			
 			} 
 			else{									// Laden, gehe zu RUN
 				wpState= WP_STATE_RUN;
@@ -145,14 +146,15 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 			wpState= WP_STATE_STOP;
 		}
 		else if (wpReqFunc== WP_REQ_FUNC_DEFROST){	// Enteisungs-Anforderung
-			wpState= WP_STATE_DEFROST;
+			wpState= WP_STATE_DEFROST;		
 		}
 		
 		else{
+			digitalWrite(PIN_K_ANLAUF,HIGH);
 			digitalWrite(PIN_K_BETRIEB,HIGH);
 			digitalWrite(PIN_VENTILATOR,HIGH);
 			digitalWrite(PIN_LADEPUMPE,HIGH);
-			digitalWrite(PIN_BYPASS, HIGH);
+			digitalWrite(PIN_BYPASS, LOW);
 			reglerStatemachine(REGLER_STATE_LADEN);	// Regler hat wieder IO Kontrolle
 		}
 		
@@ -161,9 +163,13 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 	case WP_STATE_STOP:		// Beende Betrieb, schalte Sumpfheizung ein, gehe zu IDLE
 		digitalWrite(PIN_K_BETRIEB,LOW);
 		digitalWrite(PIN_VENTILATOR, LOW);
-		digitalWrite(PIN_BYPASS, LOW);
+		digitalWrite(PIN_BYPASS, HIGH);		// Bypass auf für Druckausgleich
 		digitalWrite(PIN_SUMPFHEIZUNG, HIGH);
 		reglerStatemachine(REGLER_STATE_AUTO);	// Regler wieder autonom
+		
+		if (millis()-starttime >= 500){	// Softstop durch verzögertes AUS Anlaufschütz
+			digitalWrite(PIN_K_ANLAUF,LOW);
+		}
 		if (millis()-starttime <= T_NACHLAUF){	// Ladepumpe Nachlauf nur nach Laden
 			digitalWrite(PIN_LADEPUMPE, HIGH);
 		}
@@ -193,11 +199,22 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 		}
 
 		else{
-		reglerStatemachine(REGLER_STATE_DEFROST);	
-		digitalWrite(PIN_K_BETRIEB, HIGH);	
-		digitalWrite(PIN_VENTILATOR, LOW);
-		digitalWrite(PIN_LADEPUMPE, LOW);
-		digitalWrite(PIN_BYPASS, LOW);
+			if (millis()-starttime <= T_DEFROSTSPERRE){ // verhindere sofortige Enteisung
+				// Baue erst Ladedruck auf
+				digitalWrite(PIN_K_BETRIEB, HIGH);
+				digitalWrite(PIN_K_ANLAUF, HIGH);
+				digitalWrite(PIN_VENTILATOR, HIGH);
+				digitalWrite(PIN_LADEPUMPE, HIGH);
+				digitalWrite(PIN_BYPASS, LOW);
+			}
+			else{
+			reglerStatemachine(REGLER_STATE_DEFROST);	
+			digitalWrite(PIN_K_BETRIEB, HIGH);	
+			digitalWrite(PIN_K_ANLAUF, HIGH);
+			digitalWrite(PIN_VENTILATOR, LOW);
+			digitalWrite(PIN_LADEPUMPE, LOW);
+			digitalWrite(PIN_BYPASS, HIGH);
+			}
 		}
 
 		break;
@@ -207,7 +224,7 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 		digitalWrite(PIN_K_BETRIEB,LOW);
 		digitalWrite(PIN_VENTILATOR, LOW);
 		digitalWrite(PIN_LADEPUMPE, LOW);
-		digitalWrite(PIN_BYPASS, LOW);
+		digitalWrite(PIN_BYPASS, HIGH);
 		digitalWrite(PIN_SUMPFHEIZUNG, HIGH);
 		digitalWrite(PIN_SAMMELALARM,HIGH);
 		digitalWrite(PIN_ALARM, blink1Hz);
@@ -227,7 +244,7 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 		digitalWrite(PIN_K_BETRIEB,LOW);
 		digitalWrite(PIN_VENTILATOR, LOW);
 		digitalWrite(PIN_LADEPUMPE, LOW);
-		digitalWrite(PIN_BYPASS, LOW);
+		digitalWrite(PIN_BYPASS, HIGH);
 		digitalWrite(PIN_SUMPFHEIZUNG, HIGH);
 		digitalWrite(PIN_SAMMELALARM,HIGH);
 		digitalWrite(PIN_ALARM, blink1Hz);

@@ -50,7 +50,7 @@
 	 }
  
 	// setze Enteisungsdauer fest
-	if (taussen < T_DEFROST_REQUIRED){
+	if (taussen < TEMP_DEFROST_REQUIRED){
 		if (taussen < 7){
 			defrostzeit= 180000; // 3min
 		}
@@ -82,7 +82,7 @@
 			 // Bedingung 1: Speichertemp > 15°C ansonsten zu Beginn Heizperiode ständiges aus
 			 else if ((tspeicher> 15) && ((tspeicher-tkondens)<= 6)){				 
 				 // Anschliessende Enteisung falls Aussentemp kritisch
-				 if (taussen<= T_DEFROST_REQUIRED){
+				 if (taussen<= TEMP_DEFROST_REQUIRED){
 					 ladenState= LADEN_STATE_DEFROST;
 					 laufzeit= millis();
 				 }
@@ -92,8 +92,8 @@
 			 }
 			
 			// falls Vereisungsgefahr Laden pausieren um zu Enteisen, ansonsten Timerreset
-			else if ((millis()-laufzeit)> MAX_LADEZEIT){
-				 if (taussen<= T_DEFROST_REQUIRED){
+			else if ((millis()-laufzeit)> T_MAX_LADEN){
+				 if (taussen<= TEMP_DEFROST_REQUIRED){
 					 ladenState= LADEN_STATE_DEFROST;
 				 }
 				 else{
@@ -124,7 +124,7 @@
 			
 		case LADEN_STATE_GESPERRT:
 			// Warten bis Sperrzeit abgelaufen
-			if((millis()-laufzeit)> WIEDERANLAUF_SPERRZEIT){
+			if((millis()-laufzeit)> T_WIEDERANLAUFSPERRE){
 				ladenState= LADEN_STATE_IDLE;
 			}			
 			break;

@@ -41,6 +41,7 @@
 #include <PID_v1.h>	
 #include <LiquidCrystal_I2C.h>
 #include <Streaming.h>
+#include <MD_REncoder.h>
 #include "wpMain.h"
 #include "wpAuto.h"
 #include "wpControl.h"
@@ -51,9 +52,24 @@
 #include "wpSpeicherladung.h"
 #include "wpUser.h"
 
+LiquidCrystal_I2C lcd(0x20, 16, 2); // LCD (Addr, Colums, Rows)
+MD_REncoder rotaryenc= MD_REncoder(PIN_NAV_UP,PIN_NAV_DOWN);
 
 struct DI_STATES DiStates;	/** ausgelesene DI-Werte. */
 struct SYSTEMZUSTAND Systemzustand; /** Systeminfos über Betriebszustand. */
+struct LCD_MENU usermenu[9] =
+{
+	{"Open WP-Control","Standby",-1,-1,-1,NULL,NULL},
+	{"Betriebswahl", "Auto",0,0,0,NULL,NULL},
+	{"Betriebsstufe", "Normal",0,0,0,NULL,NULL},
+	{"Betriebsstufe", "Reduziert",0,0,0,NULL,NULL},
+	{"Betriebswahl", "Manuell",0,0,0,NULL,NULL},
+	{"Systemzustand", "keine Fehler",0,0,0,NULL,NULL},
+	{"Einstellungen", "",0,0,0,NULL,NULL},
+	{"Störung", "Druck zu hoch",0,0,0,NULL,NULL},
+};
+
+
 
 wpState_t wpState= WP_STATE_IDLE;		/** Switch-Case Variable für WP Betriebszustände. */
 wpReqFunc_t wpReqFunc= WP_REQ_FUNC_IDLE;	/** Betriebswahl-Anforderung an WP-Kontrollmodul. */
@@ -61,6 +77,7 @@ reglerState_t reglerState;			/** Regler Betriebszustand Steuerung. */
 ladenState_t ladenState; /** Speicherladung Zustandsautomaten-Variable. */
 
 uint8_t blink1Hz;	/** Globale Blinkvariable gesteuert durch blinkFunction(). */
+
 
 /************************************************************************/
 /**

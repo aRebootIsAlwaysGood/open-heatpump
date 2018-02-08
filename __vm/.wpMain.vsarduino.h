@@ -35,6 +35,8 @@ void speicherladung(float t_vorlaufsoll);
 int8_t getKurvenstufe();
 int8_t getParallelvs();
 int8_t modeReduziert();
+int8_t getKeys();
+void wpMenu();
 
 #include "pins_arduino.h" 
 #include "arduino.h"

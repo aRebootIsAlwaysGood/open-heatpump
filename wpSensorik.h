@@ -10,6 +10,19 @@
 #define WPSENSORIK_H
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 int16_t getAussentemp();
 int16_t getKondenstemp();
 int16_t getSpeichertemp();
