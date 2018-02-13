@@ -97,7 +97,6 @@
   <avrgcc.compiler.directories.IncludePaths>
     <ListValues>
       <Value>../../../wpMain</Value>
-      <Value>F:/Arduino/libraries/LiquidCrystal_I2C</Value>
       <Value>F:/Arduino/libraries/PID</Value>
       <Value>F:/Arduino/libraries/Streaming</Value>
       <Value>C:/Program Files (x86)/Arduino/libraries</Value>
@@ -133,7 +132,6 @@
   <avrgcccpp.compiler.directories.IncludePaths>
     <ListValues>
       <Value>../../../wpMain</Value>
-      <Value>F:/Arduino/libraries/LiquidCrystal_I2C</Value>
       <Value>F:/Arduino/libraries/PID</Value>
       <Value>F:/Arduino/libraries/Streaming</Value>
       <Value>C:/Program Files (x86)/Arduino/libraries</Value>
@@ -156,7 +154,7 @@
   <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
 </AvrGccCpp>
     </ToolchainSettings>
-    <VMSETTING_IncludePaths>../../../wpMain;F:/Arduino/libraries/LiquidCrystal_I2C;F:/Arduino/libraries/PID;F:/Arduino/libraries/Streaming;C:/Program Files (x86)/Arduino/libraries;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/hardware/avr/1.6.20/libraries;F:/Arduino/libraries;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/hardware/avr/1.6.20/cores/arduino;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/hardware/avr/1.6.20/variants/mega;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/avr/include/;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/avr/include/avr/;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/lib/gcc/avr/4.8.1/include;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/lib/gcc/avr/4.9.2/include;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/lib/gcc/avr/4.9.3/include;</VMSETTING_IncludePaths>
+    <VMSETTING_IncludePaths>../../../wpMain;F:/Arduino/libraries/LiquidCrystal_I2C;F:/Arduino/libraries/PID;F:/Arduino/libraries/Streaming;C:/Program Files (x86)/Arduino/libraries;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/hardware/avr/1.6.20/libraries;F:/Arduino/libraries;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/hardware/avr/1.6.20/cores/arduino;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/hardware/avr/1.6.20/variants/mega;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/avr/include/;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/avr/include/avr/;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/lib/gcc/avr/4.8.1/include;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/lib/gcc/avr/4.9.2/include;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/lib/gcc/avr/4.9.3/include;F:/Arduino/libraries/MD_REncoder/src;</VMSETTING_IncludePaths>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <ToolchainSettings>
@@ -182,7 +180,6 @@
   <avrgcc.compiler.directories.IncludePaths>
     <ListValues>
       <Value>../../../wpMain</Value>
-      <Value>F:/Arduino/libraries/LiquidCrystal_I2C</Value>
       <Value>F:/Arduino/libraries/PID</Value>
       <Value>F:/Arduino/libraries/Streaming</Value>
       <Value>C:/Program Files (x86)/Arduino/libraries</Value>
@@ -218,7 +215,6 @@
   <avrgcccpp.compiler.directories.IncludePaths>
     <ListValues>
       <Value>../../../wpMain</Value>
-      <Value>F:/Arduino/libraries/LiquidCrystal_I2C</Value>
       <Value>F:/Arduino/libraries/PID</Value>
       <Value>F:/Arduino/libraries/Streaming</Value>
       <Value>C:/Program Files (x86)/Arduino/libraries</Value>
@@ -241,7 +237,7 @@
   <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
 </AvrGccCpp>
     </ToolchainSettings>
-    <VMSETTING_IncludePaths>../../../wpMain;F:/Arduino/libraries/LiquidCrystal_I2C;F:/Arduino/libraries/PID;F:/Arduino/libraries/Streaming;C:/Program Files (x86)/Arduino/libraries;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/hardware/avr/1.6.20/libraries;F:/Arduino/libraries;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/hardware/avr/1.6.20/cores/arduino;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/hardware/avr/1.6.20/variants/mega;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/avr/include/;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/avr/include/avr/;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/lib/gcc/avr/4.8.1/include;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/lib/gcc/avr/4.9.2/include;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/lib/gcc/avr/4.9.3/include;</VMSETTING_IncludePaths>
+    <VMSETTING_IncludePaths>../../../wpMain;F:/Arduino/libraries/LiquidCrystal_I2C;F:/Arduino/libraries/PID;F:/Arduino/libraries/Streaming;C:/Program Files (x86)/Arduino/libraries;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/hardware/avr/1.6.20/libraries;F:/Arduino/libraries;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/hardware/avr/1.6.20/cores/arduino;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/hardware/avr/1.6.20/variants/mega;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/avr/include/;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/avr/include/avr/;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/lib/gcc/avr/4.8.1/include;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/lib/gcc/avr/4.9.2/include;C:/Users/Daniel/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/lib/gcc/avr/4.9.3/include;F:/Arduino/libraries/MD_REncoder/src;</VMSETTING_IncludePaths>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="wpAuto.ino">

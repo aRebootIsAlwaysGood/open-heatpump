@@ -32,11 +32,12 @@ int16_t getKondenstemp();
 int16_t getSpeichertemp();
 int16_t getVorlauftemp();
 void speicherladung(float t_vorlaufsoll);
+void serialEvent1();
+void receiveSerialData();
+void transmitSerialData(uint8_t settingindex);
 int8_t getKurvenstufe();
 int8_t getParallelvs();
 int8_t modeReduziert();
-int8_t getKeys();
-void wpMenu();
 
 #include "pins_arduino.h" 
 #include "arduino.h"

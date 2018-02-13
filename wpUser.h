@@ -9,21 +9,12 @@
 #ifndef WPUSER_H
 #define WPUSER_H
 
-typedef void(*PFENTER)();     // Pointer to Function for apply changes (Enter Key)
-typedef void(*PFMENUPRINT)(); // Pointer to Function (call while menu entry visible)
-
-// structure of navigation menu
-struct LCD_MENU
+struct USER_SETTINGS 
 {
-	char * menutext;
-	char * menuoption;
-	int up, enter, down;
-	PFMENUPRINT callwhenvisible;
-	PFENTER applywithenter;
+	int8_t useraction;
+	uint8_t uservalue;	
 };
 
-void wpMenu();
-int8_t getKeys();
 int8_t getKurvenstufe();
 int8_t getParallelvs();
 int8_t modeReduziert();

@@ -2,12 +2,57 @@
 /**
  *  @file wpUser.ino
  *  @brief Benutzersteuerung und Kommunikation mit Frontendcontroller.
+ *			Der Mikrocontroller, welcher die Wärmepumpen- und Heizungssteuerung übernimmt,
+ *			besitzt keine grafische Benutzerschnittstelle um eine Trennung zwischen den
+ *			sicherheitsrelevanten und kritischen Funktionen und den Benutzerfunktionen,
+ *			welche weder sicherheitstechnisch relevant noch zeitkrisch sind, zu erreichen.
+ *			
+ *			
  *  
  *  @author Daniel Schmissrauter
  *  @date 	09.01.2018
  */
 
  #include "wpUser.h"
+ 
+ 
+ // called when Serial data available
+void serialEvent1(){
+	receiveSerialData();
+	if (Serial1.available() > 0){
+		receiveSerialData(); // if Buffer still contains unread data, call receivefunc. again
+	}
+	return;
+}
+
+// Read one Line of Serial Data received 
+void receiveSerialData(){
+	uint8_t indexval= Serial1.parseInt();		//Serial.parseInt() für lesen uint
+	uint8_t actionval= Serial1.parseInt();
+	uint8_t settingval= Serial1.parseInt();
+		
+	// if Data was received properly, store it or set readflag
+	if(Serial1.read()=='\n'){
+		Usersettings[indexval].useraction= actionval;
+			
+		// if read request flag set, respond with requested data
+		if (actionval==1){
+			transmitSerialData(indexval);	
+		}
+		// if write flag was set, overwrite stored value
+		else if (actionval==2){
+			Usersettings[indexval].uservalue= settingval;
+		}
+		// if write negative flag was set, overwrite stored value with negative val
+		else if (actionval==4){
+			Usersettings[indexval].uservalue= settingval *(-1);
+		}					
+	}
+}
+
+void transmitSerialData(uint8_t settingindex){
+		
+}
  
  int8_t getKurvenstufe(){
 	return 5; 
@@ -21,48 +66,3 @@
 	 return 0;
  }
  
- int8_t getKeys(){
-	 
- }
- 
- 
- void wpMenu() {
-	 static int8_t userinput;
-	 static int8_t menu;
-	 static int8_t newmenu;
-	 
-	 
-	 if (usermenu[menu].callwhenvisible != NULL) {
-		 // call function
-		 usermenu[menu].callwhenvisible();
-	 }
-	 userinput = getKeys();
-	 
-	 switch (userinput) {
-		 default:
-		 case NO_KEY:
-		 newmenu = -1;
-		 break;
-		 case T1_UP:
-		 newmenu = usermenu[menu].up;
-		 break;
-		 case T2_ENTER: {
-			 if (usermenu[menu].applywithenter != 0) {
-				 usermenu[menu].applywithenter();
-			 }
-			 newmenu = usermenu[menu].enter;
-			 break;
-		 }
-		 case T3_DOWN:
-		 newmenu = usermenu[menu].down;
-		 break;
-	 }
-	 if ((newmenu >= 0) && (newmenu != menu))
-	 {
-		 menu = newmenu;
-		 lcd.clear();
-		 lcd.print(usermenu[menu].menutext);
-		 lcd.setCursor(0, 1);
-		 lcd.print(usermenu[menu].menuoption);
-	 }
- }

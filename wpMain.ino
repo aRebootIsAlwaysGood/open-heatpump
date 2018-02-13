@@ -12,8 +12,17 @@
 * @section dependencies Abhängigkeiten
 * 
 * Dieses Programm benutzt die folgenden Libraries:
-* PID_v1 <a href="https://github.com/adafruit/Adafruit_Sensor">
-* Add Link</a>, LiquidCrystal_I2C, Streaming,  
+* PID_v1 <a href="https://github.com/adafruit/Adafruit_Sensor">Add Link</a>
+* LiquidCrystal_I2C <a href="https://github.com/adafruit/Adafruit_Sensor">Add Link</a>
+* Streaming <a href="https://github.com/adafruit/Adafruit_Sensor">Add Link</a>
+* 
+* ESPAsyncTCP		<a href="https://github.com/me-no-dev/ESPAsyncTCP"
+*					>Async TCP Library for ESP8266</a>
+* ESPAsyncWebServer	<a href="https://github.com/me-no-dev/ESPAsyncWebServer"
+*					>Async Web Server for ESP8266 and ESP32</a>
+* ESPUI				<a href="https://github.com/s00500/ESPUI"
+*					>A simple web user interface library for ESP8266/ESP32</a>
+* 
 * 
 * @section author Author
 * 
@@ -39,9 +48,7 @@
 // ***** HEADERS *****
 #include <stdint-gcc.h>
 #include <PID_v1.h>	
-#include <LiquidCrystal_I2C.h>
 #include <Streaming.h>
-#include <MD_REncoder.h>
 #include "wpMain.h"
 #include "wpAuto.h"
 #include "wpControl.h"
@@ -52,29 +59,32 @@
 #include "wpSpeicherladung.h"
 #include "wpUser.h"
 
-LiquidCrystal_I2C lcd(0x20, 16, 2); // LCD (Addr, Colums, Rows)
-MD_REncoder rotaryenc= MD_REncoder(PIN_NAV_UP,PIN_NAV_DOWN);
 
 struct DI_STATES DiStates;	/** ausgelesene DI-Werte. */
 struct SYSTEMZUSTAND Systemzustand; /** Systeminfos über Betriebszustand. */
-struct LCD_MENU usermenu[9] =
+
+struct USER_SETTINGS Usersettings[] =
 {
-	{"Open WP-Control","Standby",-1,-1,-1,NULL,NULL},
-	{"Betriebswahl", "Auto",0,0,0,NULL,NULL},
-	{"Betriebsstufe", "Normal",0,0,0,NULL,NULL},
-	{"Betriebsstufe", "Reduziert",0,0,0,NULL,NULL},
-	{"Betriebswahl", "Manuell",0,0,0,NULL,NULL},
-	{"Systemzustand", "keine Fehler",0,0,0,NULL,NULL},
-	{"Einstellungen", "",0,0,0,NULL,NULL},
-	{"Störung", "Druck zu hoch",0,0,0,NULL,NULL},
+	{0,0}, //No connection
+	{1,1},	//SerialStatus(useraction, uservalue)
+	{},
+	{},
+	{},
+	{},
+	{},
+	{},
+	{},
+	{},
+	{},
+	{},
+	{},
 };
 
+wpState_t wpState= WP_STATE_IDLE;	/** Switch-Case Variable für WP Betriebszustände. */
+wpReqFunc_t wpReqFunc= WP_REQ_FUNC_IDLE;/** Betriebswahl-Anforderung an WP-Kontrollmodul. */
+reglerState_t reglerState= REGLER_STATE_OFF;	/** Regler Betriebszustand Steuerung. */
+ladenState_t ladenState= LADEN_STATE_IDLE; /** Speicherladung Zustandsautomaten-Variable. */
 
-
-wpState_t wpState= WP_STATE_IDLE;		/** Switch-Case Variable für WP Betriebszustände. */
-wpReqFunc_t wpReqFunc= WP_REQ_FUNC_IDLE;	/** Betriebswahl-Anforderung an WP-Kontrollmodul. */
-reglerState_t reglerState;			/** Regler Betriebszustand Steuerung. */
-ladenState_t ladenState; /** Speicherladung Zustandsautomaten-Variable. */
 
 uint8_t blink1Hz;	/** Globale Blinkvariable gesteuert durch blinkFunction(). */
 
