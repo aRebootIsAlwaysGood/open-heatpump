@@ -1,12 +1,12 @@
 ﻿/**
  *  @file wpControl.h
  *  @brief Header zum Steuer- und Sicherheitsmodul.
- *  
+ *
  *  @author Daniel Schmissrauter
  *  @date	24.01.2018
  */
- 
- 
+
+
  #ifndef WPCONTROL_H
 #define WPCONTROL_H
 
@@ -23,46 +23,46 @@ struct DI_STATES
     uint8_t status_reserve2:1;	/**< Statusbit7 Reserve */
     };
 
-/** Struct-Objekt mit Informationen zum Systemzustand durch Ausgabe eines binären Wertes */
-struct SYSTEMZUSTAND 
+/** Definiert einen 16-Bitfield Variablentyp für Informationen zum Systemzustand durch Ausgabe eines binären Wertes */
+struct SYSTEMZUSTAND
 	{
-	uint16_t sumpfheizung:1;	/**< Bit0 Kurbelwannenheizung: 0= AUS, 1= EIN */
-	uint16_t kompressor:1;		/**< Bit1 Kompressor: 0= AUS, 1= EIN */
-	uint16_t ventilator:1;		/**< Bit2 Ventilator: 0= AUS, 1= EIN */
-	uint16_t bypass:1;			/**< Bit3 Heissgasventil: 0= OFFEN, 1= ZU */
-	uint16_t ladepumpe:1;		/**< Bit4 Speicherladepumpe: 0= AUS, 1= EIN */
-	uint16_t vorlaufregler:1;	/**< Bit5 Vorlauftemperaturregler: 0= AUS, 1= EIN */
-	uint16_t heizpumpe:1;		/**< Bit6 Umwälzpumpe Heizkreis : 0= AUS, 1= EIN */
-	uint16_t defrost:1;			/**< Bit7 Enteisung: 0= AUS, 1= EIN */
-	uint16_t autobetrieb:1;		/**< Bit10 Automatikbetrieb : 0= AUS, 1= EIN */
-	uint16_t reduziert:1;		/**< Bit11 reduzierter Heizbetrieb : 0= AUS, 1= EIN */
-	uint16_t manbetrieb:1;		/**< Bit12 Manueller Betrieb : 0= AUS, 1= EIN */
-	uint16_t reserve1:1;		/**< Bit13 Reserve */
-	uint16_t druck:1;			/**< Bit14 Drucküberwachung: 0= Druck IO, 1= ALARM */
-	uint16_t motorschutz:1;		/**< Bit15 Motorschutz: 0= IO, 1= AUSGELÖST */
-	uint16_t alarm:1;			/**< Bit16 Alarm: 0= kein Alarm, 1= Anstehend */
-	uint16_t reserve2:1;		/**< Bit17 Reserve */
+	int16_t sumpfheizung:1;	   /**< Bit0 Kurbelwannenheizung: 0= AUS, 1= EIN */
+	int16_t kompressor:1;		/**< Bit1 Kompressor: 0= AUS, 1= EIN */
+	int16_t ventilator:1;		/**< Bit2 Ventilator: 0= AUS, 1= EIN */
+	int16_t bypass:1;			/**< Bit3 Heissgasventil: 0= OFFEN, 1= ZU */
+	int16_t ladepumpe:1;		/**< Bit4 Speicherladepumpe: 0= AUS, 1= EIN */
+	int16_t vorlaufregler:1;	/**< Bit5 Vorlauftemperaturregler: 0= AUS, 1= EIN */
+	int16_t heizpumpe:1;		/**< Bit6 Umwälzpumpe Heizkreis : 0= AUS, 1= EIN */
+	int16_t defrost:1;			/**< Bit7 Enteisung: 0= AUS, 1= EIN */
+	int16_t autobetrieb:1;		/**< Bit10 Automatikbetrieb : 0= AUS, 1= EIN */
+	int16_t reduziert:1;		/**< Bit11 reduzierter Heizbetrieb : 0= AUS, 1= EIN */
+	int16_t manbetrieb:1;		/**< Bit12 Manueller Betrieb : 0= AUS, 1= EIN */
+	int16_t drucktief:1;		/**< Bit13 Drucküberwachung: 0= Druck IO, 1= ALARM */
+	int16_t druckhoch:1;			/**< Bit14 Drucküberwachung: 0= Druck IO, 1= ALARM */
+	int16_t motorschutz:1;		/**< Bit15 Motorschutz: 0= IO, 1= AUSGELÖST */
+	int16_t alarm:1;			/**< Bit16 Alarm: 0= kein Alarm, 1= Anstehend */
+	int16_t reserved_msb:1;		/**< Bit17 MSB Do not use unless you know the meaning */
 	};
 
 /** Switch-Case Variable Typedef mit WP Betriebszuständen */
 typedef enum WP_STATE
 	{
-	WP_STATE_IDLE,
-	WP_STATE_START,
-	WP_STATE_RUN,
-	WP_STATE_STOP,
-	WP_STATE_DEFROST,
-	WP_STATE_ERROR_P,
-	WP_STATE_ERROR_M
+	WP_STATE_IDLE, /**< Standby. Corresponds to intvalue 0 */
+	WP_STATE_START,    /**< Startsequenz. Corresponds to intvalue 1 */
+	WP_STATE_RUN,  /**< Verdichterbetrieb. Corresponds to intvalue 2 */
+	WP_STATE_STOP, /**< Stopsequenz. Corresponds to intvalue 3 */
+	WP_STATE_DEFROST,  /**< Abtaubetrieb. Corresponds to intvalue 4 */
+	WP_STATE_ERROR_P,  /**< Unter-/Überdruck Kältemittelkreislauf. Corresponds to intvalue 5 */
+	WP_STATE_ERROR_M   /**< Motorschutzschalter ausgelöst. Corresponds to intvalue 6 */
 	} wpState_t;
 
 /** Betriebswahl-Anforderung Typedef an WP-Kontrollmodul */
 typedef enum WP_REQ_FUNC
 	{
-	WP_REQ_FUNC_IDLE,
-	WP_REQ_FUNC_HALT,
-	WP_REQ_FUNC_LADEN,
-	WP_REQ_FUNC_DEFROST
+	WP_REQ_FUNC_IDLE,  /**< Kein Betrieb angefordert, verbleibe in Standby. */
+	WP_REQ_FUNC_HALT,  /**< Anforderung laufenden Betrieb zu beenden. */
+	WP_REQ_FUNC_LADEN, /**< Anforderung Ladebetrieb. */
+	WP_REQ_FUNC_DEFROST    /**< Anforderung Enteisung des Verdampfers durchführen. */
 	} wpReqFunc_t;
 
 

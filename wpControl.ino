@@ -9,7 +9,7 @@
 #include "wpControl.h"
 
 /************************************************************************/
-/** 
+/**
 *	@brief	Initialisieren der Steuerein- und Ausgänge sowie deren Zustandsvariablen.
 *			Mithilfe der Funktion setupSteuerIO() werden die Digitalausgänge
 *			in einen sicheren Betriebszustand gebracht. Ebenfalls werden die gespeicherten
@@ -30,7 +30,7 @@ void setupSteuerIO(){
 	digitalWrite(PIN_MISCHER_ZU,LOW);
 	digitalWrite(PIN_SAMMELALARM,LOW);
 	digitalWrite(PIN_SUMPFHEIZUNG,HIGH); // Sumpfheizung in Standby immer aktiv
-
+	Systemzustand.sumpfheizung= 1;
 }
 
 /************************************************************************/
@@ -51,7 +51,7 @@ void getInputstates(){
 	DiStates.status_k_start= !digitalRead(PIN_ZUST_KSTART);
 	DiStates.status_k_run= !digitalRead(PIN_ZUST_KBETR);
 	DiStates.status_tarif= !digitalRead(PIN_TARIFSPERRE);
-	return;
+	
 }
 
 /************************************************************************/
@@ -71,12 +71,12 @@ void getInputstates(){
 *			Speichersolltemperatur, etc. müssen in den höheren Schichten implementiert
 *			werden.
 *	@param	wpReqFunc
-*			wpReqFunc_t Instanz.Enum welche die angeforderbaren Zustände enthält.	
+*			wpReqFunc_t Instanz.Enum welche die angeforderbaren Zustände enthält.
 */
 /************************************************************************/
 void wpStatemachine(wpReqFunc_t wpReqFunc)
 {
-	static uint32_t starttime;	// Vergangene Zeit ab Anforderung um Anlaufphase zu bestimmen	
+	static uint32_t starttime;	// Vergangene Zeit ab Anforderung um Anlaufphase zu bestimmen
 
 	switch(wpState)
 	{
@@ -87,9 +87,9 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 			starttime=millis();		// Startzeitpunkt
 			wpState= WP_STATE_START;
 		}
-		reglerStatemachine(REGLER_STATE_AUTO);	// rufe Regler auf, evt unnötig		
+		reglerStatemachine(REGLER_STATE_AUTO);	// rufe Regler auf, evt unnötig
 		break;
-		
+
 	case WP_STATE_START:	// Startsequenz einleiten, Eingänge prüfen
 
 		getInputstates();
@@ -105,7 +105,7 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 			reglerStatemachine(REGLER_STATE_MANUAL);	// Regler IO-Steuerung übernehmen
 			digitalWrite(PIN_MISCHER_AUF, blink1Hz);
 			digitalWrite(PIN_HEIZPUMPE, HIGH);
-			
+
 		}
 
 		else if (millis()-starttime <= (T_ANLASS+ T_MISCHERSTELLZEIT)){	// Anlassen
@@ -121,16 +121,16 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 			digitalWrite(PIN_BYPASS, LOW);
 			digitalWrite(PIN_MISCHER_AUF,LOW);
 			starttime=millis();						//Reset Laufzeittimer auf RUN
-			if (wpReqFunc== WP_REQ_FUNC_DEFROST){	// Enteisung angefordert				
-				wpState= WP_STATE_DEFROST;			
-			} 
+			if (wpReqFunc== WP_REQ_FUNC_DEFROST){	// Enteisung angefordert
+				wpState= WP_STATE_DEFROST;
+			}
 			else{									// Laden, gehe zu RUN
 				wpState= WP_STATE_RUN;
-			}			
+			}
 		}
-		
+
 		break;
-	
+
 	case WP_STATE_RUN:		// Speicher laden bis Anforderung kommt aufzuhören
 		getInputstates();
 		if (DiStates.status_nd || DiStates.status_hd){ // Druckcheck
@@ -146,9 +146,9 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 			wpState= WP_STATE_STOP;
 		}
 		else if (wpReqFunc== WP_REQ_FUNC_DEFROST){	// Enteisungs-Anforderung
-			wpState= WP_STATE_DEFROST;		
+			wpState= WP_STATE_DEFROST;
 		}
-		
+
 		else{
 			digitalWrite(PIN_K_ANLAUF,HIGH);
 			digitalWrite(PIN_K_BETRIEB,HIGH);
@@ -157,16 +157,16 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 			digitalWrite(PIN_BYPASS, LOW);
 			reglerStatemachine(REGLER_STATE_LADEN);	// Regler hat wieder IO Kontrolle
 		}
-		
+
 		break;
-		
+
 	case WP_STATE_STOP:		// Beende Betrieb, schalte Sumpfheizung ein, gehe zu IDLE
 		digitalWrite(PIN_K_BETRIEB,LOW);
 		digitalWrite(PIN_VENTILATOR, LOW);
 		digitalWrite(PIN_BYPASS, HIGH);		// Bypass auf für Druckausgleich
 		digitalWrite(PIN_SUMPFHEIZUNG, HIGH);
 		reglerStatemachine(REGLER_STATE_AUTO);	// Regler wieder autonom
-		
+
 		if (millis()-starttime >= 500){	// Softstop durch verzögertes AUS Anlaufschütz
 			digitalWrite(PIN_K_ANLAUF,LOW);
 		}
@@ -177,9 +177,9 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 			digitalWrite(PIN_LADEPUMPE,LOW);
 			wpState= WP_STATE_IDLE;
 		}
-		
+
 		break;
-		
+
 	case WP_STATE_DEFROST:		// Enteisen, Ventilator + Ladepumpe aus
 		getInputstates();
 		if (DiStates.status_nd || DiStates.status_hd){ // Druckcheck
@@ -208,8 +208,8 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 				digitalWrite(PIN_BYPASS, LOW);
 			}
 			else{
-			reglerStatemachine(REGLER_STATE_DEFROST);	
-			digitalWrite(PIN_K_BETRIEB, HIGH);	
+			reglerStatemachine(REGLER_STATE_DEFROST);
+			digitalWrite(PIN_K_BETRIEB, HIGH);
 			digitalWrite(PIN_K_ANLAUF, HIGH);
 			digitalWrite(PIN_VENTILATOR, LOW);
 			digitalWrite(PIN_LADEPUMPE, LOW);
@@ -218,7 +218,7 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 		}
 
 		break;
-		
+
 	case WP_STATE_ERROR_P:	// Druckfehler, Sammelalarm aktiv, Blinklicht aktiv
 		digitalWrite(PIN_K_ANLAUF,LOW);
 		digitalWrite(PIN_K_BETRIEB,LOW);
@@ -256,9 +256,8 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 			digitalWrite(PIN_ALARM, LOW);
 			wpState= WP_STATE_IDLE;
 		}
-	
-		break;	
-			
+
+		break;
+
 	}
 }
-

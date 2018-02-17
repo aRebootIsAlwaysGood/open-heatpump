@@ -1,7 +1,7 @@
 /**
  *  @file wpMain.h
  *  @brief Main Header Datei für grundlegende Strukturen und Pin-Definitionen.
- *  
+ *
  *  @author Daniel Schmissrauter
  *  @date 	09.01.2018
  */
@@ -59,6 +59,7 @@
 #define T_MAX_LADEN 2400000 /**< maximale Ladedauer bis Enteisung erfolgen muss [ms] */
 #define T_WIEDERANLAUFSPERRE 900000 /**< Anlaufsperre WP um Taktung gering zu halten [ms] */
 #define T_DEFROSTSPERRE 210000 /**< Enteisungs-Sperrzeit nach Anlauf für Druckaufbau [ms] */
+#define RX_BUFFERSIZE 21 /**< Anzahl empfangbarer ASCII Zeichen pro Befehl über UART (Befehlaufbau= HMIname:wert\n) */
 
 void blinkFunction();
 

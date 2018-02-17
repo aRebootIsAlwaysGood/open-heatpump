@@ -1,42 +1,42 @@
-	
+
 /**
 * @file 	wpMain.ino
 * @brief	Hauptmodul welches die oberste Programmebene darstellt
 * @mainpage	Open-Source Wärmepumpensteuerung
 * @section 	intro_sec Einleitung
-* 
+*
 * Diese Dokumentation beschreibt den Quelltext der Open-Source Wärmepumpensteuerung
 * für die Arduino Entwicklungsumgebung. Diese Software wurde speziell für die
 * im selben Projekt entwickelte Steuerung geschrieben.
-* 
+*
 * @section dependencies Abhängigkeiten
-* 
+*
 * Dieses Programm benutzt die folgenden Libraries:
 * PID_v1 <a href="https://github.com/adafruit/Adafruit_Sensor">Add Link</a>
 * LiquidCrystal_I2C <a href="https://github.com/adafruit/Adafruit_Sensor">Add Link</a>
 * Streaming <a href="https://github.com/adafruit/Adafruit_Sensor">Add Link</a>
-* 
+*
 * ESPAsyncTCP		<a href="https://github.com/me-no-dev/ESPAsyncTCP"
 *					>Async TCP Library for ESP8266</a>
 * ESPAsyncWebServer	<a href="https://github.com/me-no-dev/ESPAsyncWebServer"
 *					>Async Web Server for ESP8266 and ESP32</a>
 * ESPUI				<a href="https://github.com/s00500/ESPUI"
 *					>A simple web user interface library for ESP8266/ESP32</a>
-* 
-* 
+*
+*
 * @section author Author
-* 
+*
 * Entwickelt und geschrieben von Daniel Schmissrauter.
-* 
+*
 * Jahr 2018
-* 
+*
 * @section license Lizenz
 *
 * GNU GPLv2 or later
 */
 
 /***************************************************************************************/
-/** 
+/**
 * @brief 	Enthält die Main- und Initialisierungsfunktion des gesamten Projektes.
 * @details 	Hier sind die Top-Level Funktionen definiert, welche alle anderen aufrufen.
 * Da die Setup-Funktion bei Programmstart als erste ausgeführt wird, müssen
@@ -47,7 +47,7 @@
 
 // ***** HEADERS *****
 #include <stdint-gcc.h>
-#include <PID_v1.h>	
+#include <PID_v1.h>
 #include <Streaming.h>
 #include "wpMain.h"
 #include "wpAuto.h"
@@ -59,25 +59,41 @@
 #include "wpSpeicherladung.h"
 #include "wpUser.h"
 
+#define DEBUG_OVER_SERIAL
 
 struct DI_STATES DiStates;	/** ausgelesene DI-Werte. */
 struct SYSTEMZUSTAND Systemzustand; /** Systeminfos über Betriebszustand. */
 
-struct USER_SETTINGS Usersettings[] =
+struct SETTINGS Usersettings[15] =
 {
-	{0,0}, //No connection
-	{1,1},	//SerialStatus(useraction, uservalue)
-	{},
-	{},
-	{},
-	{},
-	{},
-	{},
-	{},
-	{},
-	{},
-	{},
-	{},
+	//123456789012345678| max command length
+	{"HMIready",0},	 /**< Determines if HMI is ready and serial link up. */
+	{"HMIbmode",1},	/**< Betriebsmodus 0=Stdby, 1=AutoN, 2=AutoR, 3=Man, 4=Error */
+	{"HMIversN",0},	/**< Parallelverschiebungsstufe Normalbetrieb -5...+5. */
+	{"HMIversR",0},	/**< Parallelverschiebungsstufe reduzierter Betrieb -5...+5. */
+	{"HMIstufe",0},	/**< Heizkurvenstufe  1...11 */
+	{"HMItimeNow",0},	/**< Aktuelle Uhrzeit in Minuten und Stunden [hhmm] */
+	{"HMIdateNow",0},	/**< Aktueller Tag und Monat als [ddmm] */
+	{"HMIyearNow",0},	/**< Aktuelles Jahr als [yyyy] */
+	{"HMItimerON",0},	/**< Zeitgesteuerter Betrieb Einschaltzeit [hhmm] */
+	{"HMItimerOFF",0},	/**< Zeitgesteuerter Betrieb Ausschaltzeit [hhmm] */
+	{"HMItimerDay",0},	/**< Zeitgesteuerter Betrieb Wochentage [0b0SSFDMDM] */
+	{"HMIdevToggle",0},	/**< Manuelles Ein-/Aus der Komponenten  */
+	{"HMIuser1",0},	/**< Unbelegte Option */
+	{"HMIuser2",0},	/**< Unbelegte Option */
+	{"HMIuser3",0}	/**< Unbelegte Option */
+};
+
+struct SETTINGS Systemsettings[8] =
+{
+	{"SYSready",1},		/**< Serialport on System ready, send Val 1 */
+	{"SYStaussen",0},	/**< Aussentemperatur ganzzahlig [°C] */
+	{"SYStvorl",0},		/**< Heizungsvorlauftemperatur ganzzahlig [°C] */
+	{"SYStkond",0},		/**< Kondensatorrücklauftemperatur ganzzahlig [°C] */
+	{"SYStspeich",0},	/**< Pufferspeichertemperatur ganzzahlig [°C] */
+	{"SYSsysZust",0},	/**< Systemkomponentenzustand als Bitfelder */
+	{"SYSuser1",0},		/**< Unbelegte Option */
+	{"SYSuser2",0}		/**< Unbelegte Option */
 };
 
 wpState_t wpState= WP_STATE_IDLE;	/** Switch-Case Variable für WP Betriebszustände. */
@@ -92,7 +108,7 @@ uint8_t blink1Hz;	/** Globale Blinkvariable gesteuert durch blinkFunction(). */
 /************************************************************************/
 /**
 *	@brief Blinkfunktion, welche ein binäres Taktsignal von 1Hz liefert.
-*	
+*
 *	Mittels der Blinkfunktion wird ein ständiges Taktsignal von 1Hz erzeugt, welches die
 *	globale Variable blink1Hz aktualisiert. Somit kann diese eingelesen werden und somit
 *	entfällt die ständige Notwendigkeit, auf die millis() Funktion zurückzugreifen.
@@ -107,19 +123,22 @@ void blinkFunction(){
 	return;
 }
 
-/***************************************************************************************/	
+/***************************************************************************************/
 /**
 * @brief Setup-Funktion welche zum Programmstart einmalig ausgeführt wird.
 *
-* Initialisiert Pins und externe Interruptquellen sowie weitere 
+* Initialisiert Pins und externe Interruptquellen sowie weitere
 * Schnittstellen. Daneben werden spezifische Initialisierungsfunktion aufgerufen.
-* 
+*
 * @return @c void
 */
 /***************************************************************************************/
 void setup(){
-Serial.begin(9600); // PC
-Serial1.begin(9600); // ESP8266
+	#ifdef DEBUG_OVER_SERIAL
+		Serial.begin(115200); // PC
+	#endif
+	Serial1.begin(115200); // ESP8266
+	Serial1.setTimeout(20); // Serial1 keep connection waiting time
 // WP Inputs active low
 pinMode(PIN_ND,INPUT_PULLUP);
 pinMode(PIN_HD,INPUT_PULLUP);
@@ -129,7 +148,7 @@ pinMode(PIN_ZUST_KBETR,INPUT_PULLUP);
 pinMode(PIN_TARIFSPERRE,INPUT_PULLUP);
 pinMode(PIN_DI_RESERVE1,INPUT_PULLUP);
 pinMode(PIN_DI_RESERVE2,INPUT_PULLUP);
-// WP Outputs 
+// WP Outputs
 pinMode(PIN_SUMPFHEIZUNG,OUTPUT);
 pinMode(PIN_K_ANLAUF,OUTPUT);
 pinMode(PIN_K_BETRIEB,OUTPUT);
@@ -159,7 +178,7 @@ setupSteuerIO();
 * @brief Main-Funktion welche ständig wiederholt wird.
 *
 * Enthält Funktionen welche vom Hauptprogramm direkt aufgerufen werden.
-* 
+*
 * @return @c void
 */
 /***************************************************************************************/
@@ -167,12 +186,8 @@ void loop(){
 	;
 }
 
-
-
-
-
-
-
-
-
-
+void serialEvent1() {
+  if (Serial1.available()>0){
+    receiveSerialData();
+  }
+}
