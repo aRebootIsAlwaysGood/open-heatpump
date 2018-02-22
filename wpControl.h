@@ -10,7 +10,13 @@
  #ifndef WPCONTROL_H
 #define WPCONTROL_H
 
-/** Struct-Objekt welches für alle digitalen Steuereingänge ein Statusbit beinhaltet */
+/**
+* @brief Definition Strukturtyps zum Speichern von 8 binären Werten in Bitfeldern.
+*       Dieser Strukturtyp kann als Variable zum Ablegen von Digitaleingangszuständen
+*       genutzt werden. Es können Statusinfos für acht digitale Steuereingänge
+*       abgelegt werden. Diese Strukturtyp Definition wurde für eine spezifische
+*       Wärmepumpe geschrieben und enthält deshalb spezifische Membernamen.
+*/
 struct DI_STATES
   {
     uint8_t status_nd:1;		/**< Statusbit0 ND-Schalter */
@@ -29,7 +35,7 @@ struct SYSTEMZUSTAND
 	int16_t sumpfheizung:1;	   /**< Bit0 Kurbelwannenheizung: 0= AUS, 1= EIN */
 	int16_t kompressor:1;		/**< Bit1 Kompressor: 0= AUS, 1= EIN */
 	int16_t ventilator:1;		/**< Bit2 Ventilator: 0= AUS, 1= EIN */
-	int16_t bypass:1;			/**< Bit3 Heissgasventil: 0= OFFEN, 1= ZU */
+	int16_t bypass:1;			/**< Bit3 Heissgasventil: 1= OFFEN, 0= ZU */
 	int16_t ladepumpe:1;		/**< Bit4 Speicherladepumpe: 0= AUS, 1= EIN */
 	int16_t vorlaufregler:1;	/**< Bit5 Vorlauftemperaturregler: 0= AUS, 1= EIN */
 	int16_t heizpumpe:1;		/**< Bit6 Umwälzpumpe Heizkreis : 0= AUS, 1= EIN */
@@ -40,8 +46,8 @@ struct SYSTEMZUSTAND
 	int16_t drucktief:1;		/**< Bit13 Drucküberwachung: 0= Druck IO, 1= ALARM */
 	int16_t druckhoch:1;			/**< Bit14 Drucküberwachung: 0= Druck IO, 1= ALARM */
 	int16_t motorschutz:1;		/**< Bit15 Motorschutz: 0= IO, 1= AUSGELÖST */
-	int16_t alarm:1;			/**< Bit16 Alarm: 0= kein Alarm, 1= Anstehend */
-	int16_t reserved_msb:1;		/**< Bit17 MSB Do not use unless you know the meaning */
+	int16_t tarifsperre:1;			/**< Bit16 Tarifsperre: 0= AUS, 1= EIN */
+	int16_t reserved_msb:1;		/**< Bit17 MSB Do not use unless you know its meaning */
 	};
 
 /** Switch-Case Variable Typedef mit WP Betriebszuständen */
@@ -67,7 +73,7 @@ typedef enum WP_REQ_FUNC
 
 
 void setupSteuerIO();
-void getInputstates();
+void getDIOstates();
 void wpStatemachine(wpReqFunc_t wpReqFunc);
 
 

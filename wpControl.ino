@@ -35,23 +35,35 @@ void setupSteuerIO(){
 
 /************************************************************************/
 /**
-*	@brief Einlesen der Digitalen Eingänge.
-*
-*	Einlesen der digitalen Steuereingängen, die Eingänge der Nutzerbedienung jedoch nicht.
-*	Alle Eingänge sind mittels Pullup-Widerstand ausgerüstet, sind also active-low
-*	und werden demensprechend negiert bevor sie in der globalen Struktur DiStates
-*	eingetragen werden . Debouncing ist hardwareseitig mittels RC-Tiefpass
-*	implementiert.
+*	@brief Einlesen der Zustände von Digital-Eingänge und Ausgänge.
+*	Einlesen der digitalen SteuerIOs, die IOs der Nutzerbedienung jedoch nicht.
+*	Alle Eingänge sind mittels Pullup-Widerstand ausgerüstet, sind also
+*	active-low und werden demensprechend negiert bevor sie in der globalen
+*	Strukturvariable #DiStates sowie #Systemzustand eingetragen werden.
+*	Debouncing ist hardwareseitig mittels RC-Tiefpass implementiert.
+*	Die Digitalausgänge werden ebenfalls eingelesen, um deren Zustand in
+*	die Bitfelder der Struktur #Systemzustand zu schreiben.
 */
 /************************************************************************/
-void getInputstates(){
-	DiStates.status_nd= digitalRead(PIN_ND); // bei Ansprechen DI=HIGH -> keine Negation
-	DiStates.status_hd= digitalRead(PIN_HD); // bei Ansprechen DI=HIGH ->  keine Negation
+void getDIOstates(){
+	DiStates.status_nd= digitalRead(PIN_ND); // NC: DI=LOW -> keine Negation
+	DiStates.status_hd= digitalRead(PIN_HD); // NC: DI=LOW -> keine Negation
 	DiStates.status_motprotect= !digitalRead(PIN_MOTPROTECT);
 	DiStates.status_k_start= !digitalRead(PIN_ZUST_KSTART);
 	DiStates.status_k_run= !digitalRead(PIN_ZUST_KBETR);
 	DiStates.status_tarif= !digitalRead(PIN_TARIFSPERRE);
-	
+
+	Systemzustand.sumpfheizung= digitalRead(PIN_SUMPFHEIZUNG);
+	Systemzustand.status_k_run= DiStates.kompressor;
+	Systemzustand.ventilator= digitalRead(PIN_VENTILATOR);
+	Systemzustand.bypass= digitalRead(PIN_BYPASS);
+	Systemzustand.ladepumpe= digitalRead(PIN_LADEPUMPE);
+	Systemzustand.heizpumpe= digitalRead(PIN_HEIZPUMPE);
+	Systemzustand.drucktief= DiStates.status_nd;
+	Systemzustand.druckhoch= DiStates.status_hd;
+	Systemzustand.motorschutz= DiStates.status_motprotect;
+	Systemzustand.tarifsperre= DiStates.status_tarif;
+
 }
 
 /************************************************************************/
@@ -81,18 +93,18 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 	switch(wpState)
 	{
 	case WP_STATE_IDLE:		// Default case
-		getInputstates();
-
+		getDIOstates();
 		if (wpReqFunc== (WP_REQ_FUNC_LADEN || WP_REQ_FUNC_DEFROST)){
 			starttime=millis();		// Startzeitpunkt
 			wpState= WP_STATE_START;
 		}
-		reglerStatemachine(REGLER_STATE_AUTO);	// rufe Regler auf, evt unnötig
+		reglerStatemachine(REGLER_STATE_AUTO);	// rufe Regler auf
+		Systemzustand.vorlaufregler= 1;
 		break;
 
 	case WP_STATE_START:	// Startsequenz einleiten, Eingänge prüfen
 
-		getInputstates();
+		getDIOstates();
 		if (DiStates.status_nd || DiStates.status_hd){// Druckalarm wenn Unter-/Überdruck
 			wpState = WP_STATE_ERROR_P;
 		}
@@ -105,7 +117,6 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 			reglerStatemachine(REGLER_STATE_MANUAL);	// Regler IO-Steuerung übernehmen
 			digitalWrite(PIN_MISCHER_AUF, blink1Hz);
 			digitalWrite(PIN_HEIZPUMPE, HIGH);
-
 		}
 
 		else if (millis()-starttime <= (T_ANLASS+ T_MISCHERSTELLZEIT)){	// Anlassen
@@ -132,7 +143,7 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 		break;
 
 	case WP_STATE_RUN:		// Speicher laden bis Anforderung kommt aufzuhören
-		getInputstates();
+		getDIOstates();
 		if (DiStates.status_nd || DiStates.status_hd){ // Druckcheck
 			wpState = WP_STATE_ERROR_P;
 		}
@@ -163,8 +174,9 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 	case WP_STATE_STOP:		// Beende Betrieb, schalte Sumpfheizung ein, gehe zu IDLE
 		digitalWrite(PIN_K_BETRIEB,LOW);
 		digitalWrite(PIN_VENTILATOR, LOW);
-		digitalWrite(PIN_BYPASS, HIGH);		// Bypass auf für Druckausgleich
+		// digitalWrite(PIN_BYPASS, HIGH);		// Bypass auf für Druckausgleich
 		digitalWrite(PIN_SUMPFHEIZUNG, HIGH);
+
 		reglerStatemachine(REGLER_STATE_AUTO);	// Regler wieder autonom
 
 		if (millis()-starttime >= 500){	// Softstop durch verzögertes AUS Anlaufschütz
@@ -181,7 +193,7 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 		break;
 
 	case WP_STATE_DEFROST:		// Enteisen, Ventilator + Ladepumpe aus
-		getInputstates();
+		getDIOstates();
 		if (DiStates.status_nd || DiStates.status_hd){ // Druckcheck
 			wpState = WP_STATE_ERROR_P;
 		}
@@ -230,7 +242,7 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 		digitalWrite(PIN_ALARM, blink1Hz);
 		reglerStatemachine(REGLER_STATE_AUTO);
 
-		getInputstates();
+		getDIOstates();
 		if (!DiStates.status_nd || !DiStates.status_hd){	// gehe zu IDLE wenn quittiert
 			digitalWrite(PIN_SAMMELALARM,LOW);
 			digitalWrite(PIN_ALARM, LOW);
@@ -250,7 +262,7 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 		digitalWrite(PIN_ALARM, blink1Hz);
 		reglerStatemachine(REGLER_STATE_AUTO);
 
-		getInputstates();
+		getDIOstates();
 		if (!DiStates.status_motprotect){	// gehe zu IDLE wenn quittiert
 			digitalWrite(PIN_SAMMELALARM,LOW);
 			digitalWrite(PIN_ALARM, LOW);
