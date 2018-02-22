@@ -40,13 +40,13 @@
 #define PIN_AI_RESERVE1 A4	/**< Reserve AI (PF4, ADC4) */
 #define PIN_AI_RESERVE2 A5	/**< Reserve AI (PF5, ADC5) */
 // ----- USER IO (DI,DO,AI) -----
-#define PIN_HEIZKURVE_NORM A10/**< Eingang Heizkurvenwahl Normalbetrieb (PK2, ADC10) */
-#define PIN_HEIZKURVE_RED A11/**< Eingang Heizkurvenwahl reduzierter Betrieb (PK3, ADC11) */
-#define PIN_PARALLELVS A12	/**< Eingang Parallelverschiebungsstufe (PK4, ADC12) */
-#define PIN_BETRMODUS 2		/**< Eingang Betriebsmoduswahl (PE4) */
-#define PIN_NAV_UP 3		/**< Eingang Menunavigation nach oben (PE5) */
-#define PIN_NAV_DOWN 4		/**< Eingang Menunavigation nach unten (PG5) */
-#define PIN_NAV_ENTER 5		/**< Eingang Menunavigation bestätige Auswahl (PE3) */
+#define PIN_PARALLELVS_NORM A10/**< Eingang Parallelvs Normalbetrieb (PK2, ADC10) */
+#define PIN_PARALLELVS_RED A11/**< Eingang Parallelvs reduzierter Betrieb (PK3, ADC11) */
+#define PIN_HEIZKURVENSTUFE A12	/**< Eingang Heizkurvenwahl (PK4, ADC12) */
+#define PIN_FORCE_LOCAL 2		/**< Eingang Erzwinge lokale Direktwahl (PE4) */
+#define PIN_LOCAL_STBY 3		/**< Eingang lokale Direktwahl Standby (PE5) */
+#define PIN_LOCAL_AUTONORM 4		/**< Eingang lokale Direktwahl automatischer Normalbetrieb (PG5) */
+#define PIN_LOCAL_AUTORED 5		/**< Eingang lokale Direktwahl automatischer Betrieb reduziert (PE3) */
 #define PIN_AUTOBETR_EN 6	/**< Anzeige Automatischer Betrieb aktiv (PH3) */
 #define PIN_MANBETR_EN 7	/**< Anzeige Manueller Betrieb aktiv (PH4) */
 #define PIN_ALARM 8			/**< Anzeige Störung (PH5) */

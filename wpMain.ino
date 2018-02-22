@@ -162,10 +162,10 @@ pinMode(PIN_SAMMELALARM,OUTPUT);
 pinMode(PIN_DO_RESERVE1,OUTPUT);
 pinMode(PIN_DO_RESERVE2,OUTPUT);
 // User IOs
-pinMode(PIN_BETRMODUS,INPUT_PULLUP);
-pinMode(PIN_NAV_UP,INPUT_PULLUP);
-pinMode(PIN_NAV_DOWN,INPUT_PULLUP);
-pinMode(PIN_NAV_ENTER,INPUT_PULLUP);
+pinMode(PIN_FORCE_LOCAL,INPUT_PULLUP);
+pinMode(PIN_LOCAL_STBY,INPUT_PULLUP);
+pinMode(PIN_LOCAL_AUTONORM,INPUT_PULLUP);
+pinMode(PIN_LOCAL_AUTORED,INPUT_PULLUP);
 pinMode(PIN_AUTOBETR_EN,OUTPUT);
 pinMode(PIN_MANBETR_EN,OUTPUT);
 pinMode(PIN_ALARM,OUTPUT);
@@ -183,7 +183,8 @@ setupSteuerIO();
 */
 /***************************************************************************************/
 void loop(){
-	;
+	userMain();
+	autoBetrieb();
 }
 
 void serialEvent1() {
