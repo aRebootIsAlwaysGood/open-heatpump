@@ -15,28 +15,29 @@
 
  #include "wpUser.h"
 
- /***************************************************************************************/
+ /****************************************************************************/
  /**
- * @brief Liest über UART empfangene Daten ein und legt sie als Einstellung ab.
- *        Wenn am Serialport 1 vom HMI gesendete Daten anstehen, wird die Funktion
- *        receiveSerialData() von der Funktion serialEvent1() aufgerufen.
- *        Die im Schnittstellen-Buffer enthaltene Daten werden eingelesen bis
- *        ein LINEFEED als Terminator erkannt wird, das Empfangsarray @c rxbuffer
- *        voll ist oder 20ms keine weiteren Daten empfangen werden.
- *        Mittels #RX_BUFFERSIZE kann die Anzahl empfangbarer ASCII-Zeichen/Bytes
- *        pro Empfangseinheit definiert werden, wobei gilt:
- *        Buffersize= empfangbare Zeichen + 3
- *        Durch die Begrenzung der Befehlslänge kann ein Buffer-Overflow resp.
- *        eine Out of bounds Exception effektiv verhindert werden.
- *        Die Funktion teilt empfangene Zeichenkette in Namen- und Wertteil auf
- *        wobei sie folgendes Befehlsformat erwartet:
- *        Datapaket <=RX_BUFFERSIZE= PARAMNAME:PARAMVALUE\n  (PARAMVALUE < +/-32767)
- *        Der Namenteil wird anschliessend mit den Namensfelder der Einträge im
- *        Strukturarray #Usersettings verglichen. Bei Übereinstimmung wird der
- *        empfangene Wertteil beim gefundenen Eintrag im Feld @c value abgelegt.
- *        Wird nur ein Befehlsname ohne Wert gesendet, wird der Defaultwert
- *        -99 zugewiesen und der Wert nicht gespeichert.
-
+ *  @brief Liest über UART empfangene Daten ein und legt sie als Einstellung ab.
+ *
+ *  Wenn am Serialport 1 vom HMI gesendete Daten anstehen, wird die Funktion
+ *  receiveSerialData() von der Funktion serialEvent1() aufgerufen.\n
+ *  Die im Schnittstellen-Buffer enthaltene Daten werden eingelesen bis
+ *  ein LINEFEED als Terminator erkannt wird, das Empfangsarray @c rxbuffer
+ *  voll ist oder 20ms keine weiteren Daten empfangen werden.\n
+ *  Mittels #RX_BUFFERSIZE kann die Anzahl empfangbarer ASCII-Zeichen/Bytes
+ *  pro Empfangseinheit definiert werden, wobei gilt:\n
+ *  Buffersize= empfangbare Zeichen + 3\n
+ *  Durch die Begrenzung der Befehlslänge kann ein Buffer-Overflow resp.
+ *  eine Out of bounds Exception effektiv verhindert werden.\n
+ *  Die Funktion teilt empfangene Zeichenkette in Namen- und Wertteil auf
+ *  wobei sie folgendes Befehlsformat erwartet:\n
+ *  Datapaket <=RX_BUFFERSIZE= PARAMNAME:PARAMVALUE'NL'  (PARAMVALUE < +/-32767)\n
+ *  Der Namenteil wird anschliessend mit den Namensfelder der Einträge im
+ *  Strukturarray #Usersettings verglichen. Bei Übereinstimmung wird der
+ *  empfangene Wertteil beim gefundenen Eintrag im Feld @c value abgelegt.
+ *  Wird nur ein Befehlsname ohne Wert gesendet, wird der Defaultwert
+ *  -99 zugewiesen und der Wert nicht gespeichert.
+ *
  * @remark Das alleinige Senden des Namenteils hat aktuell keine Anwendung.
  *        Eine denkbare und möglicherweise folgende Anwendung ist, das alleinige
  *        Senden des Namens als Request zur Rücksendung des Aktualwertes, welcher
@@ -44,7 +45,7 @@
  *
  * @return @c void
  */
- /***************************************************************************************/
+ /***************************************************************************/
 void receiveSerialData() {
   char rxterminator = '\n'; // explicit initialisation for type char needed!
   char rxbuffer[RX_BUFFERSIZE] = ""; // init Receivingbuffer
@@ -89,6 +90,7 @@ void receiveSerialData() {
 /************************************************************************/
 /**
 *	@brief  Sendet Daten aus der Variable Systemsettings über die UART Schnittstelle.
+*
 *         Die Funktion transmitSerialData() ist das Gegenstück zur Funktion
 *         receiveSerialData(). Sie liest die abgelegten Werte des Datenarrays
 *         #Systemsettings beim Index, welcher als Funktionsargument (uint8_t)
@@ -119,19 +121,20 @@ void transmitSerialData(uint8_t settingindex){
   /************************************************************************/
   /**
   *	@brief Fasst die Zustände aller Bitfelder der Variable #Systemzustand zusammen.
-  *       Mithilfe der Funktion combineZustandbits() können alle Werte (der
-  *       Bitfelder in der Strukturvariable #Systemzustand) in einer 16bit Variable
-  *       abgebildet werden. Dadurch können alle Felder in Einer statt 16
-  *       Nachrichten über die serielle Verbindung geschickt werden und damit
-  *	      erheblich Ressourcen eingespart werden.
-  *       Die 16 verschiedenen Meldungsfelder werden den 16bits der Variable
-  *       mittels Bitmanipulation zugewiesen. Durch die bitweise OR-Verknüpfung
-  *       können die Bits der Variable @c zustaende nicht von 1 nach 0 geändert
-  *       werden, weshalb es wichtig ist, dieser bei Initialisieung explizit
-  *       den Wert 0 zuzuweisen.
-  *       Diese Bitcodierung muss bei einer Übertragung bekannt sein damit im
-  *       Empfänger das Datenpaketes auch entsprechend wieder decodiert werden
-  *       kann.
+  *
+  *    Mithilfe der Funktion combineZustandbits() können alle Werte (der
+  *    Bitfelder in der Strukturvariable #Systemzustand) in einer 16bit Variable
+  *    abgebildet werden. Dadurch können alle Felder in Einer statt 16
+  *    Nachrichten über die serielle Verbindung geschickt werden und damit
+  *	   erheblich Ressourcen eingespart werden. \n
+  *    Die 16 verschiedenen Meldungsfelder werden den 16bits der Variable
+  *    mittels Bitmanipulation zugewiesen. Durch die bitweise OR-Verknüpfung
+  *    können die Bits der Variable @c zustaende nicht von 1 nach 0 geändert
+  *    werden, weshalb es wichtig ist, dieser bei Initialisieung explizit
+  *    den Wert 0 zuzuweisen.\n
+  *    Diese Bitcodierung muss bei einer Übertragung bekannt sein damit im
+  *    Empfänger das Datenpaketes auch entsprechend wieder decodiert werden
+  *    kann.
   *
   * @return @c void
   *
@@ -160,12 +163,13 @@ void combineZustandbits(){
 }
 
 
-/************************************************************************/
+/****************************************************************/
 /**
 *	@brief Gibt die vom User eingestellte Heizkurven-Parallelverschiebung zurück.
-*           Je nach aktivem Betriebsmodus wird entweder die Parallelverschiebung für
-*           den reduzierten Betrieb oder den Normalbetrieb zurückgegeben.
-*           Die wählbaren Verschiebungsstufen gehen jeweils von -5...+5
+*
+*     Je nach aktivem Betriebsmodus wird entweder die Parallelverschiebung für
+*     den reduzierten Betrieb oder den Normalbetrieb zurückgegeben.
+*     Die wählbaren Verschiebungsstufen gehen jeweils von -5...+5
 *
 * @return Eingestellte Heizkurvenverschiebung des aktiven Betriebsmodus als @c int8_t.
 */
@@ -182,6 +186,7 @@ void combineZustandbits(){
  /************************************************************************/
  /**
  *	@brief Bereitstellen der eingestellten Heizkurvenstufe.
+ *
  *         Diese Funktion liest die vom Nutzer eingestellte Stufe
  *         der Heizkurve (1...11) ein und gibt diese zurück.
  *        Für die Berechnung der Heizkurvenfunktion ist die Funktion
@@ -197,6 +202,7 @@ void combineZustandbits(){
  /************************************************************************/
  /**
  *	@brief Prüft ob eine reduzierte Vorlauftemperatur gewünscht wird.
+ *
  *          Die Funktion modeReduziert() gibt den Wert 1 zurück, falls
  *          mit reduzierter Vorlauftemperatur gefahren werden soll.
  *          Die entprechende Moduswahl wird vom Benutzer gewählt.
@@ -214,11 +220,13 @@ void combineZustandbits(){
  /************************************************************************/
  /**
  *	@brief  Auslesen der lokalen, reduzierten Parallelverschiebungsstufe.
+ *
  *          Liest den Wert des Analogeingangs #PIN_PARALLELVS_RED
  *          an welchem die Verschiebungsstufe der Heizkurve im reduzierten
  *          Betrieb per Drehregler, für die lokale respektive die
  *          Notbedienung, eingestellt werden kann. Die Funktion rechnet
  *          den Eingangswert in die Stufen -5...+5 um.
+ *
  * @return Eingestellte Stufe im Bereich -5...+5 als @c int8_t.
  */
  /************************************************************************/
@@ -230,11 +238,13 @@ int8_t readLocalParallelvsRed(){
 /************************************************************************/
 /**
 *	@brief  Auslesen der lokalen, normalen Parallelverschiebungsstufe.
+*
 *          Liest den Wert des Analogeingangs #PIN_PARALLELVS_NORM
 *          an welchem die Verschiebungsstufe der Heizkurve im normalen
 *          Betrieb per Drehregler, für die lokale respektive die
 *          Notbedienung, eingestellt werden kann. Die Funktion rechnet
 *          den Eingangswert in die Stufen -5...+5 um.
+*
 * @return Eingestellte Stufe im Bereich -5...+5 als @c int8_t.
 */
 /************************************************************************/
@@ -246,11 +256,13 @@ int8_t readLocalParallelvsNorm(){
 /************************************************************************/
 /**
 *	@brief  Auslesen der lokalen, Stufenwahl der Heizkurve.
+*
 *          Liest den Wert des Analogeingangs #PIN_HEIZKURVENSTUFE
 *          an welchem die Steigung der Heizkurvenfunktion
 *          per Drehregler, für die lokale respektive die
 *          Notbedienung, eingestellt werden kann. Die Funktion rechnet
 *          den Eingangswert in die Stufen 1...11 um.
+*
 * @return Eingestellte Stufe im Bereich 1...11 als @c int8_t.
 */
 /************************************************************************/
@@ -262,14 +274,17 @@ int8_t readLocalKurvenstufe(){
 /************************************************************************/
 /**
 *	@brief  Erzwingt die Verwendung der lokal eingestellten Parametern.
+*
 *          Die Funktion forceLocalBedienung() forciert die Verwendung
 *           der lokalen Bedienungswerte (Notbedienung) wenn diese aktiviert
 *           ist. Dadurch werden die gespeicherten Einstellungen überschrieben
-*           und betreffende Eingaben des HMI ignoriert.
+*           und betreffende Eingaben des HMI ignoriert.\n
 *           Die lokale Bedienung kann einerseits mittels Hardwareschalter
 *           aktiviert werden anderseits mittels optionalem Funktionsparameter.
+*
 * @param    reqForce
 *           Funktionsaufruf mit Argumentwert ungleich 0 als @c int8_t.
+*
 * @return TRUE falls lokale Bedienung aktiv, ansonsten FALSE.
 */
 /************************************************************************/
@@ -292,6 +307,7 @@ int8_t forceLocalBedienung(int8_t reqForce=0){
 /************************************************************************/
 /**
 *   @brief  Aktualisiert den Betriebsmodus und zeigt diesen lokal an.
+*
 *           Die Funktion getBetriebsmodus() liest den Wert der Moduswahl
 *           aus der Strukturvariable #Usersettings und aktualisiert damit
 *           die entsprechenden Bitfields der Variable #Systemzustand.
@@ -344,7 +360,8 @@ int8_t getBetriebsmodus(){
 
 /************************************************************************/
 /**
-*   @brief Benutzersteuerungs Hauptfunktion zum Aufruf im Mainloop
+*   @brief Benutzersteuerungs Hauptfunktion zum Aufruf im Mainloop.
+*
 *           Oberste Ebene der Benutzersteuerung, welche die weiteren
 *           Benutzerfunktionen direkt oder indirekt aufruft.
 */

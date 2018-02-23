@@ -12,10 +12,11 @@
 
 /**
 * @brief Definition Strukturtyps zum Speichern von 8 binären Werten in Bitfeldern.
-*       Dieser Strukturtyp kann als Variable zum Ablegen von Digitaleingangszuständen
-*       genutzt werden. Es können Statusinfos für acht digitale Steuereingänge
-*       abgelegt werden. Diese Strukturtyp Definition wurde für eine spezifische
-*       Wärmepumpe geschrieben und enthält deshalb spezifische Membernamen.
+*
+*  Dieser Strukturtyp kann als Variable zum Ablegen von Digitaleingangszuständen
+*  genutzt werden. Es können Statusinfos für acht digitale Steuereingänge
+*  abgelegt werden. Diese Strukturtyp Definition wurde für eine spezifische
+*   Wärmepumpe geschrieben und enthält deshalb spezifische Membernamen.
 */
 struct DI_STATES
   {
@@ -29,7 +30,13 @@ struct DI_STATES
     uint8_t status_reserve2:1;	/**< Statusbit7 Reserve */
     };
 
-/** Definiert einen 16-Bitfield Variablentyp für Informationen zum Systemzustand durch Ausgabe eines binären Wertes */
+/**
+*   @brief  Definiert einen 16-Bitfield Variablentyp für Informationen.
+*
+*   Innerhalb solchen Strukturen können Variablen mit nur zwei Werten
+*   speichersparend abgelegt werden, beispielsweise zum Systemzustand.
+*   Der Aufruf eines Members kann wie bei Klassenfunktionen erfolgen.
+*/
 struct SYSTEMZUSTAND
 	{
 	int16_t sumpfheizung:1;	   /**< Bit0 Kurbelwannenheizung: 0= AUS, 1= EIN */
@@ -50,7 +57,12 @@ struct SYSTEMZUSTAND
 	int16_t reserved_msb:1;		/**< Bit17 MSB Do not use unless you know its meaning */
 	};
 
-/** Switch-Case Variable Typedef mit WP Betriebszuständen */
+/**
+* @brief Enumerator Typendefinition für die WP-Betriebs Statemachine.
+*
+*       Dies ist die Definition der Switch-Case Variable welche die WP
+*    Betriebszustände enthält.
+*/
 typedef enum WP_STATE
 	{
 	WP_STATE_IDLE, /**< Standby. Corresponds to intvalue 0 */
@@ -62,7 +74,12 @@ typedef enum WP_STATE
 	WP_STATE_ERROR_M   /**< Motorschutzschalter ausgelöst. Corresponds to intvalue 6 */
 	} wpState_t;
 
-/** Betriebswahl-Anforderung Typedef an WP-Kontrollmodul */
+/**
+*   @brief Enumerator Typdefinition zur WP-Betriebswahl-Anforderung.
+*
+*   Dieser Variablentyp wird genutzt um Betriebswahl Anforderungen
+*   an das WP-Kontrollmodul zu übergeben.
+*/
 typedef enum WP_REQ_FUNC
 	{
 	WP_REQ_FUNC_IDLE,  /**< Kein Betrieb angefordert, verbleibe in Standby. */

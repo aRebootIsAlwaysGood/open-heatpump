@@ -10,7 +10,8 @@
 #define WPSPEICHERLADUNG_H
 
 /**
-*	@brief	Definition des Enumtyps für die Speicherladungs-Statemachine
+*	@brief	Definition des Enumtyps für die Speicherladungs-Statemachine.
+*
 *			Mittels dieses Enumerator-Variablentyps, können die Zustände
 *			der Speicherladungs-Statemachine speicherladung()
 *			als Klarnamen statt numerischer Werte aufgerufen werden.

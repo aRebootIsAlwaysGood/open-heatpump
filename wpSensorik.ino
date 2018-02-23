@@ -1,7 +1,7 @@
 /**
  *  @file wpSensorik.ino
  *  @brief Auswertung der Analogsignale der Temperatursensoren.
- *   
+ *
  *  @author Daniel Schmissrauter
  *  @date 	09.01.2018
  */
@@ -9,25 +9,26 @@
  #include "wpSensorik.h"
 
  /************************************************************************/
- /** 
+ /**
  *	@brief	Messung der aktuellen Aussentemperatur in Grad Celsius.
- *			Die Auswertung des Analogeinganges erfolgt bei Aufruf dieser Funktion.
- *			Der Analog-Digital Wandler erzeugt aus dem Messbereich von 0 bis 5V eine
- *			Zahlenmenge von 0 bis 1023 (10bit ADC). Somit entspricht die Auflösung des ADC
- *			0.0049V = 4.9mV. 
- *			Der KTY81/210 Messfühler ist als Spannungsteiler-Widerstand zwischen GND und
- *			dem ADC-Eingang angeschlossen, zwischen 5V und ADC ein Festwiderstand von 2k7.
- *			Über den KTY81 fällt somit bei -50°C eine Spannung von 1.38V, bei +100°C
- *			eine Spannung von 2.78V ab. Linearisiert man die Temperatur-Spannungs-
- *			Kennlinie in diesem Bereich mittels Regressionsgeraden, ergeben sich Werte
- *			von 1.41V bei -50°C und 2.82V bei +100°C.
- *			Mittels bekannter ADC-Auflösung entspricht -50°C einem linearisierten Wert
- *			von 287 und +100°C einem Rückgabewert von 576. 
- *			Durch Einsatz der Funktion map() wird der ADC-Ausgangswert in Grad Celsius
- *			ausgegeben. Die Ausgabe erfolgt als 16bit Integer, demzufolge nur ganzzahlige
- *			Werte.
- *			Um genauere Messwerte zu erhalten, erfolgen drei Messungen deren Mittelwert
- *			der neue Messwert wird.
+ *
+ *	Die Auswertung des Analogeinganges erfolgt bei Aufruf dieser Funktion.
+ *	Der Analog-Digital Wandler erzeugt aus dem Messbereich von 0 bis 5V eine
+ *	Zahlenmenge von 0 bis 1023 (10bit ADC). Somit entspricht die AuflÃ¶sung des ADC
+ *	0.0049V = 4.9mV.\n
+ *	Der KTY81/210 MessfÃ¼hler ist als Spannungsteiler-Widerstand zwischen GND und
+ *	dem ADC-Eingang angeschlossen, zwischen 5V und ADC ein Festwiderstand von 2k7.
+ *	Ãœber den KTY81 fÃ¤llt somit bei -50Â°C eine Spannung von 1.38V, bei +100Â°C
+ *	eine Spannung von 2.78V ab. Linearisiert man die Temperatur-Spannungs-
+ *	Kennlinie in diesem Bereich mittels Regressionsgeraden, ergeben sich Werte
+ *	von 1.41V bei -50Â°C und 2.82V bei +100Â°C.\n
+ *	Mittels bekannter ADC-AuflÃ¶sung entspricht -50Â°C einem linearisierten Wert
+ *	von 287 und +100Â°C einem RÃ¼ckgabewert von 576.
+ *	Durch Einsatz der Funktion map() wird der ADC-Ausgangswert in Grad Celsius
+ *	ausgegeben. Die Ausgabe erfolgt als 16bit Integer, demzufolge nur
+ *  ganzzahlige Werte.\n
+ *	Um genauere Messwerte zu erhalten, erfolgen drei Messungen deren Mittelwert
+ *	der neue Messwert wird.
  *
  *	@return	gemessene Aussentemperatur in Grad Celsius (ganzzahlig).
  */
@@ -43,27 +44,28 @@
  }
 
   /************************************************************************/
- /** 
- *	@brief	Messung der aktuellen Wassertemperatur nach dem Wärmetauscher.
- *			Die Auswertung des Analogeinganges erfolgt bei Aufruf dieser Funktion.
- *			Der Analog-Digital Wandler erzeugt aus dem Messbereich von 0 bis 5V eine
- *			Zahlenmenge von 0 bis 1023 (10bit ADC). Somit entspricht die Auflösung des ADC
- *			0.0049V = 4.9mV. 
- *			Der KTY81/210 Messfühler ist als Spannungsteiler-Widerstand zwischen GND und
- *			dem ADC-Eingang angeschlossen, zwischen 5V und ADC ein Festwiderstand von 2k7.
- *			Über den KTY81 fällt somit bei -50°C eine Spannung von 1.38V, bei +100°C
- *			eine Spannung von 2.78V ab. Linearisiert man die Temperatur-Spannungs-
- *			Kennlinie in diesem Bereich mittels Regressionsgeraden, ergeben sich Werte
- *			von 1.41V bei -50°C und 2.82V bei +100°C.
- *			Mittels bekannter ADC-Auflösung entspricht -50°C einem linearisierten Wert
- *			von 287 und +100°C einem Rückgabewert von 576. 
- *			Durch Einsatz der Funktion map() wird der ADC-Ausgangswert in Grad Celsius
- *			ausgegeben. Die Ausgabe erfolgt als 16bit Integer, demzufolge nur ganzzahlige
- *			Werte.
- *			Um genauere Messwerte zu erhalten, erfolgen drei Messungen deren Mittelwert
- *			der neue Messwert wird.
- *			
- *	@return	gemessene Kondensatorrücklauf-Temperatur in Grad Celsius (ganzzahlig).
+ /**
+ *	@brief	Messung der aktuellen Wassertemperatur vor dem WÃ¤rmetauscher.
+ *
+ *	Die Auswertung des Analogeinganges erfolgt bei Aufruf dieser Funktion.
+ *	Der Analog-Digital Wandler erzeugt aus dem Messbereich von 0 bis 5V eine
+ *	Zahlenmenge von 0 bis 1023 (10bit ADC). Somit entspricht die AuflÃ¶sung des ADC
+ *	0.0049V = 4.9mV. \n
+ *	Der KTY81/210 MessfÃ¼hler ist als Spannungsteiler-Widerstand zwischen GND und
+ *	dem ADC-Eingang angeschlossen, zwischen 5V und ADC ein Festwiderstand von 2k7.
+ *	Ãœber den KTY81 fÃ¤llt somit bei -50Â°C eine Spannung von 1.38V, bei +100Â°C
+ *	eine Spannung von 2.78V ab. Linearisiert man die Temperatur-Spannungs-
+ *	Kennlinie in diesem Bereich mittels Regressionsgeraden, ergeben sich Werte
+ *	von 1.41V bei -50Â°C und 2.82V bei +100Â°C.\n
+ *	Mittels bekannter ADC-AuflÃ¶sung entspricht -50Â°C einem linearisierten Wert
+ *	von 287 und +100Â°C einem RÃ¼ckgabewert von 576.
+ *	Durch Einsatz der Funktion map() wird der ADC-Ausgangswert in Grad Celsius
+ *	ausgegeben. Die Ausgabe erfolgt als 16bit Integer, demzufolge nur ganzzahlige
+ *	Werte.\n
+ *	Um genauere Messwerte zu erhalten, erfolgen drei Messungen deren Mittelwert
+ *	der neue Messwert wird.
+ *
+ *	@return	gemessene Temperatur des unteren Speicherausgangs in Grad Celsius (ganzzahlig).
  */
  /************************************************************************/
  int16_t getKondenstemp(){
@@ -77,25 +79,26 @@
  }
 
   /************************************************************************/
- /** 
+ /**
  *	@brief	Messung der aktuellen Pufferspeichertemperatur in Grad Celsius.
- *			Die Auswertung des Analogeinganges erfolgt bei Aufruf dieser Funktion.
- *			Der Analog-Digital Wandler erzeugt aus dem Messbereich von 0 bis 5V eine
- *			Zahlenmenge von 0 bis 1023 (10bit ADC). Somit entspricht die Auflösung des ADC
- *			0.0049V = 4.9mV. 
- *			Der KTY81/210 Messfühler ist als Spannungsteiler-Widerstand zwischen GND und
- *			dem ADC-Eingang angeschlossen, zwischen 5V und ADC ein Festwiderstand von 2k7.
- *			Über den KTY81 fällt somit bei -50°C eine Spannung von 1.38V, bei +100°C
- *			eine Spannung von 2.78V ab. Linearisiert man die Temperatur-Spannungs-
- *			Kennlinie in diesem Bereich mittels Regressionsgeraden, ergeben sich Werte
- *			von 1.41V bei -50°C und 2.82V bei +100°C.
- *			Mittels bekannter ADC-Auflösung entspricht -50°C einem linearisierten Wert
- *			von 287 und +100°C einem Rückgabewert von 576. 
- *			Durch Einsatz der Funktion map() wird der ADC-Ausgangswert in Grad Celsius
- *			ausgegeben. Die Ausgabe erfolgt als 16bit Integer, demzufolge nur ganzzahlige
- *			Werte.
- *			Um genauere Messwerte zu erhalten, erfolgen drei Messungen deren Mittelwert
- *			der neue Messwert wird.
+ *
+ *	Die Auswertung des Analogeinganges erfolgt bei Aufruf dieser Funktion.
+ *	Der Analog-Digital Wandler erzeugt aus dem Messbereich von 0 bis 5V eine
+ *	Zahlenmenge von 0 bis 1023 (10bit ADC). Somit entspricht die AuflÃ¶sung des ADC
+ *	0.0049V = 4.9mV. \n
+ *	Der KTY81/210 MessfÃ¼hler ist als Spannungsteiler-Widerstand zwischen GND und
+ *	dem ADC-Eingang angeschlossen, zwischen 5V und ADC ein Festwiderstand von 2k7.
+ *	Ãœber den KTY81 fÃ¤llt somit bei -50Â°C eine Spannung von 1.38V, bei +100Â°C
+ *	eine Spannung von 2.78V ab. Linearisiert man die Temperatur-Spannungs-
+ *	Kennlinie in diesem Bereich mittels Regressionsgeraden, ergeben sich Werte
+ *	von 1.41V bei -50Â°C und 2.82V bei +100Â°C.\n
+ *	Mittels bekannter ADC-AuflÃ¶sung entspricht -50Â°C einem linearisierten Wert
+ *	von 287 und +100Â°C einem RÃ¼ckgabewert von 576.
+ *	Durch Einsatz der Funktion map() wird der ADC-Ausgangswert in Grad Celsius
+ *	ausgegeben. Die Ausgabe erfolgt als 16bit Integer, demzufolge nur ganzzahlige
+ *	Werte.\n
+ *	Um genauere Messwerte zu erhalten, erfolgen drei Messungen deren Mittelwert
+ *	der neue Messwert wird.
  *
  *	@return	gemessene Speichertemperatur in Grad Celsius (ganzzahlig).
  */
@@ -111,25 +114,26 @@
  }
 
   /************************************************************************/
- /** 
+ /**
  *	@brief	Messung der  aktuellen Heizungs-Vorlauftemperatur in Grad Celsius.
- *			Die Auswertung des Analogeinganges erfolgt bei Aufruf dieser Funktion.
- *			Der Analog-Digital Wandler erzeugt aus dem Messbereich von 0 bis 5V eine
- *			Zahlenmenge von 0 bis 1023 (10bit ADC). Somit entspricht die Auflösung des ADC
- *			0.0049V = 4.9mV. 
- *			Der KTY81/210 Messfühler ist als Spannungsteiler-Widerstand zwischen GND und
- *			dem ADC-Eingang angeschlossen, zwischen 5V und ADC ein Festwiderstand von 2k7.
- *			Über den KTY81 fällt somit bei -50°C eine Spannung von 1.38V, bei +100°C
- *			eine Spannung von 2.78V ab. Linearisiert man die Temperatur-Spannungs-
- *			Kennlinie in diesem Bereich mittels Regressionsgeraden, ergeben sich Werte
- *			von 1.41V bei -50°C und 2.82V bei +100°C.
- *			Mittels bekannter ADC-Auflösung entspricht -50°C einem linearisierten Wert
- *			von 287 und +100°C einem Rückgabewert von 576. 
- *			Durch Einsatz der Funktion map() wird der ADC-Ausgangswert in Grad Celsius
- *			ausgegeben. Die Ausgabe erfolgt als 16bit Integer, demzufolge nur ganzzahlige
- *			Werte.
- *			Um genauere Messwerte zu erhalten, erfolgen drei Messungen deren Mittelwert
- *			der neue Messwert wird.
+ *
+ *	Die Auswertung des Analogeinganges erfolgt bei Aufruf dieser Funktion.
+ *	Der Analog-Digital Wandler erzeugt aus dem Messbereich von 0 bis 5V eine
+ *	Zahlenmenge von 0 bis 1023 (10bit ADC). Somit entspricht die AuflÃ¶sung des ADC
+ *	0.0049V = 4.9mV. \n
+ *	Der KTY81/210 MessfÃ¼hler ist als Spannungsteiler-Widerstand zwischen GND und
+ *	dem ADC-Eingang angeschlossen, zwischen 5V und ADC ein Festwiderstand von 2k7.
+ *	Ãœber den KTY81 fÃ¤llt somit bei -50Â°C eine Spannung von 1.38V, bei +100Â°C
+ *	eine Spannung von 2.78V ab. Linearisiert man die Temperatur-Spannungs-
+ *	Kennlinie in diesem Bereich mittels Regressionsgeraden, ergeben sich Werte
+ *	von 1.41V bei -50Â°C und 2.82V bei +100Â°C.\n
+ *	Mittels bekannter ADC-AuflÃ¶sung entspricht -50Â°C einem linearisierten Wert
+ *	von 287 und +100Â°C einem RÃ¼ckgabewert von 576.
+ *	Durch Einsatz der Funktion map() wird der ADC-Ausgangswert in Grad Celsius
+ *	ausgegeben. Die Ausgabe erfolgt als 16bit Integer, demzufolge nur ganzzahlige
+ *	Werte.\n
+ *	Um genauere Messwerte zu erhalten, erfolgen drei Messungen deren Mittelwert
+ *	der neue Messwert wird.
  *
  *	@return	gemessene Vorlauftemperatur nach dem Mischer in Grad Celsius (ganzzahlig).
  */
@@ -143,6 +147,3 @@
 	adc_val= map(adc_val,287,576,-50,100);
 	return adc_val;
  }
-
-
-

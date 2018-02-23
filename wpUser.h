@@ -11,15 +11,17 @@
 
 /**
 *		@brief Definition des Strukturtyps welcher Benutzer-Werte oder -Infos enthält.
-*		Definiert den Strukturtyp SETTINGS in welchem über die serielle
-*		Schnittstelle übertragene Befehle als Namens- und Wertfeld
-*		ein- und ausgelesen werden können. Die Nachrichten werden mit dem Namensfeld
-*		@c action vom Empfänger identifiziert und können dadurch den gesendeten
-*		Wert im Feld @c value entsprechend zuordnen. Strukturvariablen dieses Typs
-*		übernehmen eine doppelte Funktion. Sie speichern einersets Einstellungwerte
-*		global im Feld value und dienen anderseits in Kombination mit dem Feld action
-*		auch gleich dazu, Einstellungen über eine Kommunikationsschnittstelle
-*		auszulesen resp. zu verändern.
+*
+*	Definiert den Strukturtyp SETTINGS in welchem über die serielle
+*	Schnittstelle übertragene Befehle als Namens- und Wertfeld
+*	ein- und ausgelesen werden können.\n
+*	Die Nachrichten werden mit dem Namensfeld
+*	@c action vom Empfänger identifiziert und können dadurch den gesendeten
+*	Wert im Feld @c value entsprechend zuordnen.\n Strukturvariablen dieses Typs
+*	übernehmen eine doppelte Funktion. Sie speichern einersets Einstellungwerte
+*	global im Feld value und dienen anderseits in Kombination mit dem Feld action
+*	auch gleich dazu, Einstellungen über eine Kommunikationsschnittstelle
+*	auszulesen resp. zu verändern.
 */
 struct SETTINGS
 {

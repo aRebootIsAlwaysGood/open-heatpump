@@ -35,7 +35,7 @@
 * GNU GPLv2 or later
 */
 
-/***************************************************************************************/
+/******************************************************************************/
 /**
 * @brief 	Enthält die Main- und Initialisierungsfunktion des gesamten Projektes.
 * @details 	Hier sind die Top-Level Funktionen definiert, welche alle anderen aufrufen.
@@ -43,8 +43,7 @@
 * hier alle notwendigen Initialisierungsfunktion aufgerufen werden.
 * Globale Variablen und Objekte sind desweiteren hier zu finden.
 */
-/***************************************************************************************/
-
+/******************************************************************************/
 // ***** HEADERS *****
 #include <stdint-gcc.h>
 #include <PID_v1.h>
@@ -59,11 +58,12 @@
 #include "wpSpeicherladung.h"
 #include "wpUser.h"
 
-#define DEBUG_OVER_SERIAL
+
 
 struct DI_STATES DiStates;	/** ausgelesene DI-Werte. */
 struct SYSTEMZUSTAND Systemzustand; /** Systeminfos über Betriebszustand. */
 
+/** Structarray mit Einstellungen welche vom User am HMI vorgenommen werden */
 struct SETTINGS Usersettings[15] =
 {
 	//123456789012345678| max command length
@@ -84,6 +84,7 @@ struct SETTINGS Usersettings[15] =
 	{"HMIuser3",0}	/**< Unbelegte Option */
 };
 
+/** Structarray mit Infos, welche an das HMI gesendet werden */
 struct SETTINGS Systemsettings[8] =
 {
 	{"SYSready",1},		/**< Serialport on System ready, send Val 1 */
@@ -123,7 +124,7 @@ void blinkFunction(){
 	return;
 }
 
-/***************************************************************************************/
+/*****************************************************************************/
 /**
 * @brief Setup-Funktion welche zum Programmstart einmalig ausgeführt wird.
 *
@@ -132,7 +133,7 @@ void blinkFunction(){
 *
 * @return @c void
 */
-/***************************************************************************************/
+/***************************************************************************/
 void setup(){
 	#ifdef DEBUG_OVER_SERIAL
 		Serial.begin(115200); // PC
@@ -173,7 +174,7 @@ pinMode(PIN_ALARM,OUTPUT);
 setupSteuerIO();
 }
 
-/***************************************************************************************/
+/*****************************************************************************/
 /**
 * @brief Main-Funktion welche ständig wiederholt wird.
 *
@@ -181,12 +182,23 @@ setupSteuerIO();
 *
 * @return @c void
 */
-/***************************************************************************************/
+/****************************************************************************/
 void loop(){
 	userMain();
 	autoBetrieb();
 }
 
+/*****************************************************************************/
+/**
+* @brief Funktion, welche den Serial Empfangsbuffer auf neue Daten prüft
+*
+*	Die Funktion wird jeweils nach Abarbeiten der Funktion loop() aufgerufen.
+*	Falls Daten im Empfangsbuffer anstehen, ruft sie receiveSerialData() auf,
+*	welche den Buffer ausliest.
+*
+* @return @c void
+*/
+/****************************************************************************/
 void serialEvent1() {
   if (Serial1.available()>0){
     receiveSerialData();

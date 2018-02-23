@@ -23,9 +23,10 @@ struct HEIZKURVE{
 };
 
 /**
-*	@brief	Enumerator Typedef für Regler Betriebszustand Steuerung
+*	@brief	Enumerator Typedef für Regler Betriebszustand Steuerung.
+*
 *			Enthält die Betriebszustände des Reglers, welche dieser
-*			einnehmen kann, als Klarnamen.		
+*			einnehmen kann, als Klarnamen.
 */
 typedef enum REGLER_STATE{
 	REGLER_STATE_OFF,
@@ -42,11 +43,6 @@ typedef enum REGLER_STATE{
 float calcTvorlauf(int16_t tAussen, int8_t kurvenstufe, int8_t parallelver, int8_t reduziert);
 
 void reglerStatemachine(reglerState_t reglerState);
-
-
-
-
-
 
 
 #endif

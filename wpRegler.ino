@@ -17,13 +17,14 @@
 * Die Ansteuerung des Mischers erfolgt durch 1Hz lange Pulse um ein
 * Übersteuern zu vermeiden.
 */
-/***************************************************************************************/
+/*****************************************************************************/
 
 #include "wpRegler.h"
 
-/***************************************************************************************/
+/*****************************************************************************/
 /**
  *  @brief Array mit Steigung (m) und y-Verschiebung(n) der Heizkurvenstufen 1-11.
+ *
  *  Array des Typs HEIZKURVE. Enthält die Parameter m und n der
  *  Heizkurvenfunktion vergrössert um den Faktor 100 um Gleitpunktzahlen
  *  zu vermeiden. Die 11 Arrayelemente entsprechen den 11 Stufen
@@ -31,7 +32,7 @@
  *  Die Berechnung der Heizkurve resp. der Vorlauftemperatur erfolgt in
  *  der Funktion calcTvorlauf().
  */
- /***************************************************************************************/
+ /****************************************************************************/
 struct HEIZKURVE heizkurve[11]=
 {
 	{-25,2550}, // Stufe 1
@@ -47,7 +48,7 @@ struct HEIZKURVE heizkurve[11]=
 	{-229,7020}, // Stufe 11
 };
 
-/***************************************************************************************/
+/*****************************************************************************/
 /**
  *  @brief Berechnet Solltemperatur des Heizungsvorlauf mittels Heizkurve.
  *
@@ -62,9 +63,9 @@ struct HEIZKURVE heizkurve[11]=
  *  Die Berechnung erfolgt mittels Ganzzahl-Arithmetik um den Speicherbedarf gering und
  *  die Rechenzeit kurz zu halten. Die Argumente werden deshalb um den Faktor 100 erhöht
  *  und erst nach erfolgter Berechnung wieder verkleinert.
- *  Steigung und Verschiebung in y-Richtung sind im Array #heizkurve definiert
+ *  Steigung und Verschiebung in y-Richtung sind im Array #heizkurve definiert.
  */
- /***************************************************************************************/
+ /****************************************************************************/
 float calcTvorlauf(int16_t tAussen, int8_t kurvenstufe, int8_t parallelver, int8_t reduziert){
 	// function of Tvorlauf, calculate with integer math instead of float to increase speed
 	int16_t tvorlauf= heizkurve[kurvenstufe].steigung *tAussen +heizkurve[kurvenstufe].verschiebung +(parallelver *100);
@@ -78,16 +79,17 @@ float calcTvorlauf(int16_t tAussen, int8_t kurvenstufe, int8_t parallelver, int8
 /************************************************************************/
 /**
 *	@brief	Zustandsautomat für den Heizungsvorlauf-Temperaturregler.
-*			Der Regler kann verschiedene Zustände annehmen, welche die stetige Vorlauf-
-*			Temperaturregelung beeinflussen beziehungsweise diese ausser Kraft setzen.
-*			Im Zustand OFF wird der Regler ganz ausgeschalten, beispielsweise im Sommer.
-*			Im Zustand AUTO wird die Vorlauftemperatur stetig geregelt.
-*			Im Zustand MANUAL nimmt der Regler keinen Einfluss auf seine Steuerausgänge
-*			(Mischer auf/zu und Heizkreislaufpumpe). Somit können diese von anderen
-*			Modulen angesteuert werden ohne dass es zu Konflikten kommt.
-*			Die Zustände LADEN und ENTEISEN initialisieren den Regler gegebenfalls mit
-*			neuen Regelparametern, falls es durch die schnellen Temperaturwechsel zum
-*			instabilen Regelverhalten kommt.
+*
+*	Der Regler kann verschiedene Zustände annehmen, welche die stetige Vorlauf-
+*	Temperaturregelung beeinflussen beziehungsweise diese ausser Kraft setzen.\n
+*	Im Zustand OFF wird der Regler ganz ausgeschalten, beispielsweise im Sommer.\n
+*	Im Zustand AUTO wird die Vorlauftemperatur stetig geregelt.\n
+*	Im Zustand MANUAL nimmt der Regler keinen Einfluss auf seine Steuerausgänge
+*	(Mischer auf/zu und Heizkreislaufpumpe). Somit können diese von anderen
+*	Modulen angesteuert werden ohne dass es zu Konflikten kommt.\n
+*	Die Zustände LADEN und ENTEISEN initialisieren den Regler gegebenfalls mit
+*	neuen Regelparametern, falls es durch die schnellen Temperaturwechsel zum
+*	instabilen Regelverhalten kommt.
 *
 *	@param	[in] reglerState Variable für die Anwahl des Reglerzustandes.
 */
@@ -120,5 +122,5 @@ void reglerStatemachine(reglerState_t reglerState){
 }
 
 void tristateRegler(){
-	
+
 }

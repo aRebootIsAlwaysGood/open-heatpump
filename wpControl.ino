@@ -11,10 +11,11 @@
 /************************************************************************/
 /**
 *	@brief	Initialisieren der Steuerein- und Ausgänge sowie deren Zustandsvariablen.
-*			Mithilfe der Funktion setupSteuerIO() werden die Digitalausgänge
-*			in einen sicheren Betriebszustand gebracht. Ebenfalls werden die gespeicherten
-*			Systemzustandsbits mit 0 überschrieben. Die globale Variable, welche die
-*			Digitaleingangszustände enthält, wird weiter zurückgesetzt.
+*
+*	Mithilfe der Funktion setupSteuerIO() werden die Digitalausgänge
+*	in einen sicheren Betriebszustand gebracht. Ebenfalls werden die gespeicherten
+*	Systemzustandsbits mit 0 überschrieben. Die globale Variable, welche die
+*	Digitaleingangszustände enthält, wird weiter zurückgesetzt.
 */
 /************************************************************************/
 void setupSteuerIO(){
@@ -36,6 +37,7 @@ void setupSteuerIO(){
 /************************************************************************/
 /**
 *	@brief Einlesen der Zustände von Digital-Eingänge und Ausgänge.
+*
 *	Einlesen der digitalen SteuerIOs, die IOs der Nutzerbedienung jedoch nicht.
 *	Alle Eingänge sind mittels Pullup-Widerstand ausgerüstet, sind also
 *	active-low und werden demensprechend negiert bevor sie in der globalen
@@ -69,19 +71,22 @@ void getDIOstates(){
 /************************************************************************/
 /**
 *	@brief	Statemachine für die Low-Level Steuerung der Wärmepumpe.
-*			In dieser Funktion werden die Steuerausgänge geschalten und die Eingänge
-*			überwacht.
-*			Durch das Zwischenschalten dieser Low-Level Funktion, können unsichere
-*			Betriebszustände vermieden werden.
-*			Das Einschalten des Kompressors muss zwingend über zuschaltbare
-*			Anlasswiderstände erfolgen, was diese Funktion automatisch ausführt
-*			wenn die Wärmepumpe angefordert wird.
-*			Übergeordnete Funktionen können entweder eine Speicherladung, Enteisung
-*			oder das Beenden dieser beiden anfordern. Das direkte Umschalten von Laden
-*			zu Enteisen und umgekehrt ist möglich und erwünscht.
-*			Die Anforderungsbedingungen wie Enteisungszeit und -Dauer,
-*			Speichersolltemperatur, etc. müssen in den höheren Schichten implementiert
-*			werden.
+*
+*	In dieser Funktion werden die Steuerausgänge geschalten und die Eingänge
+*	überwacht.
+*	Durch das Zwischenschalten dieser Low-Level Funktion, können unsichere
+*	Betriebszustände vermieden werden.
+*	Das Einschalten des Kompressors muss zwingend über zuschaltbare
+*	Anlasswiderstände erfolgen, was diese Funktion automatisch ausführt
+*	wenn die Wärmepumpe angefordert wird. \n
+*	Übergeordnete Funktionen können entweder eine Speicherladung, Enteisung
+*	oder das Beenden dieser beiden anfordern. Das direkte Umschalten von Laden
+*	zu Enteisen und umgekehrt ist möglich und erwünscht. \n
+*
+*	@note	Die Anforderungsbedingungen wie Enteisungszeit und -Dauer,
+*	Speichersolltemperatur, etc. müssen in den höheren Schichten implementiert
+*	werden.
+*
 *	@param	wpReqFunc
 *			wpReqFunc_t Instanz.Enum welche die angeforderbaren Zustände enthält.
 */

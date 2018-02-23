@@ -1,25 +1,13 @@
 ﻿/**
  *  @file wpSensorik.h
  *  @brief Header zum Sensorikmodul.
- *   
+ *
  *  @author Daniel Schmissrauter
  *  @date 	09.01.2018
  */
 
 #ifndef WPSENSORIK_H
 #define WPSENSORIK_H
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
