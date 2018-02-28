@@ -56,7 +56,7 @@ void getDIOstates(){
 	DiStates.status_tarif= !digitalRead(PIN_TARIFSPERRE);
 
 	Systemzustand.sumpfheizung= digitalRead(PIN_SUMPFHEIZUNG);
-	Systemzustand.status_k_run= DiStates.kompressor;
+	Systemzustand.kompressor= DiStates.status_k_run;
 	Systemzustand.ventilator= digitalRead(PIN_VENTILATOR);
 	Systemzustand.bypass= digitalRead(PIN_BYPASS);
 	Systemzustand.ladepumpe= digitalRead(PIN_LADEPUMPE);
@@ -118,29 +118,35 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 			wpState = WP_STATE_ERROR_M;
 		}
 
-		else if (millis()-starttime <= T_MISCHERSTELLZEIT){	// Mischventil öffnen
+		// Mischventil öffnen
+		else if (millis()-starttime <= T_MISCHERSTELLZEIT){
 			reglerStatemachine(REGLER_STATE_MANUAL);	// Regler IO-Steuerung übernehmen
-			digitalWrite(PIN_MISCHER_AUF, blink1Hz);
+			digitalWrite(PIN_MISCHER_AUF, HIGH);
+			digitalWrite(PIN_MISCHER_AUF, LOW);
 			digitalWrite(PIN_HEIZPUMPE, HIGH);
 		}
 
-		else if (millis()-starttime <= (T_ANLASS+ T_MISCHERSTELLZEIT)){	// Anlassen
-			digitalWrite(PIN_BYPASS, HIGH);
+		// Anlassen
+		else if (millis()-starttime <= (T_ANLASS+ T_MISCHERSTELLZEIT)){
+			digitalWrite(PIN_BYPASS, HIGH); // evt auch LOW (Lastanlauf)
 			digitalWrite(PIN_K_ANLAUF, HIGH);
 			digitalWrite(PIN_K_BETRIEB, LOW);
 			digitalWrite(PIN_SUMPFHEIZUNG, LOW);
 		}
 
-		else{										// Anlassen komplett
+		// Anlassen komplett
+		else{
 			digitalWrite(PIN_K_ANLAUF, HIGH);
 			digitalWrite(PIN_K_BETRIEB, HIGH);
 			digitalWrite(PIN_BYPASS, LOW);
 			digitalWrite(PIN_MISCHER_AUF,LOW);
-			starttime=millis();						//Reset Laufzeittimer auf RUN
-			if (wpReqFunc== WP_REQ_FUNC_DEFROST){	// Enteisung angefordert
+			starttime=millis();		//Reset Laufzeittimer auf RUN
+			// Enteisung angefordert
+			if (wpReqFunc== WP_REQ_FUNC_DEFROST){
 				wpState= WP_STATE_DEFROST;
 			}
-			else{									// Laden, gehe zu RUN
+			// Laden, gehe zu RUN
+			else{
 				wpState= WP_STATE_RUN;
 			}
 		}
@@ -162,6 +168,7 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 			wpState= WP_STATE_STOP;
 		}
 		else if (wpReqFunc== WP_REQ_FUNC_DEFROST){	// Enteisungs-Anforderung
+			initRegler();
 			wpState= WP_STATE_DEFROST;
 		}
 
@@ -171,7 +178,7 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 			digitalWrite(PIN_VENTILATOR,HIGH);
 			digitalWrite(PIN_LADEPUMPE,HIGH);
 			digitalWrite(PIN_BYPASS, LOW);
-			reglerStatemachine(REGLER_STATE_LADEN);	// Regler hat wieder IO Kontrolle
+			reglerStatemachine(REGLER_STATE_AUTO);	// Regler hat wieder IO Kontrolle
 		}
 
 		break;
@@ -192,6 +199,7 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 		}
 		else{
 			digitalWrite(PIN_LADEPUMPE,LOW);
+			initRegler(); // Regler neu Initialisieren
 			wpState= WP_STATE_IDLE;
 		}
 
@@ -225,7 +233,7 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 				digitalWrite(PIN_BYPASS, LOW);
 			}
 			else{
-			reglerStatemachine(REGLER_STATE_DEFROST);
+			reglerStatemachine(REGLER_STATE_AUTO);
 			digitalWrite(PIN_K_BETRIEB, HIGH);
 			digitalWrite(PIN_K_ANLAUF, HIGH);
 			digitalWrite(PIN_VENTILATOR, LOW);
@@ -236,7 +244,7 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 
 		break;
 
-	case WP_STATE_ERROR_P:	// Druckfehler, Sammelalarm aktiv, Blinklicht aktiv
+	case WP_STATE_ERROR_P:	// Druckfehler, Sammelalarm aktiv
 		digitalWrite(PIN_K_ANLAUF,LOW);
 		digitalWrite(PIN_K_BETRIEB,LOW);
 		digitalWrite(PIN_VENTILATOR, LOW);
@@ -244,13 +252,11 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 		digitalWrite(PIN_BYPASS, HIGH);
 		digitalWrite(PIN_SUMPFHEIZUNG, HIGH);
 		digitalWrite(PIN_SAMMELALARM,HIGH);
-		digitalWrite(PIN_ALARM, blink1Hz);
 		reglerStatemachine(REGLER_STATE_AUTO);
 
 		getDIOstates();
 		if (!DiStates.status_nd || !DiStates.status_hd){	// gehe zu IDLE wenn quittiert
 			digitalWrite(PIN_SAMMELALARM,LOW);
-			digitalWrite(PIN_ALARM, LOW);
 			wpState= WP_STATE_IDLE;
 		}
 
@@ -264,13 +270,13 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 		digitalWrite(PIN_BYPASS, HIGH);
 		digitalWrite(PIN_SUMPFHEIZUNG, HIGH);
 		digitalWrite(PIN_SAMMELALARM,HIGH);
-		digitalWrite(PIN_ALARM, blink1Hz);
+		//digitalWrite(PIN_LED_ALARM, blink1Hz);
 		reglerStatemachine(REGLER_STATE_AUTO);
 
 		getDIOstates();
 		if (!DiStates.status_motprotect){	// gehe zu IDLE wenn quittiert
 			digitalWrite(PIN_SAMMELALARM,LOW);
-			digitalWrite(PIN_ALARM, LOW);
+			//digitalWrite(PIN_LED_ALARM, LOW);
 			wpState= WP_STATE_IDLE;
 		}
 

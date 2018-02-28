@@ -1,4 +1,4 @@
-﻿/**
+/**
  *  @file wpSpeicherladung.ino
  *  @brief Aufladen des Pufferspeichers.
  *
@@ -27,7 +27,7 @@
 	 static uint32_t laufzeit;
 	 uint32_t defrostzeit= 180000; // Enteisungszeitdauer abhängig von Aussentemp
 	int16_t tregel= int(t_vorlaufsoll); // Umwandlung Float zu signed int
-    int16_t tvorlauf= getVorlauftemp(); // gemischt
+    // int16_t tvorlauf= getVorlauftemp(); // gemischt (unused)
 	 int16_t tspeicher= getSpeichertemp(); // Speicher Einlaufbereich= erwärmt
 	 int16_t tkondens= getKondenstemp(); // Kaltwasser vor Erwärmung
 	 int16_t taussen= getAussentemp();
@@ -71,6 +71,7 @@
 				 laufzeit= millis(); // Startzeit festhalten
 				 ladenState= LADEN_STATE_LADEN;
 			 }
+             wpStatemachine(WP_REQ_FUNC_IDLE);
 			break;
 
 		case LADEN_STATE_LADEN:
@@ -81,7 +82,7 @@
 
 			 // Ausschaltbedingung (Speicher bis unten warm)
 			 // Bedingung 1: Speichertemp > 15°C ansonsten zu Beginn Heizperiode ständiges aus
-			 else if ((tspeicher > tmax_ruecklauf) && ((tkondens- tregel)>=5){
+			 else if ((tspeicher > tmax_ruecklauf) && ((tkondens- tregel)>=5)){
 				 // Anschliessende Enteisung falls Aussentemp kritisch
 				 if (taussen<= TEMP_DEFROST_REQUIRED){
 					 ladenState= LADEN_STATE_DEFROST;

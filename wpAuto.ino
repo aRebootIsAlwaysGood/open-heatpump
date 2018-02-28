@@ -8,11 +8,20 @@
 
  #include "wpAuto.h"
 
-
+/************************************************************************/
+/**
+*   @brief Ruft die für den automatischen Betrieb nötigen Funktionen auf.
+*
+*   Mittels der Funktion autoBetrieb() kann der automatische Betrieb
+*   gestartet werden. Die Funktion ruft die entsprechend nötigen, weiteren
+*   Funktionen und Abläufe auf. Davon ausgenommen sind Funktionen zur
+*   Benutzersteuerung welche auf globaler Ebene gesteuert werden.
+*/
+/************************************************************************/
  void autoBetrieb(){
-     Systemzustand.autobetrieb= 1;
-     Systemzustand.manbetrieb= 0;
-	 float vorlaufsoll= calcTvorlauf(getAussentemp(), getKurvenstufe(),getParallelvs(),modeReduziert());
 
+	 float vorlaufsoll= calcTvorlauf(getAussentemp(), getKurvenstufe(),getParallelvs(),modeReduziert());
 	 speicherladung(vorlaufsoll);
  }
+
+ 
