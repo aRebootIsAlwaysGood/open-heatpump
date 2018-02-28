@@ -1,7 +1,8 @@
-﻿
+
 /**
  *  @file wpUser.ino
  *  @brief Benutzersteuerung und Kommunikation mit Frontendcontroller.
+ *
  *			Der Mikrocontroller, welcher die Wärmepumpen- und Heizungssteuerung übernimmt,
  *			besitzt keine grafische Benutzerschnittstelle um eine Trennung zwischen den
  *			sicherheitsrelevanten und kritischen Funktionen und den Benutzerfunktionen,
@@ -116,6 +117,26 @@ void transmitSerialData(uint8_t settingindex){
     Serial1<<Systemsettings[settingindex].action<<":"<<Systemsettings[settingindex].value<<"\n";
     Serial1.flush();
   }
+}
+
+/************************************************************************/
+/**
+*   @brief Periodisches Update der Werte ans HMI senden.
+*
+*   Aktualisiert die Werte für das HMI periodisch. Alle Einträge des Arrays
+*   #Systemsettings werden dabei nacheinander an die Funktion
+*   transmitSerialData() übergeben und von dieser an das HMI gesendet.
+*   Die Aktualisierung erfolgt jede Sekunde.
+*/
+/************************************************************************/
+void updateHMI(){
+    static int8_t lastupdate;
+    if(lastupdate!=blink1Hz){
+        for(int8_t j=7;j>=0;j--){
+            transmitSerialData(j);
+        }
+        lastupdate=blink1Hz;
+    }
 }
 
   /************************************************************************/
@@ -275,12 +296,17 @@ int8_t readLocalKurvenstufe(){
 /**
 *	@brief  Erzwingt die Verwendung der lokal eingestellten Parametern.
 *
-*          Die Funktion forceLocalBedienung() forciert die Verwendung
-*           der lokalen Bedienungswerte (Notbedienung) wenn diese aktiviert
-*           ist. Dadurch werden die gespeicherten Einstellungen überschrieben
-*           und betreffende Eingaben des HMI ignoriert.\n
-*           Die lokale Bedienung kann einerseits mittels Hardwareschalter
-*           aktiviert werden anderseits mittels optionalem Funktionsparameter.
+*   Die Funktion forceLocalBedienung() forciert die Verwendung
+*   der lokalen Bedienungswerte (Notbedienung) wenn diese aktiviert
+*   ist. Dadurch werden die gespeicherten Einstellungen überschrieben
+*   und betreffende Eingaben des HMI ignoriert.\n
+*   Die lokale Bedienung kann einerseits mittels Hardwareschalter
+*   aktiviert werden anderseits mittels optionalem Funktionsparameter.
+*   Danach werden die lokalen Taster ausgewertet und der entsprechende
+*   Betriebsmodus ausgewählt.
+*
+* @todo Die Taster 5 und 6 sind noch unbelegt und somit Funktionslos.
+*       Die Einbindung dieser kann beliebig erfolgen.
 *
 * @param    reqForce
 *           Funktionsaufruf mit Argumentwert ungleich 0 als @c int8_t.
@@ -288,15 +314,24 @@ int8_t readLocalKurvenstufe(){
 * @return TRUE falls lokale Bedienung aktiv, ansonsten FALSE.
 */
 /************************************************************************/
-int8_t forceLocalBedienung(int8_t reqForce=0){
+int8_t forceLocalBedienung(int8_t reqForce){
     int8_t enabled= !digitalRead(PIN_FORCE_LOCAL);
-    int8_t forceStby= !digitalRead(PIN_LOCAL_STBY);
-    int8_t forceAutoN= !digitalRead(PIN_LOCAL_AUTONORM);
-    int8_t forceAutoR= !digitalRead(PIN_LOCAL_AUTORED);
+
     if(enabled || reqForce){
-        if(forceStby){Usersettings[1].value=0;} // set Betriebsmodus to Stby
-        else if(forceAutoN){Usersettings[1].value=1;} // set to Auto Normal
-        else if(forceAutoR){Usersettings[1].value=2;} // set to Auto reduziert
+        int8_t buttonread= analogRead(PIN_LOCALBUTTONS);
+        // set to Stby
+        if(buttonread<50){Usersettings[1].value=0;}
+        // set to Auto Normal
+        else if(buttonread>100 && buttonread< 200){Usersettings[1].value=1;}
+        // set to Auto reduziert
+        else if(buttonread>200 && buttonread< 300){Usersettings[1].value=2;}
+        // set to Manual Mode
+        else if(buttonread>300 && buttonread< 400){Usersettings[1].value=3;}
+        // reserve Button
+        else if(buttonread>400 && buttonread< 500){;}
+        // reserve Button
+        else if(buttonread>500 && buttonread< 600){;}
+
         Usersettings[4].value= readLocalKurvenstufe(); // overwrite Heizkurvenstufe
         Usersettings[3].value= readLocalParallelvsRed(); // overwrite Verschiebung reduzierter Betrieb
         Usersettings[2].value= readLocalParallelvsNorm(); // overwrite Verschiebung Normalbetrieb
@@ -319,42 +354,67 @@ int8_t forceLocalBedienung(int8_t reqForce=0){
 /************************************************************************/
 int8_t getBetriebsmodus(){
     int8_t mode= Usersettings[1].value; // 0 Stdby, 1 AutoN, 2 AutoR, 3 Man, 4 Error
+    // Standby mode
     if(mode==0){
-        Systemzustand.autoBetrieb=0;
+        Systemzustand.autobetrieb=0;
         Systemzustand.manbetrieb=0;
         Systemzustand.reduziert=0;
-        digitalWrite(PIN_AUTOBETR_EN,LOW);
-        digitalWrite(PIN_MANBETR_EN,LOW);
-        digitalWrite(PIN_ALARM,LOW);
+        digitalWrite(PIN_LED_STBY,HIGH);
+        digitalWrite(PIN_LED_AUTONORM,LOW);
+        digitalWrite(PIN_LED_AUTORED,LOW);
+        digitalWrite(PIN_LED_MAN,LOW);
+        digitalWrite(PIN_LED_ALARM,LOW);
     }
+    // auto mode normal
     else if(mode==1){
-        Systemzustand.autoBetrieb=1;
+        Systemzustand.autobetrieb=1;
         Systemzustand.reduziert=0;
         Systemzustand.manbetrieb=0;
-        digitalWrite(PIN_AUTOBETR_EN,HIGH);
-        digitalWrite(PIN_MANBETR_EN,LOW);
-        digitalWrite(PIN_ALARM,LOW);
+        digitalWrite(PIN_LED_STBY,LOW);
+        digitalWrite(PIN_LED_AUTONORM,HIGH);
+        digitalWrite(PIN_LED_AUTORED,LOW);
+        digitalWrite(PIN_LED_MAN,LOW);
+        digitalWrite(PIN_LED_ALARM,LOW);
     }
-
+    // auto red. mode
     else if(mode==2){
-        Systemzustand.autoBetrieb=1;
+        Systemzustand.autobetrieb=1;
         Systemzustand.reduziert=1;
         Systemzustand.manbetrieb=0;
-        digitalWrite(PIN_AUTOBETR_EN,HIGH);
-        digitalWrite(PIN_MANBETR_EN,LOW);
-        digitalWrite(PIN_ALARM,LOW);
+        digitalWrite(PIN_LED_STBY,LOW);
+        digitalWrite(PIN_LED_AUTONORM,LOW);
+        digitalWrite(PIN_LED_AUTORED,HIGH);
+        digitalWrite(PIN_LED_MAN,LOW);
+        digitalWrite(PIN_LED_ALARM,LOW);
     }
+    // manual mode, turn on LED
     else if(mode==3){
-        Systemzustand.autoBetrieb=0;
+        Systemzustand.autobetrieb=0;
         Systemzustand.reduziert=0;
         Systemzustand.manbetrieb=1;
-        digitalWrite(PIN_AUTOBETR_EN,LOW);
-        digitalWrite(PIN_MANBETR_EN,HIGH);
-        digitalWrite(PIN_ALARM,LOW);
+        digitalWrite(PIN_LED_STBY,LOW);
+        digitalWrite(PIN_LED_AUTONORM,LOW);
+        digitalWrite(PIN_LED_AUTORED,LOW);
+        digitalWrite(PIN_LED_MAN,HIGH);
+        digitalWrite(PIN_LED_ALARM,LOW);
     }
+    // blinking LED if error occurs
     else if(mode== 4){
-        digitalWrite(PIN_ALARM,blink1Hz);
+        digitalWrite(PIN_LED_ALARM,blink1Hz);
     }
+    // check pressure and blink if too high/low
+    if(Systemzustand.druckhoch || Systemzustand.drucktief){
+        Systemzustand.autobetrieb=0;
+        Systemzustand.reduziert=0;
+        Systemzustand.manbetrieb=0;
+        digitalWrite(PIN_LED_STBY,LOW);
+        digitalWrite(PIN_LED_AUTONORM,LOW);
+        digitalWrite(PIN_LED_AUTORED,LOW);
+        digitalWrite(PIN_LED_MAN,LOW);
+        digitalWrite(PIN_LED_HDND,blink1Hz);
+    }
+    // activate pressure indicator if pressure within range
+    else{digitalWrite(PIN_LED_HDND,HIGH);}
     return mode;
 }
 
@@ -367,6 +427,7 @@ int8_t getBetriebsmodus(){
 */
 /************************************************************************/
 void userMain(){
-    forceLocalBedienung();
-    getBetriebsmodus();
+    forceLocalBedienung(); // check if local usercontrol active
+    getBetriebsmodus(); // Update Mode to Systemsettings and show LEDs
+    updateHMI();   // send Values to HMI every second
 }

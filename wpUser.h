@@ -31,6 +31,7 @@ struct SETTINGS
 
 void receiveSerialData();
 void transmitSerialData(uint8_t settingindex);
+void updateHMI();
 void combineZustandbits();
 int8_t getKurvenstufe();
 int8_t getParallelvs();
