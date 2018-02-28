@@ -95,15 +95,19 @@ float calcTvorlauf(int16_t tAussen, int8_t kurvenstufe, int8_t parallelver, int8
 */
 /************************************************************************/
 void reglerStatemachine(reglerState_t reglerState){
-
+  float sollwert= 0;
 	switch (reglerState)
 	{
 	case REGLER_STATE_OFF:
-
+		digitalWrite(PIN_HEIZPUMPE,LOW);
+		digitalWrite(PIN_MISCHER_ZU,LOW);
+		digitalWrite(PIN_MISCHER_AUF,LOW);
 		break;
 
 	case REGLER_STATE_AUTO:
-
+		sollwert= calcTvorlauf(getAussentemp(), getKurvenstufe(), getParallelvs(), modeReduziert());
+		tristateRegler(sollwert, getVorlauftemp());
+		digitalWrite(PIN_HEIZPUMPE,HIGH);
 		break;
 
 	case REGLER_STATE_MANUAL:
@@ -111,6 +115,7 @@ void reglerStatemachine(reglerState_t reglerState){
 		break;
 
 	case REGLER_STATE_LADEN:
+		digitalWrite(PIN_HEIZPUMPE,HIGH);
 
 		break;
 
@@ -121,6 +126,97 @@ void reglerStatemachine(reglerState_t reglerState){
 	}
 }
 
-void tristateRegler(){
+/************************************************************************/
+/**
+*   @brief Reinitialisieren des Dreipunktreglers.
+*
+*   Diese Funktion initialisiert den Regler und setzt die internen Parameter
+*	zurück. Nach starken Temperaturschwankungen des Vorlaufs, beispielsweise
+*	nach Aufladen des Speichers, sollte eine Reinitialisierung vorgenommen
+*	werden.
+*/
+/************************************************************************/
+void initRegler(){
+	tristateRegler(0,0);
+}
 
+/************************************************************************/
+/**
+*   @brief Quasi-stegiger Dreipunktregler für Dreiweg-Mischventil.
+*
+*	Diese Funktion beinhaltet einen Dreipunktregler mit quasi-stetigem
+*	Regelverhalten. Dieser Reglertyp ist zur Ansteuerung von elektrischen
+*	Stellantrieben geeignet, welche mit konstanter Stellgeschwindigkeit
+*	in beide Richtungen fahren können.\n
+*	Hauptmerkmal dieses Reglers ist die
+*	Rückführung einer prognostizierten Regelabweichung (ep) welche noch gar
+*	nicht an der Regelstrecke auftritt. Dadurch kann ein vielfach schnelleres
+*	Ausregeln bei langsam reagierenden Systemen erreicht werden.\n
+*	Die Funktion arbeitet mit Gleitpunktarithmetik was sie genau jedoch langsam
+*	macht. Reinitialisieren erfolgt durch Aufruf mit den Argumenten @c w = 0
+*	 und @c x = 0 oder einfacher durch Aufruf der Funktion initRegler().
+*
+*   @param w Sollwert auf welchen geregelt wird in °C.
+*
+*   @param x Regelgrösse, also die gemessene Vorlauftemperatur in °C.
+*
+*   @param kp Übertragungsbeiwert Rückführung optionaler Parameter
+*
+*   @param e_min Ansprechempfindlichkeit (entspricht Totzone/2) in °C, optional.
+*
+*   @param hyst Hysterese an den Totzonengrenzen in °C, optional.
+*
+*   @param tn Rückführzeitkonstante in Sekunden, optional.
+*
+*	@note	Falls die Funktion ohne die optionalen Parameter aufgerufen wird,
+*			werden folgende Standardwerte eingesetzt:
+*			- kp: 	0.35
+*			- e_min: 0,4°C
+*			- hyst: 0,2°C
+*			- tn:	1,0s
+*/
+/************************************************************************/
+void tristateRegler(float w,float x,float kp,float e_min, float hyst, float tn){
+	float e= 0;	/**< Regelabweichung */
+	float ep= 0; /**< prognostizierte Regelabweichung */
+	float yr= 0; /**< Rückführwert */
+	static float ty; /**< aktuelle Laufzeit Motor in s */
+	static float ep_old; /**< letzte berechnete Abweichung */
+	static uint32_t lastcalctime; // Zeitpunkt letzte Berechnung
+
+	// set w & x to 0 will reinitialize the controller to zero
+	if(w==0 && x==0){
+		ty=0;
+		ep_old=0;
+		lastcalctime=0;
+		digitalWrite(PIN_MISCHER_ZU, LOW);
+		digitalWrite(PIN_MISCHER_AUF, LOW);
+	}
+
+	// normal controller loop
+	else if((millis()-lastcalctime)>(tn*1000)){
+		e= w-x; // berechne Regelabweichung
+		yr= (kp*ty)/(ty+tn); // berechne Rückführwert. kp und tn konstant!
+		ep= e-yr; // berechne Prognosewert Regelabweichung mittels Rückführwert
+
+		// Hysterese Totzonengrenze (Ansprechempfindlichkeit e_min verändern)
+		if(abs(ep)>abs(ep_old)){e_min+=hyst;} //Regelabw steigt->e_min vergr
+		else if (abs(ep)<abs(ep_old)) {e_min-=hyst;} //Abwsinkt->e_min verkl.
+
+		// Regelabweichung ausserhalb Totzone/2 (e_min) und Hysterese
+		if(abs(ep)>e_min){
+			ty += tn; // zähle Laufzeit hoch
+			// öffne oder schliesse Mischventil
+			if(ep< 0){digitalWrite(PIN_MISCHER_ZU, HIGH);} // wenn Abw negativ
+			else{digitalWrite(PIN_MISCHER_AUF, HIGH);}	// Abw positiv
+		}
+		// Regelabw innerhalb Totzone, Ausgang 0
+		else{
+			digitalWrite(PIN_MISCHER_ZU, LOW);
+			digitalWrite(PIN_MISCHER_AUF, LOW);
+			if(ty > 0){ty -=tn;} // Ziehe Laufzeit ab
+		}
+		ep_old=ep; // speichere berechnete Abweichung vor erneuter Berechnung
+		lastcalctime=millis();
+	}
 }

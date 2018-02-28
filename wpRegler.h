@@ -43,6 +43,7 @@ typedef enum REGLER_STATE{
 float calcTvorlauf(int16_t tAussen, int8_t kurvenstufe, int8_t parallelver, int8_t reduziert);
 
 void reglerStatemachine(reglerState_t reglerState);
-
+void initRegler();
+void tristateRegler(float w,float x,float kp=0.35,float e_min=0.4, float hyst=0.2, float tn=1.0);
 
 #endif
