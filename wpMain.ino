@@ -12,16 +12,16 @@
 * @section dependencies Abhängigkeiten
 *
 * Dieses Programm benutzt die folgenden Libraries:
-* PID_v1 <a href="https://github.com/adafruit/Adafruit_Sensor">Add Link</a>
-* LiquidCrystal_I2C <a href="https://github.com/adafruit/Adafruit_Sensor">Add Link</a>
-* Streaming <a href="https://github.com/adafruit/Adafruit_Sensor">Add Link</a>
+
+* -Streaming: <a href="http://arduiniana.org/libraries/streaming/">Streaming V5.0</a>
 *
-* ESPAsyncTCP		<a href="https://github.com/me-no-dev/ESPAsyncTCP"
+* -LiquidCrystal_I2C <a href="https://github.com/adafruit/Adafruit_Sensor">Add Link</a>
+* -ESPAsyncTCP:	<a href="https://github.com/me-no-dev/ESPAsyncTCP"
 *					>Async TCP Library for ESP8266</a>
-* ESPAsyncWebServer	<a href="https://github.com/me-no-dev/ESPAsyncWebServer"
+* -ESPAsyncWebServer:	<a href="https://github.com/me-no-dev/ESPAsyncWebServer"
 *					>Async Web Server for ESP8266 and ESP32</a>
-* ESPUI				<a href="https://github.com/s00500/ESPUI"
-*					>A simple web user interface library for ESP8266/ESP32</a>
+* -ESPUI:	<a href="https://github.com/s00500/ESPUI"
+*			>A simple web user interface library for ESP8266/ESP32</a>
 *
 *
 * @section author Author
@@ -45,8 +45,7 @@
 */
 /******************************************************************************/
 // ***** HEADERS *****
-#include <stdint-gcc.h>
-#include <PID_v1.h>
+
 #include <Streaming.h>
 #include "wpMain.h"
 #include "wpAuto.h"
@@ -60,18 +59,18 @@
 
 
 
-struct DI_STATES DiStates;	/** ausgelesene DI-Werte. */
-struct SYSTEMZUSTAND Systemzustand; /** Systeminfos über Betriebszustand. */
+struct DI_STATES DiStates;	/** ausgelesene DI-Werte als Bitfields. */
+struct SYSTEMZUSTAND Systemzustand; /** Systemzustand als Bitfields. */
 
 /** Structarray mit Einstellungen welche vom User am HMI vorgenommen werden */
 struct SETTINGS Usersettings[15] =
 {
 	//123456789012345678| max command length
-	{"HMIready",0},	 /**< Determines if HMI is ready and serial link up. */
+	{"HMIready",1},	 /**< Determines if HMI is ready and serial link up. */
 	{"HMIbmode",1},	/**< Betriebsmodus 0=Stdby, 1=AutoN, 2=AutoR, 3=Man, 4=Error */
 	{"HMIversN",0},	/**< Parallelverschiebungsstufe Normalbetrieb -5...+5. */
 	{"HMIversR",0},	/**< Parallelverschiebungsstufe reduzierter Betrieb -5...+5. */
-	{"HMIstufe",0},	/**< Heizkurvenstufe  1...11 */
+	{"HMIstufe",4},	/**< Heizkurvenstufe  1...11 */
 	{"HMItimeNow",0},	/**< Aktuelle Uhrzeit in Minuten und Stunden [hhmm] */
 	{"HMIdateNow",0},	/**< Aktueller Tag und Monat als [ddmm] */
 	{"HMIyearNow",0},	/**< Aktuelles Jahr als [yyyy] */
@@ -104,7 +103,6 @@ ladenState_t ladenState= LADEN_STATE_IDLE; /** Speicherladung Zustandsautomaten-
 
 
 uint8_t blink1Hz;	/** Globale Blinkvariable gesteuert durch blinkFunction(). */
-
 
 /************************************************************************/
 /**
@@ -164,12 +162,12 @@ pinMode(PIN_DO_RESERVE1,OUTPUT);
 pinMode(PIN_DO_RESERVE2,OUTPUT);
 // User IOs
 pinMode(PIN_FORCE_LOCAL,INPUT_PULLUP);
-pinMode(PIN_LOCAL_STBY,INPUT_PULLUP);
-pinMode(PIN_LOCAL_AUTONORM,INPUT_PULLUP);
-pinMode(PIN_LOCAL_AUTORED,INPUT_PULLUP);
-pinMode(PIN_AUTOBETR_EN,OUTPUT);
-pinMode(PIN_MANBETR_EN,OUTPUT);
-pinMode(PIN_ALARM,OUTPUT);
+pinMode(PIN_LED_STBY,OUTPUT);
+pinMode(PIN_LED_AUTONORM,OUTPUT);
+pinMode(PIN_LED_AUTORED,OUTPUT);
+pinMode(PIN_LED_MAN,OUTPUT);
+pinMode(PIN_LED_HDND,OUTPUT);
+pinMode(PIN_LED_ALARM,OUTPUT);
 
 setupSteuerIO();
 }

@@ -27,8 +27,8 @@
 #define PIN_VENTILATOR 34	/**< Schalten des Ventilators (PC3) */
 #define PIN_LADEPUMPE 35	/**< Schalten der Speicherladepumpe (PC2) */
 #define PIN_HEIZPUMPE 36	/**< Schalten der Heizkreislaufpumpe (PC1) */
-#define PIN_MISCHER_ZU 37	/**< Schliessen des Mischventils (Vorlauftemperatur senken) (PC0) */
-#define PIN_MISCHER_AUF 38	/**< Öffnen des Mischventils (Vorlauftemperatur erhöhen) (PD7) */
+#define PIN_MISCHER_AUF 37	/**< Öffnen des Mischventils (Vorlauftemperatur erhöhen) (PC0) */
+#define PIN_MISCHER_ZU 38	/**< Schliessen des Mischventils (Vorlauftemperatur senken) (PD7) */
 #define PIN_SAMMELALARM 39	/**< Schaltkontakt zur Alarmweiterleitung (PG2) */
 #define PIN_DO_RESERVE1 40	/**< Reserve Digital-Output (PG1) */
 #define PIN_DO_RESERVE2 41	/**< Reserve Digital-Output (PG0) */
@@ -43,17 +43,18 @@
 #define PIN_PARALLELVS_NORM A10/**< Eingang Parallelvs Normalbetrieb (PK2, ADC10) */
 #define PIN_PARALLELVS_RED A11/**< Eingang Parallelvs reduzierter Betrieb (PK3, ADC11) */
 #define PIN_HEIZKURVENSTUFE A12	/**< Eingang Heizkurvenwahl (PK4, ADC12) */
-#define PIN_FORCE_LOCAL 2		/**< Eingang Erzwinge lokale Direktwahl (PE4) */
-#define PIN_LOCAL_STBY 3		/**< Eingang lokale Direktwahl Standby (PE5) */
-#define PIN_LOCAL_AUTONORM 4		/**< Eingang lokale Direktwahl automatischer Normalbetrieb (PG5) */
-#define PIN_LOCAL_AUTORED 5		/**< Eingang lokale Direktwahl automatischer Betrieb reduziert (PE3) */
-#define PIN_AUTOBETR_EN 6	/**< Anzeige Automatischer Betrieb aktiv (PH3) */
-#define PIN_MANBETR_EN 7	/**< Anzeige Manueller Betrieb aktiv (PH4) */
-#define PIN_ALARM 8			/**< Anzeige Störung (PH5) */
+#define PIN_LOCALBUTTONS A13    /**< Eingang lokale Bedienung (PK5, ADC13) */
+#define PIN_FORCE_LOCAL 2		/**< Eingang Erzwinge lokale Bedienung (PE4) */
+#define PIN_LED_STBY 3		/**< Anzeige Standby (PE5) */
+#define PIN_LED_AUTONORM 4		/**< Anzeige Autobetrieb normal. (PG5) */
+#define PIN_LED_AUTORED 5		/**< Anzeige Autobetrieb reduziert. (PE3) */
+#define PIN_LED_MAN 6	/**< Anzeige manueller Betrieb aktiv (PH3) */
+#define PIN_LED_HDND 7	/**< Anzeige Druck (PH4) */
+#define PIN_LED_ALARM 8			/**< Anzeige Störung (PH5) */
 
-
+/** ##MAKROS ZUR BETRIEBSANPASSUNG */
 #define T_ANLASS 1000		/**< Anlassdauer Kompressormotor [ms] */
-#define T_MISCHERSTELLZEIT 160000	/**< Stellzeit Mischventil von 100% -> 0% [ms] + 10s Reserve. */
+#define T_MISCHERSTELLZEIT 155000	/**< Stellzeit Mischventil von 100% -> 0% [ms] + 5s Reserve. */
 #define T_NACHLAUF 100000 /**< Nachlaufzeit Ladepumpe nach Ende der Speicherladung [ms] */
 #define TEMP_DEFROST_REQUIRED 10 /**< Grenze Aussentemperatur für periodische Enteisung */
 #define T_MAX_LADEN 2400000 /**< maximale Ladedauer bis Enteisung erfolgen muss [ms] */
