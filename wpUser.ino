@@ -68,20 +68,20 @@ void receiveSerialData() {
         }
         // only for debugging
         #ifdef DEBUG_OVER_SERIAL
-          Serial.print("Updated ");
+          Serial.print(F("Updated "));
           Serial.print(Usersettings[i].action);
-          Serial.print(" mit Wert: ");
+          Serial.print(F(" mit Wert: "));
           Serial.println(Usersettings[i].value);
         #endif
         break;
       }
     }
   #ifdef DEBUG_OVER_SERIAL
-    Serial.print("Splitted Namenteil: ");
+    Serial.print(F("Splitted Namenteil: "));
     Serial.println(nameptr);
-    Serial.print("Splitted Wertteil: ");
+    Serial.print(F("Splitted Wertteil: "));
     Serial.println(splitptr);
-    Serial.print("Wertteil als Intwert: ");
+    Serial.print(F("Wertteil als Intwert: "));
     Serial.println(intvalue,DEC);
     Serial.println();
   #endif
@@ -117,6 +117,11 @@ void transmitSerialData(uint8_t settingindex){
     Serial1<<Systemsettings[settingindex].action<<":"<<Systemsettings[settingindex].value<<"\n";
     Serial1.flush();
   }
+  // only for debugging
+  #ifdef DEBUG_OVER_SERIAL
+      Serial.print(F("Executed: transmitSerialData"));
+      Serial.println(F(" ->Modul: User"));
+  #endif
 }
 
 /************************************************************************/
@@ -137,6 +142,11 @@ void updateHMI(){
         }
         lastupdate=blink1Hz;
     }
+    // only for debugging
+    #ifdef DEBUG_OVER_SERIAL
+        Serial.print(F("Executed: updateHMI"));
+        Serial.println(F(" ->Modul: User"));
+    #endif
 }
 
   /************************************************************************/
@@ -181,6 +191,11 @@ void combineZustandbits(){
   zustaende |= (Systemzustand.tarifsperre << 14);
   zustaende |= (Systemzustand.reserved_msb << 15);
   Systemsettings[5].value= zustaende;
+  // only for debugging
+  #ifdef DEBUG_OVER_SERIAL
+      Serial.print(F("Executed: combineZustandbits"));
+      Serial.println(F(" ->Modul: User"));
+  #endif
 }
 
 
@@ -196,6 +211,11 @@ void combineZustandbits(){
 */
 /************************************************************************/
  int8_t getParallelvs(){
+     // only for debugging
+     #ifdef DEBUG_OVER_SERIAL
+         Serial.print(F("Executed: getParallelvs"));
+         Serial.println(F(" ->Modul: User"));
+     #endif
      if(Usersettings[1].value==2){
          return Usersettings[3].value; // reduziert
      }
@@ -217,6 +237,11 @@ void combineZustandbits(){
  */
  /************************************************************************/
  int8_t getKurvenstufe(){
+     // only for debugging
+     #ifdef DEBUG_OVER_SERIAL
+         Serial.print(F("Executed: getKurvenstufe"));
+         Serial.println(F(" ->Modul: User"));
+     #endif
 	return Usersettings[4].value;
  }
 
@@ -232,6 +257,11 @@ void combineZustandbits(){
  */
  /************************************************************************/
  int8_t modeReduziert(){
+     // only for debugging
+     #ifdef DEBUG_OVER_SERIAL
+         Serial.print(F("Executed: modeReduziert"));
+         Serial.println(F(" ->Modul: User"));
+     #endif
      if(Usersettings[1].value==2){
          return 1;
      }
@@ -253,6 +283,11 @@ void combineZustandbits(){
  /************************************************************************/
 int8_t readLocalParallelvsRed(){
     int16_t inputval= analogRead(PIN_PARALLELVS_RED);
+    // only for debugging
+    #ifdef DEBUG_OVER_SERIAL
+        Serial.print(F("Executed: readLocalParallelvsRed"));
+        Serial.println(F(" ->Modul: User"));
+    #endif
     return map(inputval,0,1023,-5,5); // remap ADC-Valuerange to -5...5
 }
 
@@ -271,6 +306,11 @@ int8_t readLocalParallelvsRed(){
 /************************************************************************/
 int8_t readLocalParallelvsNorm(){
     int16_t inputval= analogRead(PIN_PARALLELVS_NORM);
+    // only for debugging
+    #ifdef DEBUG_OVER_SERIAL
+        Serial.print(F("Executed: readLocalParallelvsNorm"));
+        Serial.println(F(" ->Modul: User"));
+    #endif
     return map(inputval,0,1023,-5,5); // remap ADC-Valuerange to -5...5
 }
 
@@ -289,6 +329,11 @@ int8_t readLocalParallelvsNorm(){
 /************************************************************************/
 int8_t readLocalKurvenstufe(){
     int16_t inputval= analogRead(PIN_HEIZKURVENSTUFE);
+    // only for debugging
+    #ifdef DEBUG_OVER_SERIAL
+        Serial.print(F("Executed: readLocalKurvenstufe"));
+        Serial.println(F(" ->Modul: User"));
+    #endif
     return map(inputval,0,1023,1,11); // remap ADC-Valuerange to 1...11
 }
 
@@ -319,23 +364,29 @@ int8_t forceLocalBedienung(int8_t reqForce){
 
     if(enabled || reqForce){
         int8_t buttonread= analogRead(PIN_LOCALBUTTONS);
-        // set to Stby
-        if(buttonread<50){Usersettings[1].value=0;}
-        // set to Auto Normal
-        else if(buttonread>100 && buttonread< 200){Usersettings[1].value=1;}
-        // set to Auto reduziert
-        else if(buttonread>200 && buttonread< 300){Usersettings[1].value=2;}
-        // set to Manual Mode
-        else if(buttonread>300 && buttonread< 400){Usersettings[1].value=3;}
-        // reserve Button
-        else if(buttonread>400 && buttonread< 500){;}
-        // reserve Button
-        else if(buttonread>500 && buttonread< 600){;}
+        // reserve Button (read: 0...10)
+        if(buttonread<50){;}
+        // reserve Button (read: 127...137)
+        else if(buttonread>100 && buttonread< 200){;}
+        // set to Auto Normal (read: 241...253)
+        else if(buttonread>200 && buttonread< 300){Usersettings[1].value=3;}
+        // set to Auto reduziert (read: 352...366)
+        else if(buttonread>300 && buttonread< 400){Usersettings[1].value=2;}
+        // set to Manual Mode (read: 445...460)
+        else if(buttonread>400 && buttonread< 500){Usersettings[1].value=1;}
+        // set to Standby (read: 523...531)
+        else if(buttonread>500 && buttonread< 600){Usersettings[1].value=0;}
 
         Usersettings[4].value= readLocalKurvenstufe(); // overwrite Heizkurvenstufe
         Usersettings[3].value= readLocalParallelvsRed(); // overwrite Verschiebung reduzierter Betrieb
         Usersettings[2].value= readLocalParallelvsNorm(); // overwrite Verschiebung Normalbetrieb
     }
+    // only for debugging
+    #ifdef DEBUG_OVER_SERIAL
+        Serial.print(F("Executed: forceLocalBedienung"));
+        Serial.println(F(" ->Modul: User"));
+    #endif
+    getBetriebsmodus(); // Update Mode to Systemsettings and show LEDs
     return enabled;
 }
 
@@ -403,7 +454,7 @@ int8_t getBetriebsmodus(){
         digitalWrite(PIN_LED_ALARM,blink1Hz);
     }
     // check pressure and blink if too high/low
-    if(Systemzustand.druckhoch || Systemzustand.drucktief){
+    if(DiStates.status_hd || DiStates.status_nd){
         Systemzustand.autobetrieb=0;
         Systemzustand.reduziert=0;
         Systemzustand.manbetrieb=0;
@@ -412,9 +463,15 @@ int8_t getBetriebsmodus(){
         digitalWrite(PIN_LED_AUTORED,LOW);
         digitalWrite(PIN_LED_MAN,LOW);
         digitalWrite(PIN_LED_HDND,blink1Hz);
+        digitalWrite(PIN_LED_ALARM,HIGH);
     }
     // activate pressure indicator if pressure within range
     else{digitalWrite(PIN_LED_HDND,HIGH);}
+    // only for debugging
+    #ifdef DEBUG_OVER_SERIAL
+        Serial.print(F("Executed: getBetriebsmodus"));
+        Serial.println(F(" ->Modul: User"));
+    #endif
     return mode;
 }
 
@@ -428,6 +485,11 @@ int8_t getBetriebsmodus(){
 /************************************************************************/
 void userMain(){
     forceLocalBedienung(); // check if local usercontrol active
-    getBetriebsmodus(); // Update Mode to Systemsettings and show LEDs
+
     updateHMI();   // send Values to HMI every second
+    // only for debugging
+    #ifdef DEBUG_OVER_SERIAL
+        Serial.print(F("Executed: userMain"));
+        Serial.println(F(" ->Modul: User"));
+    #endif
 }

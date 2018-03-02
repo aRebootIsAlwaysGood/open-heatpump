@@ -19,8 +19,7 @@
 */
 /************************************************************************/
 void setupSteuerIO(){
-	DiStates= {0,0,0,0,0,0,0,0}; // Setze alle Zustandsbits der DI auf 0
-	Systemzustand= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+
 	digitalWrite(PIN_K_ANLAUF,LOW);
 	digitalWrite(PIN_K_BETRIEB,LOW);
 	digitalWrite(PIN_VENTILATOR, LOW);
@@ -32,6 +31,11 @@ void setupSteuerIO(){
 	digitalWrite(PIN_SAMMELALARM,LOW);
 	digitalWrite(PIN_SUMPFHEIZUNG,HIGH); // Sumpfheizung in Standby immer aktiv
 	Systemzustand.sumpfheizung= 1;
+	// only for debugging
+	#ifdef DEBUG_OVER_SERIAL
+		Serial.print(F("Executed: setupSteuerIO"));
+		Serial.println(F(" ->Modul: Control"));
+	#endif
 }
 
 /************************************************************************/
@@ -45,12 +49,15 @@ void setupSteuerIO(){
 *	Debouncing ist hardwareseitig mittels RC-Tiefpass implementiert.
 *	Die Digitalausgänge werden ebenfalls eingelesen, um deren Zustand in
 *	die Bitfelder der Struktur #Systemzustand zu schreiben.
+* @note	Die Bitfelder in #Systemzustand dürfen keinesfalls für Freigabeprüfungen
+*		genutzt werden sondern lediglich als Informationsquelle, da es
+*		ansonsten zu gegenseitiger Blockierung kommen kann
 */
 /************************************************************************/
 void getDIOstates(){
 	DiStates.status_nd= digitalRead(PIN_ND); // NC: DI=LOW -> keine Negation
 	DiStates.status_hd= digitalRead(PIN_HD); // NC: DI=LOW -> keine Negation
-	DiStates.status_motprotect= !digitalRead(PIN_MOTPROTECT);
+	DiStates.status_motprotect= digitalRead(PIN_MOTPROTECT); // NC: DI=LOW -> keine Negation
 	DiStates.status_k_start= !digitalRead(PIN_ZUST_KSTART);
 	DiStates.status_k_run= !digitalRead(PIN_ZUST_KBETR);
 	DiStates.status_tarif= !digitalRead(PIN_TARIFSPERRE);
@@ -65,7 +72,11 @@ void getDIOstates(){
 	Systemzustand.druckhoch= DiStates.status_hd;
 	Systemzustand.motorschutz= DiStates.status_motprotect;
 	Systemzustand.tarifsperre= DiStates.status_tarif;
-
+	// only for debugging
+	#ifdef DEBUG_OVER_SERIAL
+		Serial.print(F("Executed: getDIOstates"));
+		Serial.println(F(" ->Modul: Control"));
+	#endif
 }
 
 /************************************************************************/
@@ -104,7 +115,7 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 			wpState= WP_STATE_START;
 		}
 		reglerStatemachine(REGLER_STATE_AUTO);	// rufe Regler auf
-		Systemzustand.vorlaufregler= 1;
+		Systemzustand.vorlaufregler= 1; // update Regler Systemzustandsbit
 		break;
 
 	case WP_STATE_START:	// Startsequenz einleiten, Eingänge prüfen
@@ -279,8 +290,11 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 			//digitalWrite(PIN_LED_ALARM, LOW);
 			wpState= WP_STATE_IDLE;
 		}
-
 		break;
-
 	}
+	// only for debugging
+	#ifdef DEBUG_OVER_SERIAL
+		Serial.print(F("Executed: wpStatemachine"));
+		Serial.println(F(" ->Modul: Control"));
+	#endif
 }

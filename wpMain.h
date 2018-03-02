@@ -46,11 +46,12 @@
 #define PIN_LOCALBUTTONS A13    /**< Eingang lokale Bedienung (PK5, ADC13) */
 #define PIN_FORCE_LOCAL 2		/**< Eingang Erzwinge lokale Bedienung (PE4) */
 #define PIN_LED_STBY 3		/**< Anzeige Standby (PE5) */
-#define PIN_LED_AUTONORM 4		/**< Anzeige Autobetrieb normal. (PG5) */
+#define PIN_LED_MAN 4	/**< Anzeige manueller Betrieb aktiv (PG5) */
 #define PIN_LED_AUTORED 5		/**< Anzeige Autobetrieb reduziert. (PE3) */
-#define PIN_LED_MAN 6	/**< Anzeige manueller Betrieb aktiv (PH3) */
+#define PIN_LED_AUTONORM 6		/**< Anzeige Autobetrieb normal. (PH3) */
 #define PIN_LED_HDND 7	/**< Anzeige Druck (PH4) */
 #define PIN_LED_ALARM 8			/**< Anzeige Störung (PH5) */
+#define PIN_LED_POWERON 9   /**< Anzeige Anlage ein (nur in Verb. mit force local) (PH6) */
 
 /** ##MAKROS ZUR BETRIEBSANPASSUNG */
 #define T_ANLASS 1000		/**< Anlassdauer Kompressormotor [ms] */

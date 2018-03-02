@@ -59,15 +59,16 @@
 
 
 
-struct DI_STATES DiStates;	/** ausgelesene DI-Werte als Bitfields. */
-struct SYSTEMZUSTAND Systemzustand; /** Systemzustand als Bitfields. */
+struct DI_STATES DiStates= {0,0,0,0,0,0,0,0}; /** ausgelesene DI-Werte als Bitfields mit 0 initialisieren. */
+
+struct SYSTEMZUSTAND Systemzustand= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}; /** Systemzustand als Bitfields. */
 
 /** Structarray mit Einstellungen welche vom User am HMI vorgenommen werden */
 struct SETTINGS Usersettings[15] =
 {
 	//123456789012345678| max command length
 	{"HMIready",1},	 /**< Determines if HMI is ready and serial link up. */
-	{"HMIbmode",1},	/**< Betriebsmodus 0=Stdby, 1=AutoN, 2=AutoR, 3=Man, 4=Error */
+	{"HMIbmode",0},	/**< Betriebsmodus 0=Stdby, 1=AutoN, 2=AutoR, 3=Man, 4=Error */
 	{"HMIversN",0},	/**< Parallelverschiebungsstufe Normalbetrieb -5...+5. */
 	{"HMIversR",0},	/**< Parallelverschiebungsstufe reduzierter Betrieb -5...+5. */
 	{"HMIstufe",4},	/**< Heizkurvenstufe  1...11 */
@@ -119,6 +120,11 @@ void blinkFunction(){
 		blink1Hz = !blink1Hz;
 		lastsec= millis();
 		}
+	// only for debugging
+	#ifdef DEBUG_OVER_SERIAL
+		Serial.print(F("Executed: blinkFunction"));
+		Serial.println(F(" ->Modul: Main"));
+	#endif
 	return;
 }
 
@@ -168,8 +174,10 @@ pinMode(PIN_LED_AUTORED,OUTPUT);
 pinMode(PIN_LED_MAN,OUTPUT);
 pinMode(PIN_LED_HDND,OUTPUT);
 pinMode(PIN_LED_ALARM,OUTPUT);
+pinMode(PIN_LED_POWERON,OUTPUT);
 
 setupSteuerIO();
+digitalWrite(PIN_LED_POWERON,HIGH);
 }
 
 /*****************************************************************************/
@@ -183,7 +191,15 @@ setupSteuerIO();
 /****************************************************************************/
 void loop(){
 	userMain();
-	autoBetrieb();
+	// AutoBetrieb normal/reduziert
+	if((Usersettings[1].value==2)||(Usersettings[1].value==3)){
+		autoBetrieb();
+	}
+	// manueller Betrieb
+	else if(Usersettings[1].value==1){;} // todo manueller Betrieb
+	// Standby
+	else if(Usersettings[1].value==3){;}
+  blinkFunction();
 }
 
 /*****************************************************************************/
@@ -201,4 +217,9 @@ void serialEvent1() {
   if (Serial1.available()>0){
     receiveSerialData();
   }
+  // only for debugging
+  #ifdef DEBUG_OVER_SERIAL
+	  Serial.print(F("Executed: serialEvent1"));
+	  Serial.println(F(" ->Modul: Main"));
+  #endif
 }
