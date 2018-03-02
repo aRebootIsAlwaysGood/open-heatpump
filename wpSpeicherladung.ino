@@ -133,4 +133,9 @@
 			break;
 
 	}
+    // only for debugging
+    #ifdef DEBUG_OVER_SERIAL
+        Serial.print(F("Executed: speicherladung"));
+        Serial.println(F(" ->Modul: Speicherladung"));
+    #endif
 }

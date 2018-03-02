@@ -40,6 +40,11 @@
 	}
 	adc_val = adc_val / 3;  // Mittelwert der drei Messungen
 	adc_val= map(adc_val,287,576,-50,100);
+    // only for debugging
+    #ifdef DEBUG_OVER_SERIAL
+        Serial.print(F("Executed: getAussentemp"));
+        Serial.println(F(" ->Modul: Sensorik"));
+    #endif
 	return adc_val;
  }
 
@@ -75,6 +80,11 @@
 	}
 	adc_val = adc_val / 3;  // Mittelwert der drei Messungen
 	adc_val= map(adc_val,287,576,-50,100);
+    // only for debugging
+    #ifdef DEBUG_OVER_SERIAL
+        Serial.print(F("Executed: getKondenstemp"));
+        Serial.println(F(" ->Modul: Sensorik"));
+    #endif
 	return adc_val;
  }
 
@@ -110,6 +120,11 @@
 	}
 	adc_val = adc_val / 3;  // Mittelwert der drei Messungen
 	adc_val= map(adc_val,287,576,-50,100);
+    // only for debugging
+    #ifdef DEBUG_OVER_SERIAL
+        Serial.print(F("Executed: getSpeichertemp"));
+        Serial.println(F(" ->Modul: Sensorik"));
+    #endif
 	return adc_val;
  }
 
@@ -145,5 +160,10 @@
 	}
 	adc_val = adc_val / 3;  // Mittelwert der drei Messungen
 	adc_val= map(adc_val,287,576,-50,100);
+    // only for debugging
+    #ifdef DEBUG_OVER_SERIAL
+        Serial.print(F("Executed: getVorlauftemp"));
+        Serial.println(F(" ->Modul: Sensorik"));
+    #endif
 	return adc_val;
  }

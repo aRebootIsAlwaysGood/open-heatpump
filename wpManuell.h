@@ -1,4 +1,4 @@
-﻿/**
+/**
  *  @file wpManuell.h
  *  @brief Header zum manuellen Betriebsmodus.
  *  
