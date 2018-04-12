@@ -7,21 +7,38 @@
  */
 
  #include "wpSpeicherladung.h"
-
-// Stufenladung Speicher monovalent RAVEL Empfehlung: Siehe RAVEL Standardschaltungen S16
-// Temperaturdiff über Verflüssiger = 0.5...0.7*Tempdiff VL/RL im Auslegepunkt(45-35=10°C) = 5°C
-// -> Ausschalten WP wenn Tkondensatorrücklauf - Tspeicher < 5...7°C
-//      witterungsgeführtes Ausschalten: (Tspeicher - Tkond) < 5°C && Tkond < 46°C
-// Einstellregeln:
-// 1. Speichertemp bei WP-Start(Einschalttemp) <= Speichertemp bei WP-Stop(Ausschalttemp)
-// 2. Ausschalttemp <= max. zul. Verflüssiger-Austrittstemp - max Tempdiff über Verfl. -> 50*C - (5...7°C) = 45°C (max Heizanforderung)
-// 3. Bedingung: Einschalttemp >= max. auftretende Rücklauftemp
-//      -> Ton >= (Tvorlauf-Tempdiff_Heizung) falls > Tspeicher
-// -Festlegen max zul. Verflüssigeraustrittstemp auf <=50°C (R502)
-//	ND: 2bar= -19°C, HD: 26bar= 60°C, Verflüssiger Pmax: 28bar= 64°C
-// -Vor-&Nachlauf Ladepumpe normalerweise unnötig
-// -Tempdiff über Verbraucher: 10K
-
+ /************************************************************************/
+ /**
+ *	@brief Führt die Speicherladung und Abtauung mittels Zustandsautomat durch.
+ *
+ * Kontrolliert die Speichertemperatur und hält sie stets oberhalb der
+ * Vorlauftemperatur durch initiieren eines Ladevorgangs. Die Funktion steuert
+ * ausserdem den Abtauvorgang und leitet ihn in Abhängigkeit von Laufzeit und
+ * Aussentemperatur selbständig ein. Die Richtwerte entstammen aus
+ * Fachliteratur. \n
+ * Untenstehend sind die Überlegungen in Notizform niedergeschrieben: \n
+* Stufenladung Speicher monovalent RAVEL Empfehlung: Siehe RAVEL
+* Standardschaltungen S16
+* Temperaturdiff über Verflüssiger = 0.5...0.7*Tempdiff VL/RL im
+* Auslegepunkt(45-35=10°C) = 5°C
+* -> Ausschalten WP wenn Tkondensatorrücklauf - Tspeicher < 5...7°C
+*  -->witterungsgeführtes Ausschalten: (Tspeicher - Tkond) < 5°C && Tkond < 46°C
+* Einstellregeln: \n
+*1. Speichertemp bei WP-Start(Einschalttemp) <= Speichertemp bei
+* WP-Stop(Ausschalttemp)
+* 2. Ausschalttemp <= max. zul. Verflüssiger-Austrittstemp - max Tempdiff über
+* Verfl. -> 50*C - (5...7°C) = 45°C (max Heizanforderung)
+* 3. Bedingung: Einschalttemp >= max. auftretende Rücklauftemp
+*      -> Ton >= (Tvorlauf-Tempdiff_Heizung) falls > Tspeicher
+* -Festlegen max zul. Verflüssigeraustrittstemp auf <=50°C (R502)
+*	ND: 2bar= -19°C, HD: 26bar= 60°C, Verflüssiger Pmax: 28bar= 64°C
+* -Vor-&Nachlauf Ladepumpe normalerweise unnötig
+* -Tempdiff über Verbraucher: 10K
+*
+* @param t_vorlaufsoll
+*       Berechnete Vorlauf-Solltemperatur.
+*/
+/************************************************************************/
  void speicherladung(float t_vorlaufsoll){
 
 	 static uint32_t laufzeit;
@@ -134,7 +151,7 @@
 
 	}
     // only for debugging
-    #ifdef DEBUG_OVER_SERIAL
+    #ifdef DEBUG_PROGRAM_FLOW
         Serial.print(F("Executed: speicherladung"));
         Serial.println(F(" ->Modul: Speicherladung"));
     #endif

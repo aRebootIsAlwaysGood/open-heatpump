@@ -73,7 +73,7 @@ float calcTvorlauf(int16_t tAussen, int8_t kurvenstufe, int8_t parallelver, int8
 	tvorlauf += parallelver*100; // add parallelverschiebung (1K/ Stufe)
 	tvorlauf= constrain(tvorlauf, 2200, 4500); // limits the output (Tvorlauf) between 22 to 45°C
 	// only for debugging
-	#ifdef DEBUG_OVER_SERIAL
+	#ifdef DEBUG_PROGRAM_FLOW
 		Serial.print(F("Executed: calcTvorlauf"));
 		Serial.println(F(" ->Modul: Regler"));
 	#endif
@@ -129,7 +129,7 @@ void reglerStatemachine(reglerState_t reglerState){
 		break;
 	}
 	// only for debugging
-	#ifdef DEBUG_OVER_SERIAL
+	#ifdef DEBUG_PROGRAM_FLOW
 		Serial.print(F("Executed: reglerStatemachine"));
 		Serial.println(F(" ->Modul: Regler"));
 	#endif
@@ -148,7 +148,7 @@ void reglerStatemachine(reglerState_t reglerState){
 void initRegler(){
 	tristateRegler(0,0);
 	// only for debugging
-	#ifdef DEBUG_OVER_SERIAL
+	#ifdef DEBUG_PROGRAM_FLOW
 		Serial.print(F("Executed: initRegler"));
 		Serial.println(F(" ->Modul: Regler"));
 	#endif
@@ -234,7 +234,7 @@ void tristateRegler(float w,float x,float kp,float e_min, float hyst, float tn){
 		lastcalctime=millis();
 	}
 	// only for debugging
-	#ifdef DEBUG_OVER_SERIAL
+	#ifdef DEBUG_PROGRAM_FLOW
 		Serial.print(F("Executed: tristateRegler"));
 		Serial.println(F(" ->Modul: Regler"));
 	#endif

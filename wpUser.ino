@@ -67,7 +67,7 @@ void receiveSerialData() {
           Usersettings[i].value= intvalue;
         }
         // only for debugging
-        #ifdef DEBUG_OVER_SERIAL
+        #ifdef DEBUG_COMMUNICATION
           Serial.print(F("Updated "));
           Serial.print(Usersettings[i].action);
           Serial.print(F(" mit Wert: "));
@@ -76,7 +76,7 @@ void receiveSerialData() {
         break;
       }
     }
-  #ifdef DEBUG_OVER_SERIAL
+  #ifdef DEBUG_COMMUNICATION
     Serial.print(F("Splitted Namenteil: "));
     Serial.println(nameptr);
     Serial.print(F("Splitted Wertteil: "));
@@ -118,7 +118,7 @@ void transmitSerialData(uint8_t settingindex){
     Serial1.flush();
   }
   // only for debugging
-  #ifdef DEBUG_OVER_SERIAL
+  #ifdef DEBUG_PROGRAM_FLOW
       Serial.print(F("Executed: transmitSerialData"));
       Serial.println(F(" ->Modul: User"));
   #endif
@@ -143,7 +143,7 @@ void updateHMI(){
         lastupdate=blink1Hz;
     }
     // only for debugging
-    #ifdef DEBUG_OVER_SERIAL
+    #ifdef DEBUG_PROGRAM_FLOW
         Serial.print(F("Executed: updateHMI"));
         Serial.println(F(" ->Modul: User"));
     #endif
@@ -173,8 +173,8 @@ void updateHMI(){
   */
   /************************************************************************/
 void combineZustandbits(){
-  int16_t zustaende=0b0;
-  zustaende |= (Systemzustand.sumpfheizung << 0);
+  int16_t zustaende=0;
+  zustaende |= (Systemzustand.sumpfheizung);
   zustaende |= (Systemzustand.kompressor << 1);
   zustaende |= (Systemzustand.ventilator << 2);
   zustaende |= (Systemzustand.bypass << 3);
@@ -191,8 +191,15 @@ void combineZustandbits(){
   zustaende |= (Systemzustand.tarifsperre << 14);
   zustaende |= (Systemzustand.reserved_msb << 15);
   Systemsettings[5].value= zustaende;
+
+  // only for debugging Inputvalues
+  #ifdef DEBUG_SYSTEMZUSTAND
+      Serial.print(F("Systemzustand binär, VALUE: "));
+      Serial.println(zustaende,BIN);
+      Serial.println();
+  #endif
   // only for debugging
-  #ifdef DEBUG_OVER_SERIAL
+  #ifdef DEBUG_PROGRAM_FLOW
       Serial.print(F("Executed: combineZustandbits"));
       Serial.println(F(" ->Modul: User"));
   #endif
@@ -212,7 +219,7 @@ void combineZustandbits(){
 /************************************************************************/
  int8_t getParallelvs(){
      // only for debugging
-     #ifdef DEBUG_OVER_SERIAL
+     #ifdef DEBUG_PROGRAM_FLOW
          Serial.print(F("Executed: getParallelvs"));
          Serial.println(F(" ->Modul: User"));
      #endif
@@ -238,7 +245,7 @@ void combineZustandbits(){
  /************************************************************************/
  int8_t getKurvenstufe(){
      // only for debugging
-     #ifdef DEBUG_OVER_SERIAL
+     #ifdef DEBUG_PROGRAM_FLOW
          Serial.print(F("Executed: getKurvenstufe"));
          Serial.println(F(" ->Modul: User"));
      #endif
@@ -258,7 +265,7 @@ void combineZustandbits(){
  /************************************************************************/
  int8_t modeReduziert(){
      // only for debugging
-     #ifdef DEBUG_OVER_SERIAL
+     #ifdef DEBUG_PROGRAM_FLOW
          Serial.print(F("Executed: modeReduziert"));
          Serial.println(F(" ->Modul: User"));
      #endif
@@ -283,8 +290,13 @@ void combineZustandbits(){
  /************************************************************************/
 int8_t readLocalParallelvsRed(){
     int16_t inputval= analogRead(PIN_PARALLELVS_RED);
+    // only for debugging Inputvalues
+    #ifdef DEBUG_INPUTVALUES
+        Serial.print(F("AI: Local ParaVs Red, VALUE: "));
+        Serial.println(inputval);
+    #endif
     // only for debugging
-    #ifdef DEBUG_OVER_SERIAL
+    #ifdef DEBUG_PROGRAM_FLOW
         Serial.print(F("Executed: readLocalParallelvsRed"));
         Serial.println(F(" ->Modul: User"));
     #endif
@@ -306,8 +318,13 @@ int8_t readLocalParallelvsRed(){
 /************************************************************************/
 int8_t readLocalParallelvsNorm(){
     int16_t inputval= analogRead(PIN_PARALLELVS_NORM);
+    // only for debugging Inputvalues
+    #ifdef DEBUG_INPUTVALUES
+        Serial.print(F("AI: Local ParaVs Normal, VALUE: "));
+        Serial.println(inputval);
+    #endif
     // only for debugging
-    #ifdef DEBUG_OVER_SERIAL
+    #ifdef DEBUG_PROGRAM_FLOW
         Serial.print(F("Executed: readLocalParallelvsNorm"));
         Serial.println(F(" ->Modul: User"));
     #endif
@@ -329,8 +346,13 @@ int8_t readLocalParallelvsNorm(){
 /************************************************************************/
 int8_t readLocalKurvenstufe(){
     int16_t inputval= analogRead(PIN_HEIZKURVENSTUFE);
+    // only for debugging Inputvalues
+    #ifdef DEBUG_INPUTVALUES
+        Serial.print(F("AI: Local Heizkurve, VALUE: "));
+        Serial.println(inputval);
+    #endif
     // only for debugging
-    #ifdef DEBUG_OVER_SERIAL
+    #ifdef DEBUG_PROGRAM_FLOW
         Serial.print(F("Executed: readLocalKurvenstufe"));
         Serial.println(F(" ->Modul: User"));
     #endif
@@ -361,28 +383,38 @@ int8_t readLocalKurvenstufe(){
 /************************************************************************/
 int8_t forceLocalBedienung(int8_t reqForce){
     int8_t enabled= !digitalRead(PIN_FORCE_LOCAL);
-
+    // only for debugging inputvalues
+    #ifdef DEBUG_INPUTVALUES
+        Serial.print(F("DI: Force Local inverted, VALUE: "));
+        Serial.println(enabled);
+    #endif
     if(enabled || reqForce){
-        int8_t buttonread= analogRead(PIN_LOCALBUTTONS);
+        int16_t buttonread= analogRead(PIN_LOCALBUTTONS);
         // reserve Button (read: 0...10)
         if(buttonread<50){;}
         // reserve Button (read: 127...137)
         else if(buttonread>100 && buttonread< 200){;}
         // set to Auto Normal (read: 241...253)
-        else if(buttonread>200 && buttonread< 300){Usersettings[1].value=3;}
+        else if(buttonread>200 && buttonread< 300){Usersettings[1].value=1;}
         // set to Auto reduziert (read: 352...366)
         else if(buttonread>300 && buttonread< 400){Usersettings[1].value=2;}
         // set to Manual Mode (read: 445...460)
-        else if(buttonread>400 && buttonread< 500){Usersettings[1].value=1;}
+        else if(buttonread>400 && buttonread< 500){Usersettings[1].value=3;}
         // set to Standby (read: 523...531)
         else if(buttonread>500 && buttonread< 600){Usersettings[1].value=0;}
+        // only for debugging inputvalues
+        #ifdef DEBUG_INPUTVALUES
+            Serial.print(F("AI: Local Buttons, VALUE: "));
+            Serial.println(buttonread);
+            Serial.println();
+        #endif
 
         Usersettings[4].value= readLocalKurvenstufe(); // overwrite Heizkurvenstufe
         Usersettings[3].value= readLocalParallelvsRed(); // overwrite Verschiebung reduzierter Betrieb
         Usersettings[2].value= readLocalParallelvsNorm(); // overwrite Verschiebung Normalbetrieb
     }
     // only for debugging
-    #ifdef DEBUG_OVER_SERIAL
+    #ifdef DEBUG_PROGRAM_FLOW
         Serial.print(F("Executed: forceLocalBedienung"));
         Serial.println(F(" ->Modul: User"));
     #endif
@@ -467,8 +499,27 @@ int8_t getBetriebsmodus(){
     }
     // activate pressure indicator if pressure within range
     else{digitalWrite(PIN_LED_HDND,HIGH);}
+
+    // only for debugging Outputstates
+    #ifdef DEBUG_OUTPUTVALUES
+        Serial.print(F("DO: LED Standby , VALUE: "));
+        Serial.println(digitalRead(PIN_LED_STBY));
+        Serial.print(F("DO: LED Normalbetrieb, VALUE: "));
+        Serial.println(digitalRead(PIN_LED_AUTONORM));
+        Serial.print(F("DO: LED Reduziert, VALUE: "));
+        Serial.println(digitalRead(PIN_LED_AUTORED));
+        Serial.print(F("DO: LED Manuell , VALUE: "));
+        Serial.println(digitalRead(PIN_LED_MAN));
+        Serial.print(F("DO: LED HD/ND, VALUE: "));
+        Serial.println(digitalRead(PIN_LED_HDND));
+        Serial.print(F("DO: LED Alarm , VALUE: "));
+        Serial.println(digitalRead(PIN_LED_ALARM));
+        Serial.print(F("DO: LED Betrieb, VALUE: "));
+        Serial.println(digitalRead(PIN_LED_KEY5));
+        Serial.println();
+    #endif
     // only for debugging
-    #ifdef DEBUG_OVER_SERIAL
+    #ifdef DEBUG_PROGRAM_FLOW
         Serial.print(F("Executed: getBetriebsmodus"));
         Serial.println(F(" ->Modul: User"));
     #endif
@@ -488,7 +539,7 @@ void userMain(){
 
     updateHMI();   // send Values to HMI every second
     // only for debugging
-    #ifdef DEBUG_OVER_SERIAL
+    #ifdef DEBUG_PROGRAM_FLOW
         Serial.print(F("Executed: userMain"));
         Serial.println(F(" ->Modul: User"));
     #endif

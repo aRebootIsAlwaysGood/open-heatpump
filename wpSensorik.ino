@@ -40,8 +40,15 @@
 	}
 	adc_val = adc_val / 3;  // Mittelwert der drei Messungen
 	adc_val= map(adc_val,287,576,-50,100);
+
+    // only for debugging Inputvalues
+    #ifdef DEBUG_INPUTVALUES
+        Serial.print(F("AI: Aussentemp [°C], VALUE: "));
+        Serial.println(adc_val);
+        Serial.println();
+    #endif
     // only for debugging
-    #ifdef DEBUG_OVER_SERIAL
+    #ifdef DEBUG_PROGRAM_FLOW
         Serial.print(F("Executed: getAussentemp"));
         Serial.println(F(" ->Modul: Sensorik"));
     #endif
@@ -80,8 +87,15 @@
 	}
 	adc_val = adc_val / 3;  // Mittelwert der drei Messungen
 	adc_val= map(adc_val,287,576,-50,100);
+
+    // only for debugging Inputvalues
+    #ifdef DEBUG_INPUTVALUES
+        Serial.print(F("AI: Kondensatortemp [°C], VALUE: "));
+        Serial.println(adc_val);
+        Serial.println();
+    #endif
     // only for debugging
-    #ifdef DEBUG_OVER_SERIAL
+    #ifdef DEBUG_PROGRAM_FLOW
         Serial.print(F("Executed: getKondenstemp"));
         Serial.println(F(" ->Modul: Sensorik"));
     #endif
@@ -120,8 +134,15 @@
 	}
 	adc_val = adc_val / 3;  // Mittelwert der drei Messungen
 	adc_val= map(adc_val,287,576,-50,100);
+
+    // only for debugging Inputvalues
+    #ifdef DEBUG_INPUTVALUES
+        Serial.print(F("AI: Speichertemp [°C], VALUE: "));
+        Serial.println(adc_val);
+        Serial.println();
+    #endif
     // only for debugging
-    #ifdef DEBUG_OVER_SERIAL
+    #ifdef DEBUG_PROGRAM_FLOW
         Serial.print(F("Executed: getSpeichertemp"));
         Serial.println(F(" ->Modul: Sensorik"));
     #endif
@@ -160,8 +181,15 @@
 	}
 	adc_val = adc_val / 3;  // Mittelwert der drei Messungen
 	adc_val= map(adc_val,287,576,-50,100);
+
+    // only for debugging Inputvalues
+    #ifdef DEBUG_INPUTVALUES
+        Serial.print(F("AI: Vorlauftemp [°C], VALUE: "));
+        Serial.println(adc_val);
+        Serial.println();
+    #endif
     // only for debugging
-    #ifdef DEBUG_OVER_SERIAL
+    #ifdef DEBUG_PROGRAM_FLOW
         Serial.print(F("Executed: getVorlauftemp"));
         Serial.println(F(" ->Modul: Sensorik"));
     #endif

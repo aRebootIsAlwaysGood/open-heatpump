@@ -23,7 +23,7 @@
 	 float vorlaufsoll= calcTvorlauf(getAussentemp(), getKurvenstufe(),getParallelvs(),modeReduziert());
 	 speicherladung(vorlaufsoll);
      // only for debugging
-     #ifdef DEBUG_OVER_SERIAL
+     #ifdef DEBUG_PROGRAM_FLOW
          Serial.print(F("Executed: autoBetrieb"));
          Serial.println(F(" ->Modul: Auto"));
      #endif

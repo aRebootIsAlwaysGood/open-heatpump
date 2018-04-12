@@ -15,15 +15,6 @@
 
 * -Streaming: <a href="http://arduiniana.org/libraries/streaming/">Streaming V5.0</a>
 *
-* -LiquidCrystal_I2C <a href="https://github.com/adafruit/Adafruit_Sensor">Add Link</a>
-* -ESPAsyncTCP:	<a href="https://github.com/me-no-dev/ESPAsyncTCP"
-*					>Async TCP Library for ESP8266</a>
-* -ESPAsyncWebServer:	<a href="https://github.com/me-no-dev/ESPAsyncWebServer"
-*					>Async Web Server for ESP8266 and ESP32</a>
-* -ESPUI:	<a href="https://github.com/s00500/ESPUI"
-*			>A simple web user interface library for ESP8266/ESP32</a>
-*
-*
 * @section author Author
 *
 * Entwickelt und geschrieben von Daniel Schmissrauter.
@@ -57,8 +48,6 @@
 #include "wpSpeicherladung.h"
 #include "wpUser.h"
 
-
-
 struct DI_STATES DiStates= {0,0,0,0,0,0,0,0}; /** ausgelesene DI-Werte als Bitfields mit 0 initialisieren. */
 
 struct SYSTEMZUSTAND Systemzustand= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}; /** Systemzustand als Bitfields. */
@@ -68,7 +57,7 @@ struct SETTINGS Usersettings[15] =
 {
 	//123456789012345678| max command length
 	{"HMIready",1},	 /**< Determines if HMI is ready and serial link up. */
-	{"HMIbmode",0},	/**< Betriebsmodus 0=Stdby, 1=AutoN, 2=AutoR, 3=Man, 4=Error */
+	{"HMIbmode",1},	/**< Betriebsmodus 0=Stdby, 1=AutoN, 2=AutoR, 3=Man, 4=Error */
 	{"HMIversN",0},	/**< Parallelverschiebungsstufe Normalbetrieb -5...+5. */
 	{"HMIversR",0},	/**< Parallelverschiebungsstufe reduzierter Betrieb -5...+5. */
 	{"HMIstufe",4},	/**< Heizkurvenstufe  1...11 */
@@ -98,8 +87,8 @@ struct SETTINGS Systemsettings[8] =
 };
 
 wpState_t wpState= WP_STATE_IDLE;	/** Switch-Case Variable für WP Betriebszustände. */
-wpReqFunc_t wpReqFunc= WP_REQ_FUNC_IDLE;/** Betriebswahl-Anforderung an WP-Kontrollmodul. */
-reglerState_t reglerState= REGLER_STATE_OFF;	/** Regler Betriebszustand Steuerung. */
+//wpReqFunc_t wpReqFunc= WP_REQ_FUNC_IDLE;/** Betriebswahl-Anforderung an WP-Kontrollmodul. */
+//reglerState_t reglerState= REGLER_STATE_OFF;	/** Regler Betriebszustand Steuerung. */
 ladenState_t ladenState= LADEN_STATE_IDLE; /** Speicherladung Zustandsautomaten-Variable. */
 
 
@@ -121,7 +110,7 @@ void blinkFunction(){
 		lastsec= millis();
 		}
 	// only for debugging
-	#ifdef DEBUG_OVER_SERIAL
+	#ifdef DEBUG_PROGRAM_FLOW
 		Serial.print(F("Executed: blinkFunction"));
 		Serial.println(F(" ->Modul: Main"));
 	#endif
@@ -139,9 +128,7 @@ void blinkFunction(){
 */
 /***************************************************************************/
 void setup(){
-	#ifdef DEBUG_OVER_SERIAL
-		Serial.begin(115200); // PC
-	#endif
+	Serial.begin(115200); // PC
 	Serial1.begin(115200); // ESP8266
 	Serial1.setTimeout(20); // Serial1 keep connection waiting time
 // WP Inputs active low
@@ -174,10 +161,9 @@ pinMode(PIN_LED_AUTORED,OUTPUT);
 pinMode(PIN_LED_MAN,OUTPUT);
 pinMode(PIN_LED_HDND,OUTPUT);
 pinMode(PIN_LED_ALARM,OUTPUT);
-pinMode(PIN_LED_POWERON,OUTPUT);
+pinMode(PIN_LED_KEY5,OUTPUT);
 
 setupSteuerIO();
-digitalWrite(PIN_LED_POWERON,HIGH);
 }
 
 /*****************************************************************************/
@@ -192,14 +178,15 @@ digitalWrite(PIN_LED_POWERON,HIGH);
 void loop(){
 	userMain();
 	// AutoBetrieb normal/reduziert
-	if((Usersettings[1].value==2)||(Usersettings[1].value==3)){
+	//if((Usersettings[1].value==2)||(Usersettings[1].value==3)){
 		autoBetrieb();
-	}
+	//}
 	// manueller Betrieb
-	else if(Usersettings[1].value==1){;} // todo manueller Betrieb
+	//else if(Usersettings[1].value==1){;} // todo manueller Betrieb
 	// Standby
-	else if(Usersettings[1].value==3){;}
+//	else if(Usersettings[1].value==3){;}
   blinkFunction();
+  //delay(1000); //only for debugging needed. (slows down Serialprint data )
 }
 
 /*****************************************************************************/
@@ -218,7 +205,7 @@ void serialEvent1() {
     receiveSerialData();
   }
   // only for debugging
-  #ifdef DEBUG_OVER_SERIAL
+  #ifdef DEBUG_PROGRAM_FLOW
 	  Serial.print(F("Executed: serialEvent1"));
 	  Serial.println(F(" ->Modul: Main"));
   #endif
