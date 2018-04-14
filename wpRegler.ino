@@ -77,6 +77,10 @@ float calcTvorlauf(int16_t tAussen, int8_t kurvenstufe, int8_t parallelver, int8
 		Serial.print(F("Executed: calcTvorlauf"));
 		Serial.println(F(" ->Modul: Regler"));
 	#endif
+	#ifdef DEBUG_REGLER
+		Serial.print(F("REGLER: ber. Vorlauftemp: "));
+		Serial.println(tvorlauf/100.0,DEC);
+	#endif
 	return (tvorlauf /100.0);					// divide trough 100 to return value in °C, treat 100 as floating constant
 }
 
@@ -100,7 +104,7 @@ float calcTvorlauf(int16_t tAussen, int8_t kurvenstufe, int8_t parallelver, int8
 */
 /************************************************************************/
 void reglerStatemachine(reglerState_t reglerState){
-  float sollwert= 0;
+  float sollwert= 0.0;
 	switch (reglerState)
 	{
 	case REGLER_STATE_OFF:
@@ -116,22 +120,28 @@ void reglerStatemachine(reglerState_t reglerState){
 		break;
 
 	case REGLER_STATE_MANUAL:
-
+		// do nothing, OUTPUTs overrriden in wpStatemachine
 		break;
 
 	case REGLER_STATE_LADEN:
+		// unused case
 		digitalWrite(PIN_HEIZPUMPE,HIGH);
-
 		break;
 
 	case REGLER_STATE_DEFROST:
-
+		// unused case
 		break;
 	}
 	// only for debugging
 	#ifdef DEBUG_PROGRAM_FLOW
 		Serial.print(F("Executed: reglerStatemachine"));
 		Serial.println(F(" ->Modul: Regler"));
+	#endif
+	#ifdef DEBUG_REGLER
+		Serial.print(F("REGLER: Sollwert: "));
+		Serial.println(sollwert);
+		Serial.print(F("REGLER: Statemachine: "));
+		Serial.println(reglerState);
 	#endif
 }
 
@@ -191,17 +201,17 @@ void initRegler(){
 */
 /************************************************************************/
 void tristateRegler(float w,float x,float kp,float e_min, float hyst, float tn){
-	float e= 0;	/**< Regelabweichung */
-	float ep= 0; /**< prognostizierte Regelabweichung */
-	float yr= 0; /**< Rückführwert */
+	float e= 0.0;	/**< Regelabweichung */
+	float ep= 0.0; /**< prognostizierte Regelabweichung */
+	float yr= 0.0; /**< Rückführwert */
 	static float ty; /**< aktuelle Laufzeit Motor in s */
 	static float ep_old; /**< letzte berechnete Abweichung */
 	static uint32_t lastcalctime; // Zeitpunkt letzte Berechnung
 
 	// set w & x to 0 will reinitialize the controller to zero
 	if(w==0 && x==0){
-		ty=0;
-		ep_old=0;
+		ty=0.0;
+		ep_old=0.0;
 		lastcalctime=0;
 		digitalWrite(PIN_MISCHER_ZU, LOW);
 		digitalWrite(PIN_MISCHER_AUF, LOW);
@@ -221,14 +231,20 @@ void tristateRegler(float w,float x,float kp,float e_min, float hyst, float tn){
 		if(abs(ep)>e_min){
 			ty += tn; // zähle Laufzeit hoch
 			// öffne oder schliesse Mischventil
-			if(ep< 0){digitalWrite(PIN_MISCHER_ZU, HIGH);} // wenn Abw negativ
-			else{digitalWrite(PIN_MISCHER_AUF, HIGH);}	// Abw positiv
+			if(ep< 0.0){ // wenn Abw negativ, ist Vorlauf > Soll: schliessen
+				digitalWrite(PIN_MISCHER_ZU, HIGH);
+				digitalWrite(PIN_MISCHER_AUF, LOW);
+			}
+			else{ // falls Abw positivm ist Vorlauf < Soll: Ventil öffnen
+				digitalWrite(PIN_MISCHER_AUF, HIGH);
+				digitalWrite(PIN_MISCHER_ZU, LOW);
+			}
 		}
 		// Regelabw innerhalb Totzone, Ausgang 0
 		else{
 			digitalWrite(PIN_MISCHER_ZU, LOW);
 			digitalWrite(PIN_MISCHER_AUF, LOW);
-			if(ty > 0){ty -=tn;} // Ziehe Laufzeit ab
+			if(ty > 0.0){ty -=tn;} // Ziehe Laufzeit ab
 		}
 		ep_old=ep; // speichere berechnete Abweichung vor erneuter Berechnung
 		lastcalctime=millis();
@@ -237,5 +253,11 @@ void tristateRegler(float w,float x,float kp,float e_min, float hyst, float tn){
 	#ifdef DEBUG_PROGRAM_FLOW
 		Serial.print(F("Executed: tristateRegler"));
 		Serial.println(F(" ->Modul: Regler"));
+	#endif
+	#ifdef DEBUG_REGLER
+		Serial.print(F("REGLER: Regelabweichung: "));
+		Serial.println(ep);
+		Serial.print(F("REGLER: Motorlaufzeit: "));
+		Serial.println(ty/1000);
 	#endif
 }

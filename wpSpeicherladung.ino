@@ -68,7 +68,7 @@
 	 }
 
 	// setze Enteisungsdauer fest
-	if (taussen < TEMP_DEFROST_REQUIRED){
+	if (taussen <= TEMP_DEFROST_REQUIRED){
 		if (taussen < 7){
 			defrostzeit= 180000; // 3min bei Ta über +7°C
 		}
@@ -83,15 +83,16 @@
 	switch (ladenState)
 		{
 		case LADEN_STATE_IDLE:
+            wpStatemachine(WP_REQ_FUNC_IDLE);
 			// Einschaltbedingung prüfen(Speichertemp höher als Rücklaufmax oder unterhalb Sollvorlauftemp -> Inbetriebname!
+            laufzeit= millis(); // Startzeit festhalten
 			 if ((tspeicher >= tmax_ruecklauf) || (tspeicher < tregel)){
-				 laufzeit= millis(); // Startzeit festhalten
 				 ladenState= LADEN_STATE_LADEN;
-			 }
-             wpStatemachine(WP_REQ_FUNC_IDLE);
+			}
 			break;
 
 		case LADEN_STATE_LADEN:
+            wpStatemachine(WP_REQ_FUNC_LADEN);
 			// max Verflüssigertemp - 0.5*Tempdiff über Verflüssiger Auslegepunkt zu hoch
 			if ((tspeicher> 48) || (tkondens > 45)){
 				ladenState= LADEN_STATE_STOP;
@@ -114,13 +115,11 @@
 			else if ((millis()-laufzeit)> T_MAX_LADEN){
 				 if (taussen<= TEMP_DEFROST_REQUIRED){
 					 ladenState= LADEN_STATE_DEFROST;
+                     laufzeit= millis();
 				 }
 				 else{
 					 laufzeit= millis();
 				 }
-			}
-			else{
-				wpStatemachine(WP_REQ_FUNC_LADEN);
 			}
 			break;
 
@@ -132,20 +131,19 @@
 			break;
 
 		case LADEN_STATE_DEFROST:
+            wpStatemachine(WP_REQ_FUNC_DEFROST);
 			// Enteisen bis Defrostzeit abgelaufen
 			if ((millis()-laufzeit) > defrostzeit){
 				ladenState= LADEN_STATE_STOP;
 			}
-			else{
-				wpStatemachine(WP_REQ_FUNC_DEFROST);
-			}
 			break;
 
 		case LADEN_STATE_GESPERRT:
+            wpStatemachine(WP_REQ_FUNC_IDLE);
 			// Warten bis Sperrzeit abgelaufen
 			if((millis()-laufzeit)> T_WIEDERANLAUFSPERRE){
 				ladenState= LADEN_STATE_IDLE;
-                wpStatemachine(WP_REQ_FUNC_IDLE);
+                laufzeit= millis();
 			}
 			break;
 

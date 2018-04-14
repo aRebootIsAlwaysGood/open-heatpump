@@ -31,7 +31,7 @@ struct DI_STATES
     };
 
 /**
-*   @brief  Definiert einen 16-Bitfield Variablentyp für Informationen.
+* @brief Definiert einen 16-Bitfield Variablentyp für Informationen.
 *
 *   Innerhalb solchen Strukturen können Variablen mit nur zwei Werten
 *   speichersparend abgelegt werden, beispielsweise zum Systemzustand.
@@ -60,18 +60,18 @@ struct SYSTEMZUSTAND
 /**
 * @brief Enumerator Typendefinition für die WP-Betriebs Statemachine.
 *
-*       Dies ist die Definition der Switch-Case Variable welche die WP
+*    Dies ist die Definition der Switch-Case Variable welche die WP
 *    Betriebszustände enthält.
 */
 typedef enum WP_STATE
 	{
-	WP_STATE_IDLE, /**< Standby. Corresponds to intvalue 0 */
-	WP_STATE_START,    /**< Startsequenz. Corresponds to intvalue 1 */
-	WP_STATE_RUN,  /**< Verdichterbetrieb. Corresponds to intvalue 2 */
-	WP_STATE_STOP, /**< Stopsequenz. Corresponds to intvalue 3 */
-	WP_STATE_DEFROST,  /**< Abtaubetrieb. Corresponds to intvalue 4 */
-	WP_STATE_ERROR_P,  /**< Unter-/Überdruck Kältemittelkreislauf. Corresponds to intvalue 5 */
-	WP_STATE_ERROR_M   /**< Motorschutzschalter ausgelöst. Corresponds to intvalue 6 */
+	WP_STATE_IDLE, /**< Standby. Numeric value 0 */
+	WP_STATE_START, /**< Startsequence. Numeric value 1 */
+	WP_STATE_RUN, /**< Verdichterbetrieb. Numeric value 2 */
+	WP_STATE_STOP, /**< Stopsequenz. Numeric value 3 */
+	WP_STATE_DEFROST, /**< Abtaubetrieb. Numeric value 4 */
+	WP_STATE_ERROR_P,/**< Unter-/Überdruckstörung. Numeric value 5 */
+	WP_STATE_ERROR_M   /**< Motorschutzschalter Numeric value 6 */
 	} wpState_t;
 
 /**
@@ -82,12 +82,11 @@ typedef enum WP_STATE
 */
 typedef enum WP_REQ_FUNC
 	{
-	WP_REQ_FUNC_IDLE,  /**< Kein Betrieb angefordert, verbleibe in Standby. */
-	WP_REQ_FUNC_HALT,  /**< Anforderung laufenden Betrieb zu beenden. */
-	WP_REQ_FUNC_LADEN, /**< Anforderung Ladebetrieb. */
-	WP_REQ_FUNC_DEFROST    /**< Anforderung Enteisung des Verdampfers durchführen. */
+	WP_REQ_FUNC_IDLE, /**< Keine Betriebsanforderung, WP-Standby. */
+	WP_REQ_FUNC_HALT,  /**< Anforderung WP-Betrieb beenden. */
+	WP_REQ_FUNC_LADEN, /**< Anforderung Speicherladebetrieb. */
+	WP_REQ_FUNC_DEFROST /**< Anforderung Abtaubetrieb einleiten. */
 	} wpReqFunc_t;
-
 
 void setupSteuerIO();
 void getDIOstates();

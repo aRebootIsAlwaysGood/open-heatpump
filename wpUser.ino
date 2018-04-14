@@ -174,22 +174,24 @@ void updateHMI(){
   /************************************************************************/
 void combineZustandbits(){
   int16_t zustaende=0;
-  zustaende |= (Systemzustand.sumpfheizung);
-  zustaende |= (Systemzustand.kompressor << 1);
-  zustaende |= (Systemzustand.ventilator << 2);
-  zustaende |= (Systemzustand.bypass << 3);
-  zustaende |= (Systemzustand.ladepumpe << 4);
-  zustaende |= (Systemzustand.vorlaufregler << 5);
-  zustaende |= (Systemzustand.heizpumpe << 6);
-  zustaende |= (Systemzustand.defrost << 7);
-  zustaende |= (Systemzustand.autobetrieb << 8);
-  zustaende |= (Systemzustand.reduziert << 9);
-  zustaende |= (Systemzustand.manbetrieb << 10);
-  zustaende |= (Systemzustand.drucktief << 11);
-  zustaende |= (Systemzustand.druckhoch << 12);
-  zustaende |= (Systemzustand.motorschutz << 13);
-  zustaende |= (Systemzustand.tarifsperre << 14);
-  zustaende |= (Systemzustand.reserved_msb << 15);
+  // zustaende = (zustaende | Systemzustand.reserved_msb) << 1; //...0000000?
+  zustaende = (zustaende | Systemzustand.tarifsperre) << 1;     //...000000?<
+  zustaende = (zustaende | Systemzustand.motorschutz) << 1;     //...00000?<0
+  zustaende = (zustaende | Systemzustand.druckhoch) << 1;       //...0000?<00
+  zustaende = (zustaende | Systemzustand.drucktief) << 1;       //...000?<000
+  zustaende = (zustaende | Systemzustand.manbetrieb) << 1;      //...00?<0000
+  zustaende = (zustaende | Systemzustand.reduziert) << 1;       //...0?<00000
+  zustaende = (zustaende | Systemzustand.autobetrieb) << 1;     //...?<000000
+
+  zustaende = (zustaende | Systemzustand.defrost) << 1;         // 0000000?<..
+  zustaende = (zustaende | Systemzustand.heizpumpe) << 1;       // 000000?<...
+  zustaende = (zustaende | Systemzustand.vorlaufregler) << 1;   // 00000?<0...
+  zustaende = (zustaende | Systemzustand.ladepumpe) << 1;       // 0000?<00...
+  zustaende = (zustaende | Systemzustand.bypass) << 1;          // 000?<000...
+  zustaende = (zustaende | Systemzustand.ventilator) << 1;      // 00?<0000...
+  zustaende = (zustaende | Systemzustand.kompressor) << 1;      // 0?<00000...
+  zustaende = (zustaende | Systemzustand.sumpfheizung);         // ...0000000?
+
   Systemsettings[5].value= zustaende;
 
   // only for debugging Inputvalues
@@ -436,7 +438,15 @@ int8_t forceLocalBedienung(int8_t reqForce){
 */
 /************************************************************************/
 int8_t getBetriebsmodus(){
+    // if pressure alarm overwrite user-selected mode with error mode
+    if(DiStates.status_hd || DiStates.status_nd){Usersettings[1].value=4;}
+    // if motor protection alarm overwrite user-selected mode with error mode
+    else if(DiStates.status_motprotect){Usersettings[1].value=4;}
+    else{;}
+
     int8_t mode= Usersettings[1].value; // 0 Stdby, 1 AutoN, 2 AutoR, 3 Man, 4 Error
+    static uint8_t savebetriebsmodus; // save current mode to restore after alarm ack.
+
     // Standby mode
     if(mode==0){
         Systemzustand.autobetrieb=0;
@@ -447,6 +457,7 @@ int8_t getBetriebsmodus(){
         digitalWrite(PIN_LED_AUTORED,LOW);
         digitalWrite(PIN_LED_MAN,LOW);
         digitalWrite(PIN_LED_ALARM,LOW);
+        savebetriebsmodus=0;
     }
     // auto mode normal
     else if(mode==1){
@@ -458,6 +469,7 @@ int8_t getBetriebsmodus(){
         digitalWrite(PIN_LED_AUTORED,LOW);
         digitalWrite(PIN_LED_MAN,LOW);
         digitalWrite(PIN_LED_ALARM,LOW);
+        savebetriebsmodus=1;
     }
     // auto red. mode
     else if(mode==2){
@@ -469,6 +481,7 @@ int8_t getBetriebsmodus(){
         digitalWrite(PIN_LED_AUTORED,HIGH);
         digitalWrite(PIN_LED_MAN,LOW);
         digitalWrite(PIN_LED_ALARM,LOW);
+        savebetriebsmodus=2;
     }
     // manual mode, turn on LED
     else if(mode==3){
@@ -480,13 +493,10 @@ int8_t getBetriebsmodus(){
         digitalWrite(PIN_LED_AUTORED,LOW);
         digitalWrite(PIN_LED_MAN,HIGH);
         digitalWrite(PIN_LED_ALARM,LOW);
+        savebetriebsmodus=3;
     }
     // blinking LED if error occurs
     else if(mode== 4){
-        digitalWrite(PIN_LED_ALARM,blink1Hz);
-    }
-    // check pressure and blink if too high/low
-    if(DiStates.status_hd || DiStates.status_nd){
         Systemzustand.autobetrieb=0;
         Systemzustand.reduziert=0;
         Systemzustand.manbetrieb=0;
@@ -494,12 +504,25 @@ int8_t getBetriebsmodus(){
         digitalWrite(PIN_LED_AUTONORM,LOW);
         digitalWrite(PIN_LED_AUTORED,LOW);
         digitalWrite(PIN_LED_MAN,LOW);
-        digitalWrite(PIN_LED_HDND,blink1Hz);
-        digitalWrite(PIN_LED_ALARM,HIGH);
+        // if pressure alarm switch is active blink Alarm and Pressure LED
+        if(DiStates.status_hd || DiStates.status_nd){
+            digitalWrite(PIN_LED_HDND,blink1Hz);
+            digitalWrite(PIN_LED_ALARM,blink1Hz);
+        }
+        // if motor protection is switched on, blink alarm LED
+        else if(DiStates.status_motprotect){
+            digitalWrite(PIN_LED_ALARM,blink1Hz);
+        }
+        // if fault state went back to normal, light alarm LED solid & blink last selected mode to restart. Also activate pressure indicator
+        else{
+            digitalWrite(PIN_LED_HDND,HIGH);
+            digitalWrite(PIN_LED_ALARM,HIGH);
+            if(savebetriebsmodus==0){digitalWrite(PIN_LED_STBY,blink1Hz);}
+            else if(savebetriebsmodus==1){digitalWrite(PIN_LED_AUTONORM,blink1Hz);}
+            else if(savebetriebsmodus==2){digitalWrite(PIN_LED_AUTORED,blink1Hz);}
+            else if(savebetriebsmodus==3){digitalWrite(PIN_LED_MAN,blink1Hz);}
+        }
     }
-    // activate pressure indicator if pressure within range
-    else{digitalWrite(PIN_LED_HDND,HIGH);}
-
     // only for debugging Outputstates
     #ifdef DEBUG_OUTPUTVALUES
         Serial.print(F("DO: LED Standby , VALUE: "));

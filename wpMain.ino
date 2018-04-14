@@ -186,7 +186,7 @@ void loop(){
 	// Standby
 //	else if(Usersettings[1].value==3){;}
   blinkFunction();
-  //delay(1000); //only for debugging needed. (slows down Serialprint data )
+  delay(2000); //only for debugging needed. (slows down Serialprint data )
 }
 
 /*****************************************************************************/

@@ -52,6 +52,7 @@
         Serial.print(F("Executed: getAussentemp"));
         Serial.println(F(" ->Modul: Sensorik"));
     #endif
+    Systemsettings[1].value= adc_val;// add value to serial tx struct
 	return adc_val;
  }
 
@@ -99,6 +100,7 @@
         Serial.print(F("Executed: getKondenstemp"));
         Serial.println(F(" ->Modul: Sensorik"));
     #endif
+    Systemsettings[3].value= adc_val;// add value to serial tx struct
 	return adc_val;
  }
 
@@ -146,6 +148,7 @@
         Serial.print(F("Executed: getSpeichertemp"));
         Serial.println(F(" ->Modul: Sensorik"));
     #endif
+    Systemsettings[4].value= adc_val; // add value to serial tx struct
 	return adc_val;
  }
 
@@ -193,5 +196,6 @@
         Serial.print(F("Executed: getVorlauftemp"));
         Serial.println(F(" ->Modul: Sensorik"));
     #endif
+    Systemsettings[2].value= adc_val;// add value to serial tx struct
 	return adc_val;
  }

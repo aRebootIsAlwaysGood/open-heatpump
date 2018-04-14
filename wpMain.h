@@ -67,12 +67,13 @@
 #define RX_BUFFERSIZE 21 /**< Anzahl empfangbarer ASCII Zeichen pro Befehl über UART (Befehlaufbau= HMIname:wert\n) */
 
 /***** DEBUGGING MACROS *****/
-//#define DEBUG_PROGRAM_FLOW /**< Uncomment to print function calls over USB-Port (Serial0) */
+#define DEBUG_PROGRAM_FLOW /**< Uncomment to print function calls over USB-Port (Serial0) */
 #define DEBUG_INPUTVALUES /**< Uncomment to print values read by Analog-& Digital Inputs */
 #define DEBUG_OUTPUTVALUES /**< Uncomment to print states of Digital Outputs */
 #define DEBUG_SYSTEMZUSTAND /**< Uncomment to print values stored in struct Systemzustand */
 #define DEBUG_SETTINGS /**< Uncomment to print values stored in User-& Systemsettings */
 #define DEBUG_COMMUNICATION /**< Uncomment to print values stored in User-& Systemsettings */
+#define DEBUG_REGLER /**< Uncomment to print temperaturecontrol relevant data */
 
 void blinkFunction();
 
