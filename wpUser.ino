@@ -174,23 +174,22 @@ void updateHMI(){
   /************************************************************************/
 void combineZustandbits(){
   int16_t zustaende=0;
-  // zustaende = (zustaende | Systemzustand.reserved_msb) << 1; //...0000000?
-  zustaende = (zustaende | Systemzustand.tarifsperre) << 1;     //...000000?<
-  zustaende = (zustaende | Systemzustand.motorschutz) << 1;     //...00000?<0
-  zustaende = (zustaende | Systemzustand.druckhoch) << 1;       //...0000?<00
-  zustaende = (zustaende | Systemzustand.drucktief) << 1;       //...000?<000
-  zustaende = (zustaende | Systemzustand.manbetrieb) << 1;      //...00?<0000
-  zustaende = (zustaende | Systemzustand.reduziert) << 1;       //...0?<00000
-  zustaende = (zustaende | Systemzustand.autobetrieb) << 1;     //...?<000000
+  if(Systemzustand.tarifsperre){zustaende |= 1 << 14;}  //01xxxxxx...
+  if(Systemzustand.motorschutz){zustaende |= 1 << 13;}  //0x1xxxxx...
+  if(Systemzustand.druckhoch){zustaende |= 1 << 12;}    //0xx1xxxx...
+  if(Systemzustand.drucktief){zustaende |= 1 << 11;}    //0xxx1xxx...
+  if(Systemzustand.manbetrieb){zustaende |= 1 << 10;}   //0xxxx1xx...
+  if(Systemzustand.reduziert){zustaende |= 1 << 9;}     //0xxxxx1x...
+  if(Systemzustand.autobetrieb){zustaende |= 1 << 8;}   //0xxxxxx1...
 
-  zustaende = (zustaende | Systemzustand.defrost) << 1;         // 0000000?<..
-  zustaende = (zustaende | Systemzustand.heizpumpe) << 1;       // 000000?<...
-  zustaende = (zustaende | Systemzustand.vorlaufregler) << 1;   // 00000?<0...
-  zustaende = (zustaende | Systemzustand.ladepumpe) << 1;       // 0000?<00...
-  zustaende = (zustaende | Systemzustand.bypass) << 1;          // 000?<000...
-  zustaende = (zustaende | Systemzustand.ventilator) << 1;      // 00?<0000...
-  zustaende = (zustaende | Systemzustand.kompressor) << 1;      // 0?<00000...
-  zustaende = (zustaende | Systemzustand.sumpfheizung);         // ...0000000?
+  if(Systemzustand.defrost){zustaende |= 1 << 7;}       //...1xxxxxxx
+  if(Systemzustand.heizpumpe){zustaende |= 1 << 6;}     //...x1xxxxxx
+  if(Systemzustand.vorlaufregler){zustaende |= 1 << 5;} //...xx1xxxxx
+  if(Systemzustand.ladepumpe){zustaende |= 1 << 4;}     //...xxx1xxxx
+  if(Systemzustand.bypass){zustaende |= 1 << 3;}        //...xxxx1xxx
+  if(Systemzustand.ventilator){zustaende |= 1 << 2;}    //...xxxxx1xx
+  if(Systemzustand.kompressor){zustaende |= 1 << 1;}    //...xxxxxx1x
+  if(Systemzustand.sumpfheizung);{zustaende |= 1 << 0;} //...xxxxxxx1
 
   Systemsettings[5].value= zustaende;
 
@@ -225,11 +224,11 @@ void combineZustandbits(){
          Serial.print(F("Executed: getParallelvs"));
          Serial.println(F(" ->Modul: User"));
      #endif
-     if(Usersettings[1].value==2){
-         return Usersettings[3].value; // reduziert
+     if(Usersettings[1].value==2){     // falls reduzierter Betrieb gewählt
+         return Usersettings[3].value; // Rückgabe von Parallelvs reduziert
      }
      else{
-         return Usersettings[2].value; // Normalbetrieb
+         return Usersettings[2].value; // sonst Rückgabe Parallelvs Normalbetr
 	}
  }
 
@@ -295,7 +294,7 @@ int8_t readLocalParallelvsRed(){
     // only for debugging Inputvalues
     #ifdef DEBUG_INPUTVALUES
         Serial.print(F("AI: Local ParaVs Red, VALUE: "));
-        Serial.println(inputval);
+        Serial.println(map(inputval,0,1023,-5,5));
     #endif
     // only for debugging
     #ifdef DEBUG_PROGRAM_FLOW
@@ -323,7 +322,7 @@ int8_t readLocalParallelvsNorm(){
     // only for debugging Inputvalues
     #ifdef DEBUG_INPUTVALUES
         Serial.print(F("AI: Local ParaVs Normal, VALUE: "));
-        Serial.println(inputval);
+        Serial.println(map(inputval,0,1023,-5,5));
     #endif
     // only for debugging
     #ifdef DEBUG_PROGRAM_FLOW
@@ -351,7 +350,7 @@ int8_t readLocalKurvenstufe(){
     // only for debugging Inputvalues
     #ifdef DEBUG_INPUTVALUES
         Serial.print(F("AI: Local Heizkurve, VALUE: "));
-        Serial.println(inputval);
+        Serial.println(map(inputval,0,1023,1,11));
     #endif
     // only for debugging
     #ifdef DEBUG_PROGRAM_FLOW
@@ -387,7 +386,7 @@ int8_t forceLocalBedienung(int8_t reqForce){
     int8_t enabled= !digitalRead(PIN_FORCE_LOCAL);
     // only for debugging inputvalues
     #ifdef DEBUG_INPUTVALUES
-        Serial.print(F("DI: Force Local inverted, VALUE: "));
+        Serial.print(F("DI: Force Local, VALUE: "));
         Serial.println(enabled);
     #endif
     if(enabled || reqForce){
@@ -408,7 +407,6 @@ int8_t forceLocalBedienung(int8_t reqForce){
         #ifdef DEBUG_INPUTVALUES
             Serial.print(F("AI: Local Buttons, VALUE: "));
             Serial.println(buttonread);
-            Serial.println();
         #endif
 
         Usersettings[4].value= readLocalKurvenstufe(); // overwrite Heizkurvenstufe
@@ -449,71 +447,76 @@ int8_t getBetriebsmodus(){
 
     // Standby mode
     if(mode==0){
-        Systemzustand.autobetrieb=0;
-        Systemzustand.manbetrieb=0;
-        Systemzustand.reduziert=0;
-        digitalWrite(PIN_LED_STBY,HIGH);
+        Systemzustand.autobetrieb=0; // update Statusbit
+        Systemzustand.manbetrieb=0; // update Statusbit
+        Systemzustand.reduziert=0; // update Statusbit
+        digitalWrite(PIN_LED_STBY,HIGH); // Stby mode Indicator ON
         digitalWrite(PIN_LED_AUTONORM,LOW);
         digitalWrite(PIN_LED_AUTORED,LOW);
         digitalWrite(PIN_LED_MAN,LOW);
         digitalWrite(PIN_LED_ALARM,LOW);
+        digitalWrite(PIN_LED_HDND,HIGH); // pressure ok, Indicator ON
         savebetriebsmodus=0;
     }
     // auto mode normal
     else if(mode==1){
-        Systemzustand.autobetrieb=1;
-        Systemzustand.reduziert=0;
-        Systemzustand.manbetrieb=0;
+        Systemzustand.autobetrieb=1; // update Statusbit
+        Systemzustand.reduziert=0; // update Statusbit
+        Systemzustand.manbetrieb=0; // update Statusbit
         digitalWrite(PIN_LED_STBY,LOW);
-        digitalWrite(PIN_LED_AUTONORM,HIGH);
+        digitalWrite(PIN_LED_AUTONORM,HIGH); // automode normal ON
         digitalWrite(PIN_LED_AUTORED,LOW);
         digitalWrite(PIN_LED_MAN,LOW);
         digitalWrite(PIN_LED_ALARM,LOW);
+        digitalWrite(PIN_LED_HDND,HIGH); // pressure ok, Indicator ON
         savebetriebsmodus=1;
     }
     // auto red. mode
     else if(mode==2){
-        Systemzustand.autobetrieb=1;
-        Systemzustand.reduziert=1;
-        Systemzustand.manbetrieb=0;
+        Systemzustand.autobetrieb=1; // update Statusbit
+        Systemzustand.reduziert=1; // update Statusbit
+        Systemzustand.manbetrieb=0; // update Statusbit
         digitalWrite(PIN_LED_STBY,LOW);
         digitalWrite(PIN_LED_AUTONORM,LOW);
-        digitalWrite(PIN_LED_AUTORED,HIGH);
+        digitalWrite(PIN_LED_AUTORED,HIGH); // automode reduced ON
         digitalWrite(PIN_LED_MAN,LOW);
         digitalWrite(PIN_LED_ALARM,LOW);
+        digitalWrite(PIN_LED_HDND,HIGH); // pressure ok, Indicator ON
         savebetriebsmodus=2;
     }
     // manual mode, turn on LED
     else if(mode==3){
-        Systemzustand.autobetrieb=0;
-        Systemzustand.reduziert=0;
-        Systemzustand.manbetrieb=1;
+        Systemzustand.autobetrieb=0; // update Statusbit
+        Systemzustand.reduziert=0; // update Statusbit
+        Systemzustand.manbetrieb=1; // update Statusbit
         digitalWrite(PIN_LED_STBY,LOW);
         digitalWrite(PIN_LED_AUTONORM,LOW);
         digitalWrite(PIN_LED_AUTORED,LOW);
-        digitalWrite(PIN_LED_MAN,HIGH);
+        digitalWrite(PIN_LED_MAN,HIGH); // manual mode ON
         digitalWrite(PIN_LED_ALARM,LOW);
+        digitalWrite(PIN_LED_HDND,HIGH); // pressure ok, Indicator ON
         savebetriebsmodus=3;
     }
     // blinking LED if error occurs
     else if(mode== 4){
-        Systemzustand.autobetrieb=0;
-        Systemzustand.reduziert=0;
-        Systemzustand.manbetrieb=0;
+        Systemzustand.autobetrieb=0; // update Statusbit
+        Systemzustand.reduziert=0; // update Statusbit
+        Systemzustand.manbetrieb=0; // update Statusbit
         digitalWrite(PIN_LED_STBY,LOW);
         digitalWrite(PIN_LED_AUTONORM,LOW);
         digitalWrite(PIN_LED_AUTORED,LOW);
         digitalWrite(PIN_LED_MAN,LOW);
         // if pressure alarm switch is active blink Alarm and Pressure LED
         if(DiStates.status_hd || DiStates.status_nd){
-            digitalWrite(PIN_LED_HDND,blink1Hz);
+            digitalWrite(PIN_LED_HDND,blink1Hz); // blink pressure & alarm LED
             digitalWrite(PIN_LED_ALARM,blink1Hz);
         }
         // if motor protection is switched on, blink alarm LED
         else if(DiStates.status_motprotect){
-            digitalWrite(PIN_LED_ALARM,blink1Hz);
+            digitalWrite(PIN_LED_ALARM,blink1Hz); // blink only alarm LED
         }
-        // if fault state went back to normal, light alarm LED solid & blink last selected mode to restart. Also activate pressure indicator
+        // if fault state went back to normal, light alarm LED solid & blink last selected mode to restart. Also activate pressure indicator.
+        // user has to ack alarm by pressing the button for mode again
         else{
             digitalWrite(PIN_LED_HDND,HIGH);
             digitalWrite(PIN_LED_ALARM,HIGH);
