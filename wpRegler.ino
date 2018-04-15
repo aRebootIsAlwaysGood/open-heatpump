@@ -111,25 +111,30 @@ void reglerStatemachine(reglerState_t reglerState){
 		digitalWrite(PIN_HEIZPUMPE,LOW);
 		digitalWrite(PIN_MISCHER_ZU,LOW);
 		digitalWrite(PIN_MISCHER_AUF,LOW);
+		Systemzustand.vorlaufregler= 0; // update Regler Systemzustandsbit
 		break;
 
 	case REGLER_STATE_AUTO:
 		sollwert= calcTvorlauf(getAussentemp(), getKurvenstufe(), getParallelvs(), modeReduziert());
 		tristateRegler(sollwert, getVorlauftemp());
 		digitalWrite(PIN_HEIZPUMPE,HIGH);
+		Systemzustand.vorlaufregler= 1; // update Regler Systemzustandsbit
 		break;
 
 	case REGLER_STATE_MANUAL:
 		// do nothing, OUTPUTs overrriden in wpStatemachine
+		Systemzustand.vorlaufregler= 0; // update Regler Systemzustandsbit
 		break;
 
 	case REGLER_STATE_LADEN:
 		// unused case
 		digitalWrite(PIN_HEIZPUMPE,HIGH);
+		Systemzustand.vorlaufregler= 1; // update Regler Systemzustandsbit
 		break;
 
 	case REGLER_STATE_DEFROST:
 		// unused case
+		Systemzustand.vorlaufregler= 1; // update Regler Systemzustandsbit
 		break;
 	}
 	// only for debugging

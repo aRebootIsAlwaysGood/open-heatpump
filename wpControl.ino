@@ -155,7 +155,6 @@ void wpStatemachine(wpReqFunc_t wpReqFunc)
 	case WP_STATE_IDLE:		// Default case
 		getDIOstates();
 		reglerStatemachine(REGLER_STATE_AUTO);	// rufe Regler auf
-		Systemzustand.vorlaufregler= 1; // update Regler Systemzustandsbit
 		digitalWrite(PIN_SUMPFHEIZUNG,HIGH);
 		if (wpReqFunc== (WP_REQ_FUNC_LADEN || WP_REQ_FUNC_DEFROST)){
 			starttime=millis();		// Startzeitpunkt

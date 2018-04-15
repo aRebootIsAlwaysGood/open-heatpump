@@ -41,7 +41,6 @@
 #include "wpMain.h"
 #include "wpAuto.h"
 #include "wpControl.h"
-#include "wpEnteisung.h"
 #include "wpManuell.h"
 #include "wpRegler.h"
 #include "wpSensorik.h"
@@ -50,7 +49,7 @@
 
 struct DI_STATES DiStates= {0,0,0,0,0,0,0,0}; /** ausgelesene DI-Werte als Bitfields mit 0 initialisieren. */
 
-struct SYSTEMZUSTAND Systemzustand= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}; /** Systemzustand als Bitfields. */
+struct SYSTEMZUSTAND Systemzustand= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}; /** Systemzustand als Bitfields.  */
 
 /** Structarray mit Einstellungen welche vom User am HMI vorgenommen werden */
 struct SETTINGS Usersettings[15] =
