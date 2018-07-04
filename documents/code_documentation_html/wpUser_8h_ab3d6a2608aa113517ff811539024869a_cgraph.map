@@ -1,0 +1,10 @@
+<map id="userMain" name="userMain">
+<area shape="rect" id="node2" href="$wpUser_8ino.html#ab814931318f1238c9776e2df701131f8" title="Erzwingt die Verwendung der lokal eingestellten Parametern. " alt="" coords="128,107,271,133"/>
+<area shape="rect" id="node7" href="$wpUser_8ino.html#a4c596e6694414c50339477d311d4f242" title="Periodisches Update der Werte ans HMI senden. " alt="" coords="157,183,241,209"/>
+<area shape="rect" id="node3" href="$wpUser_8ino.html#aede7defca79c2f53957ba9b5a4d97e55" title="Auslesen der lokalen, Stufenwahl der Heizkurve. " alt="" coords="328,5,473,32"/>
+<area shape="rect" id="node4" href="$wpUser_8ino.html#ae08b1d7a0b684b7a72a8129f9e370dc4" title="Auslesen der lokalen, reduzierten Parallelverschiebungsstufe. " alt="" coords="323,56,479,83"/>
+<area shape="rect" id="node5" href="$wpUser_8ino.html#a36a7fa0457f950d3dbcd648e66580f81" title="Auslesen der lokalen, normalen Parallelverschiebungsstufe. " alt="" coords="319,107,483,133"/>
+<area shape="rect" id="node6" href="$wpUser_8ino.html#afd01b1ed5116b92e8869efff7de97a68" title="Aktualisiert den Betriebsmodus und zeigt diesen lokal an. " alt="" coords="337,157,464,184"/>
+<area shape="rect" id="node8" href="$wpUser_8ino.html#a88b61e21d57753aeb25ca4bbdcb04617" title="Sendet Daten aus der Variable Systemsettings über die UART Schnittstelle. " alt="" coords="336,208,465,235"/>
+<area shape="rect" id="node9" href="$wpUser_8ino.html#a9371d894cd5ac0125c1fd1449e88de4d" title="Fasst die Zustände aller Bitfelder der Variable Systemzustand zusammen. " alt="" coords="531,208,669,235"/>
+</map>

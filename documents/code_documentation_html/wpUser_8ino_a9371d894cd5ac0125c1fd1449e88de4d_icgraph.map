@@ -1,0 +1,6 @@
+<map id="combineZustandbits" name="combineZustandbits">
+<area shape="rect" id="node2" href="$wpUser_8ino.html#a88b61e21d57753aeb25ca4bbdcb04617" title="Sendet Daten aus der Variable Systemsettings über die UART Schnittstelle. " alt="" coords="192,5,321,32"/>
+<area shape="rect" id="node3" href="$wpUser_8ino.html#a4c596e6694414c50339477d311d4f242" title="Periodisches Update der Werte ans HMI senden. " alt="" coords="369,5,453,32"/>
+<area shape="rect" id="node4" href="$wpUser_8ino.html#ab3d6a2608aa113517ff811539024869a" title="Benutzersteuerungs Hauptfunktion zum Aufruf im Mainloop. " alt="" coords="501,5,576,32"/>
+<area shape="rect" id="node5" href="$wpMain_8ino.html#afe461d27b9c48d5921c00d521181f12f" title="Main&#45;Funktion welche ständig wiederholt wird. " alt="" coords="624,5,671,32"/>
+</map>

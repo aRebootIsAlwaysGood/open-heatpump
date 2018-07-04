@@ -1,0 +1,671 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Wärmepumpensteuerung: wpUser.ino-Dateireferenz</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(initResizable);
+/* @license-end */</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Wärmepumpensteuerung
+   &#160;<span id="projectnumber">1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Erzeugt von Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Suchen');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('wpUser_8ino.html','');});
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Funktionen</a>  </div>
+  <div class="headertitle">
+<div class="title">wpUser.ino-Dateireferenz</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Benutzersteuerung und Kommunikation mit Frontendcontroller.  
+<a href="#details">Mehr ...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="wpUser_8h_source.html">wpUser.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include-Abhängigkeitsdiagramm für wpUser.ino:</div>
+<div class="dyncontent">
+<div class="center"><img src="wpUser_8ino__incl.png" border="0" usemap="#wpUser_8ino" alt=""/></div>
+<map name="wpUser_8ino" id="wpUser_8ino">
+<area shape="rect" id="node2" href="wpUser_8h.html" title="Header zum Modul Benutzersteuerung. " alt="" coords="11,80,87,107"/>
+</map>
+</div>
+</div>
+<p><a href="wpUser_8ino_source.html">gehe zum Quellcode dieser Datei</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funktionen</h2></td></tr>
+<tr class="memitem:afe3300f6a466de2905be5dcb04724d49"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wpUser_8ino.html#afe3300f6a466de2905be5dcb04724d49">receiveSerialData</a> ()</td></tr>
+<tr class="memdesc:afe3300f6a466de2905be5dcb04724d49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Liest über UART empfangene Daten ein und legt sie als Einstellung ab.  <a href="#afe3300f6a466de2905be5dcb04724d49">Mehr ...</a><br /></td></tr>
+<tr class="separator:afe3300f6a466de2905be5dcb04724d49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88b61e21d57753aeb25ca4bbdcb04617"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wpUser_8ino.html#a88b61e21d57753aeb25ca4bbdcb04617">transmitSerialData</a> (uint8_t settingindex)</td></tr>
+<tr class="memdesc:a88b61e21d57753aeb25ca4bbdcb04617"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sendet Daten aus der Variable Systemsettings über die UART Schnittstelle.  <a href="#a88b61e21d57753aeb25ca4bbdcb04617">Mehr ...</a><br /></td></tr>
+<tr class="separator:a88b61e21d57753aeb25ca4bbdcb04617"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c596e6694414c50339477d311d4f242"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wpUser_8ino.html#a4c596e6694414c50339477d311d4f242">updateHMI</a> ()</td></tr>
+<tr class="memdesc:a4c596e6694414c50339477d311d4f242"><td class="mdescLeft">&#160;</td><td class="mdescRight">Periodisches Update der Werte ans HMI senden.  <a href="#a4c596e6694414c50339477d311d4f242">Mehr ...</a><br /></td></tr>
+<tr class="separator:a4c596e6694414c50339477d311d4f242"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9371d894cd5ac0125c1fd1449e88de4d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wpUser_8ino.html#a9371d894cd5ac0125c1fd1449e88de4d">combineZustandbits</a> ()</td></tr>
+<tr class="memdesc:a9371d894cd5ac0125c1fd1449e88de4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fasst die Zustände aller Bitfelder der Variable <a class="el" href="wpMain_8ino.html#a3d245ff9bded6a031abf01a964d72e05">Systemzustand</a> zusammen.  <a href="#a9371d894cd5ac0125c1fd1449e88de4d">Mehr ...</a><br /></td></tr>
+<tr class="separator:a9371d894cd5ac0125c1fd1449e88de4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92568e4f841036f5ae061e46f09dbde5"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wpUser_8ino.html#a92568e4f841036f5ae061e46f09dbde5">getParallelvs</a> ()</td></tr>
+<tr class="memdesc:a92568e4f841036f5ae061e46f09dbde5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gibt die vom User eingestellte Heizkurven-Parallelverschiebung zurück.  <a href="#a92568e4f841036f5ae061e46f09dbde5">Mehr ...</a><br /></td></tr>
+<tr class="separator:a92568e4f841036f5ae061e46f09dbde5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6132506f43bcc6cffd99023797a83699"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wpUser_8ino.html#a6132506f43bcc6cffd99023797a83699">getKurvenstufe</a> ()</td></tr>
+<tr class="memdesc:a6132506f43bcc6cffd99023797a83699"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bereitstellen der eingestellten Heizkurvenstufe.  <a href="#a6132506f43bcc6cffd99023797a83699">Mehr ...</a><br /></td></tr>
+<tr class="separator:a6132506f43bcc6cffd99023797a83699"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cb5ee680fd84dea322a8a24f6e26e77"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wpUser_8ino.html#a0cb5ee680fd84dea322a8a24f6e26e77">modeReduziert</a> ()</td></tr>
+<tr class="memdesc:a0cb5ee680fd84dea322a8a24f6e26e77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prüft ob eine reduzierte Vorlauftemperatur gewünscht wird.  <a href="#a0cb5ee680fd84dea322a8a24f6e26e77">Mehr ...</a><br /></td></tr>
+<tr class="separator:a0cb5ee680fd84dea322a8a24f6e26e77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae08b1d7a0b684b7a72a8129f9e370dc4"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wpUser_8ino.html#ae08b1d7a0b684b7a72a8129f9e370dc4">readLocalParallelvsRed</a> ()</td></tr>
+<tr class="memdesc:ae08b1d7a0b684b7a72a8129f9e370dc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Auslesen der lokalen, reduzierten Parallelverschiebungsstufe.  <a href="#ae08b1d7a0b684b7a72a8129f9e370dc4">Mehr ...</a><br /></td></tr>
+<tr class="separator:ae08b1d7a0b684b7a72a8129f9e370dc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36a7fa0457f950d3dbcd648e66580f81"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wpUser_8ino.html#a36a7fa0457f950d3dbcd648e66580f81">readLocalParallelvsNorm</a> ()</td></tr>
+<tr class="memdesc:a36a7fa0457f950d3dbcd648e66580f81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Auslesen der lokalen, normalen Parallelverschiebungsstufe.  <a href="#a36a7fa0457f950d3dbcd648e66580f81">Mehr ...</a><br /></td></tr>
+<tr class="separator:a36a7fa0457f950d3dbcd648e66580f81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aede7defca79c2f53957ba9b5a4d97e55"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wpUser_8ino.html#aede7defca79c2f53957ba9b5a4d97e55">readLocalKurvenstufe</a> ()</td></tr>
+<tr class="memdesc:aede7defca79c2f53957ba9b5a4d97e55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Auslesen der lokalen, Stufenwahl der Heizkurve.  <a href="#aede7defca79c2f53957ba9b5a4d97e55">Mehr ...</a><br /></td></tr>
+<tr class="separator:aede7defca79c2f53957ba9b5a4d97e55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab814931318f1238c9776e2df701131f8"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wpUser_8ino.html#ab814931318f1238c9776e2df701131f8">forceLocalBedienung</a> (int8_t reqForce)</td></tr>
+<tr class="memdesc:ab814931318f1238c9776e2df701131f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erzwingt die Verwendung der lokal eingestellten Parametern.  <a href="#ab814931318f1238c9776e2df701131f8">Mehr ...</a><br /></td></tr>
+<tr class="separator:ab814931318f1238c9776e2df701131f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd01b1ed5116b92e8869efff7de97a68"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wpUser_8ino.html#afd01b1ed5116b92e8869efff7de97a68">getBetriebsmodus</a> ()</td></tr>
+<tr class="memdesc:afd01b1ed5116b92e8869efff7de97a68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aktualisiert den Betriebsmodus und zeigt diesen lokal an.  <a href="#afd01b1ed5116b92e8869efff7de97a68">Mehr ...</a><br /></td></tr>
+<tr class="separator:afd01b1ed5116b92e8869efff7de97a68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3d6a2608aa113517ff811539024869a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wpUser_8ino.html#ab3d6a2608aa113517ff811539024869a">userMain</a> ()</td></tr>
+<tr class="memdesc:ab3d6a2608aa113517ff811539024869a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Benutzersteuerungs Hauptfunktion zum Aufruf im Mainloop.  <a href="#ab3d6a2608aa113517ff811539024869a">Mehr ...</a><br /></td></tr>
+<tr class="separator:ab3d6a2608aa113517ff811539024869a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Ausführliche Beschreibung</h2>
+<div class="textblock"><p>Benutzersteuerung und Kommunikation mit Frontendcontroller. </p>
+<p>Der Mikrocontroller, welcher die Wärmepumpen- und Heizungssteuerung übernimmt, besitzt keine grafische Benutzerschnittstelle um eine Trennung zwischen den sicherheitsrelevanten und kritischen Funktionen und den Benutzerfunktionen, welche weder sicherheitstechnisch relevant noch zeitkrisch sind, zu erreichen.</p>
+<dl class="section author"><dt>Autor</dt><dd>Daniel Schmissrauter </dd></dl>
+<dl class="section date"><dt>Datum</dt><dd>09.01.2018 </dd></dl>
+
+<p class="definition">Definiert in Datei <a class="el" href="wpUser_8ino_source.html">wpUser.ino</a>.</p>
+</div><h2 class="groupheader">Dokumentation der Funktionen</h2>
+<a id="a9371d894cd5ac0125c1fd1449e88de4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9371d894cd5ac0125c1fd1449e88de4d">&#9670;&nbsp;</a></span>combineZustandbits()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void combineZustandbits </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fasst die Zustände aller Bitfelder der Variable <a class="el" href="wpMain_8ino.html#a3d245ff9bded6a031abf01a964d72e05">Systemzustand</a> zusammen. </p>
+<p>Mithilfe der Funktion <a class="el" href="wpUser_8ino.html#a9371d894cd5ac0125c1fd1449e88de4d" title="Fasst die Zustände aller Bitfelder der Variable Systemzustand zusammen. ">combineZustandbits()</a> können alle Werte (der Bitfelder in der Strukturvariable <a class="el" href="wpMain_8ino.html#a3d245ff9bded6a031abf01a964d72e05">Systemzustand</a>) in einer 16bit Variable abgebildet werden. Dadurch können alle Felder in Einer statt 16 Nachrichten über die serielle Verbindung geschickt werden und damit erheblich Ressourcen eingespart werden. <br />
+ Die 16 verschiedenen Meldungsfelder werden den 16bits der Variable mittels Bitmanipulation zugewiesen. Durch die bitweise OR-Verknüpfung können die Bits der Variable <code>zustaende</code> nicht von 1 nach 0 geändert werden, weshalb es wichtig ist, dieser bei Initialisieung explizit den Wert 0 zuzuweisen.<br />
+ Diese Bitcodierung muss bei einer Übertragung bekannt sein damit im Empfänger das Datenpaketes auch entsprechend wieder decodiert werden kann.</p>
+<dl class="section return"><dt>Rückgabe</dt><dd><code>void</code> </dd></dl>
+<dl class="section see"><dt>Siehe auch</dt><dd><a class="el" href="structSYSTEMZUSTAND.html" title="Definiert einen 16-Bitfield Variablentyp für Informationen. ">SYSTEMZUSTAND</a> </dd></dl>
+
+<p class="definition">Definiert in Zeile <a class="el" href="wpUser_8ino_source.html#l00175">175</a> der Datei <a class="el" href="wpUser_8ino_source.html">wpUser.ino</a>.</p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, wo diese Funktion aufgerufen wird:</div>
+<div class="dyncontent">
+<div class="center"><img src="wpUser_8ino_a9371d894cd5ac0125c1fd1449e88de4d_icgraph.png" border="0" usemap="#wpUser_8ino_a9371d894cd5ac0125c1fd1449e88de4d_icgraph" alt=""/></div>
+<map name="wpUser_8ino_a9371d894cd5ac0125c1fd1449e88de4d_icgraph" id="wpUser_8ino_a9371d894cd5ac0125c1fd1449e88de4d_icgraph">
+<area shape="rect" id="node2" href="wpUser_8ino.html#a88b61e21d57753aeb25ca4bbdcb04617" title="Sendet Daten aus der Variable Systemsettings über die UART Schnittstelle. " alt="" coords="192,5,321,32"/>
+<area shape="rect" id="node3" href="wpUser_8ino.html#a4c596e6694414c50339477d311d4f242" title="Periodisches Update der Werte ans HMI senden. " alt="" coords="369,5,453,32"/>
+<area shape="rect" id="node4" href="wpUser_8ino.html#ab3d6a2608aa113517ff811539024869a" title="Benutzersteuerungs Hauptfunktion zum Aufruf im Mainloop. " alt="" coords="501,5,576,32"/>
+<area shape="rect" id="node5" href="wpMain_8ino.html#afe461d27b9c48d5921c00d521181f12f" title="Main&#45;Funktion welche ständig wiederholt wird. " alt="" coords="624,5,671,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ab814931318f1238c9776e2df701131f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab814931318f1238c9776e2df701131f8">&#9670;&nbsp;</a></span>forceLocalBedienung()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t forceLocalBedienung </td>
+          <td>(</td>
+          <td class="paramtype">int8_t&#160;</td>
+          <td class="paramname"><em>reqForce</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Erzwingt die Verwendung der lokal eingestellten Parametern. </p>
+<p>Die Funktion <a class="el" href="wpUser_8ino.html#ab814931318f1238c9776e2df701131f8" title="Erzwingt die Verwendung der lokal eingestellten Parametern. ">forceLocalBedienung()</a> forciert die Verwendung der lokalen Bedienungswerte (Notbedienung) wenn diese aktiviert ist. Dadurch werden die gespeicherten Einstellungen überschrieben und betreffende Eingaben des HMI ignoriert.<br />
+ Die lokale Bedienung kann einerseits mittels Hardwareschalter aktiviert werden anderseits mittels optionalem Funktionsparameter. Danach werden die lokalen Taster ausgewertet und der entsprechende Betriebsmodus ausgewählt.</p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Noch zu erledigen:</a></b></dt><dd>Die Taster 5 und 6 sind noch unbelegt und somit Funktionslos. Die Einbindung dieser kann beliebig erfolgen.</dd></dl>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">reqForce</td><td>Funktionsaufruf mit Argumentwert ungleich 0 als <code>int8_t</code>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>TRUE falls lokale Bedienung aktiv, ansonsten FALSE. </dd></dl>
+
+<p class="definition">Definiert in Zeile <a class="el" href="wpUser_8ino_source.html#l00385">385</a> der Datei <a class="el" href="wpUser_8ino_source.html">wpUser.ino</a>.</p>
+<div class="dynheader">
+Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
+<div class="dyncontent">
+<div class="center"><img src="wpUser_8ino_ab814931318f1238c9776e2df701131f8_cgraph.png" border="0" usemap="#wpUser_8ino_ab814931318f1238c9776e2df701131f8_cgraph" alt=""/></div>
+<map name="wpUser_8ino_ab814931318f1238c9776e2df701131f8_cgraph" id="wpUser_8ino_ab814931318f1238c9776e2df701131f8_cgraph">
+<area shape="rect" id="node2" href="wpUser_8ino.html#aede7defca79c2f53957ba9b5a4d97e55" title="Auslesen der lokalen, Stufenwahl der Heizkurve. " alt="" coords="205,5,351,32"/>
+<area shape="rect" id="node3" href="wpUser_8ino.html#ae08b1d7a0b684b7a72a8129f9e370dc4" title="Auslesen der lokalen, reduzierten Parallelverschiebungsstufe. " alt="" coords="200,56,356,83"/>
+<area shape="rect" id="node4" href="wpUser_8ino.html#a36a7fa0457f950d3dbcd648e66580f81" title="Auslesen der lokalen, normalen Parallelverschiebungsstufe. " alt="" coords="196,107,360,133"/>
+<area shape="rect" id="node5" href="wpUser_8ino.html#afd01b1ed5116b92e8869efff7de97a68" title="Aktualisiert den Betriebsmodus und zeigt diesen lokal an. " alt="" coords="215,157,341,184"/>
+</map>
+</div>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, wo diese Funktion aufgerufen wird:</div>
+<div class="dyncontent">
+<div class="center"><img src="wpUser_8ino_ab814931318f1238c9776e2df701131f8_icgraph.png" border="0" usemap="#wpUser_8ino_ab814931318f1238c9776e2df701131f8_icgraph" alt=""/></div>
+<map name="wpUser_8ino_ab814931318f1238c9776e2df701131f8_icgraph" id="wpUser_8ino_ab814931318f1238c9776e2df701131f8_icgraph">
+<area shape="rect" id="node2" href="wpUser_8ino.html#ab3d6a2608aa113517ff811539024869a" title="Benutzersteuerungs Hauptfunktion zum Aufruf im Mainloop. " alt="" coords="196,5,271,32"/>
+<area shape="rect" id="node3" href="wpMain_8ino.html#afe461d27b9c48d5921c00d521181f12f" title="Main&#45;Funktion welche ständig wiederholt wird. " alt="" coords="319,5,365,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="afd01b1ed5116b92e8869efff7de97a68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd01b1ed5116b92e8869efff7de97a68">&#9670;&nbsp;</a></span>getBetriebsmodus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t getBetriebsmodus </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Aktualisiert den Betriebsmodus und zeigt diesen lokal an. </p>
+<p>Die Funktion <a class="el" href="wpUser_8ino.html#afd01b1ed5116b92e8869efff7de97a68" title="Aktualisiert den Betriebsmodus und zeigt diesen lokal an. ">getBetriebsmodus()</a> liest den Wert der Moduswahl aus der Strukturvariable <a class="el" href="wpMain_8ino.html#a296db861de9d0718f4f894ed6bb20ab0">Usersettings</a> und aktualisiert damit die entsprechenden Bitfields der Variable <a class="el" href="wpMain_8ino.html#a3d245ff9bded6a031abf01a964d72e05">Systemzustand</a>. Gleichzeitig aktualisiert sie die Digitalausgänge mit den optischen Zustandsanzeigen.</p>
+<dl class="section return"><dt>Rückgabe</dt><dd>Vom User gewählter Betriebsmodus: &lt;tt&gt; 0 Standby, 1 Auto Normal, 2 Auto reduziert, 3 Manuell, 4 Störung. </dd></dl>
+
+<p class="definition">Definiert in Zeile <a class="el" href="wpUser_8ino_source.html#l00439">439</a> der Datei <a class="el" href="wpUser_8ino_source.html">wpUser.ino</a>.</p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, wo diese Funktion aufgerufen wird:</div>
+<div class="dyncontent">
+<div class="center"><img src="wpUser_8ino_afd01b1ed5116b92e8869efff7de97a68_icgraph.png" border="0" usemap="#wpUser_8ino_afd01b1ed5116b92e8869efff7de97a68_icgraph" alt=""/></div>
+<map name="wpUser_8ino_afd01b1ed5116b92e8869efff7de97a68_icgraph" id="wpUser_8ino_afd01b1ed5116b92e8869efff7de97a68_icgraph">
+<area shape="rect" id="node2" href="wpUser_8ino.html#ab814931318f1238c9776e2df701131f8" title="Erzwingt die Verwendung der lokal eingestellten Parametern. " alt="" coords="180,5,323,32"/>
+<area shape="rect" id="node3" href="wpUser_8ino.html#ab3d6a2608aa113517ff811539024869a" title="Benutzersteuerungs Hauptfunktion zum Aufruf im Mainloop. " alt="" coords="371,5,445,32"/>
+<area shape="rect" id="node4" href="wpMain_8ino.html#afe461d27b9c48d5921c00d521181f12f" title="Main&#45;Funktion welche ständig wiederholt wird. " alt="" coords="493,5,540,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a6132506f43bcc6cffd99023797a83699"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6132506f43bcc6cffd99023797a83699">&#9670;&nbsp;</a></span>getKurvenstufe()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t getKurvenstufe </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Bereitstellen der eingestellten Heizkurvenstufe. </p>
+<p>Diese Funktion liest die vom Nutzer eingestellte Stufe der Heizkurve (1...11) ein und gibt diese zurück. Für die Berechnung der Heizkurvenfunktion ist die Funktion <a class="el" href="wpRegler_8h.html#afb8c37e2ac60ef06ab2ca3e72945031f" title="Berechnet Solltemperatur des Heizungsvorlauf mittels Heizkurve. ">calcTvorlauf()</a> zuständig.</p>
+<dl class="section return"><dt>Rückgabe</dt><dd>eingestellte Heizkurvenstufe als <code>int8_t</code>. </dd></dl>
+
+<p class="definition">Definiert in Zeile <a class="el" href="wpUser_8ino_source.html#l00247">247</a> der Datei <a class="el" href="wpUser_8ino_source.html">wpUser.ino</a>.</p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, wo diese Funktion aufgerufen wird:</div>
+<div class="dyncontent">
+<div class="center"><img src="wpUser_8ino_a6132506f43bcc6cffd99023797a83699_icgraph.png" border="0" usemap="#wpUser_8ino_a6132506f43bcc6cffd99023797a83699_icgraph" alt=""/></div>
+<map name="wpUser_8ino_a6132506f43bcc6cffd99023797a83699_icgraph" id="wpUser_8ino_a6132506f43bcc6cffd99023797a83699_icgraph">
+<area shape="rect" id="node2" href="wpAuto_8ino.html#afed4915ead06746e4c683ee93642d8cb" title="Ruft die für den automatischen Betrieb nötigen Funktionen auf. " alt="" coords="667,5,755,32"/>
+<area shape="rect" id="node4" href="wpRegler_8ino.html#a802a6ca104db722b268f0693497b7094" title="Zustandsautomat für den Heizungsvorlauf&#45;Temperaturregler. " alt="" coords="160,31,295,57"/>
+<area shape="rect" id="node3" href="wpMain_8ino.html#afe461d27b9c48d5921c00d521181f12f" title="Main&#45;Funktion welche ständig wiederholt wird. " alt="" coords="803,5,849,32"/>
+<area shape="rect" id="node5" href="wpControl_8ino.html#ae710165b7dd2b053ad08f96dba48d54c" title="Statemachine für die Low&#45;Level Steuerung der Wärmepumpe. " alt="" coords="343,31,461,57"/>
+<area shape="rect" id="node6" href="wpSpeicherladung_8ino.html#a1c0cf0ef9357ae514777ada14e9a8edd" title="Führt die Speicherladung und Abtauung mittels Zustandsautomat durch. " alt="" coords="509,31,619,57"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a92568e4f841036f5ae061e46f09dbde5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92568e4f841036f5ae061e46f09dbde5">&#9670;&nbsp;</a></span>getParallelvs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t getParallelvs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gibt die vom User eingestellte Heizkurven-Parallelverschiebung zurück. </p>
+<p>Je nach aktivem Betriebsmodus wird entweder die Parallelverschiebung für den reduzierten Betrieb oder den Normalbetrieb zurückgegeben. Die wählbaren Verschiebungsstufen gehen jeweils von -5...+5</p>
+<dl class="section return"><dt>Rückgabe</dt><dd>Eingestellte Heizkurvenverschiebung des aktiven Betriebsmodus als <code>int8_t</code>. </dd></dl>
+
+<p class="definition">Definiert in Zeile <a class="el" href="wpUser_8ino_source.html#l00221">221</a> der Datei <a class="el" href="wpUser_8ino_source.html">wpUser.ino</a>.</p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, wo diese Funktion aufgerufen wird:</div>
+<div class="dyncontent">
+<div class="center"><img src="wpUser_8ino_a92568e4f841036f5ae061e46f09dbde5_icgraph.png" border="0" usemap="#wpUser_8ino_a92568e4f841036f5ae061e46f09dbde5_icgraph" alt=""/></div>
+<map name="wpUser_8ino_a92568e4f841036f5ae061e46f09dbde5_icgraph" id="wpUser_8ino_a92568e4f841036f5ae061e46f09dbde5_icgraph">
+<area shape="rect" id="node2" href="wpAuto_8ino.html#afed4915ead06746e4c683ee93642d8cb" title="Ruft die für den automatischen Betrieb nötigen Funktionen auf. " alt="" coords="655,5,743,32"/>
+<area shape="rect" id="node4" href="wpRegler_8ino.html#a802a6ca104db722b268f0693497b7094" title="Zustandsautomat für den Heizungsvorlauf&#45;Temperaturregler. " alt="" coords="148,31,283,57"/>
+<area shape="rect" id="node3" href="wpMain_8ino.html#afe461d27b9c48d5921c00d521181f12f" title="Main&#45;Funktion welche ständig wiederholt wird. " alt="" coords="791,5,837,32"/>
+<area shape="rect" id="node5" href="wpControl_8ino.html#ae710165b7dd2b053ad08f96dba48d54c" title="Statemachine für die Low&#45;Level Steuerung der Wärmepumpe. " alt="" coords="331,31,449,57"/>
+<area shape="rect" id="node6" href="wpSpeicherladung_8ino.html#a1c0cf0ef9357ae514777ada14e9a8edd" title="Führt die Speicherladung und Abtauung mittels Zustandsautomat durch. " alt="" coords="497,31,607,57"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a0cb5ee680fd84dea322a8a24f6e26e77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0cb5ee680fd84dea322a8a24f6e26e77">&#9670;&nbsp;</a></span>modeReduziert()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t modeReduziert </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Prüft ob eine reduzierte Vorlauftemperatur gewünscht wird. </p>
+<p>Die Funktion <a class="el" href="wpUser_8ino.html#a0cb5ee680fd84dea322a8a24f6e26e77" title="Prüft ob eine reduzierte Vorlauftemperatur gewünscht wird. ">modeReduziert()</a> gibt den Wert 1 zurück, falls mit reduzierter Vorlauftemperatur gefahren werden soll. Die entprechende Moduswahl wird vom Benutzer gewählt.</p>
+<dl class="section return"><dt>Rückgabe</dt><dd>TRUE falls der reduzierte Modus gewählt ist, ansonsten FALSE. </dd></dl>
+
+<p class="definition">Definiert in Zeile <a class="el" href="wpUser_8ino_source.html#l00267">267</a> der Datei <a class="el" href="wpUser_8ino_source.html">wpUser.ino</a>.</p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, wo diese Funktion aufgerufen wird:</div>
+<div class="dyncontent">
+<div class="center"><img src="wpUser_8ino_a0cb5ee680fd84dea322a8a24f6e26e77_icgraph.png" border="0" usemap="#wpUser_8ino_a0cb5ee680fd84dea322a8a24f6e26e77_icgraph" alt=""/></div>
+<map name="wpUser_8ino_a0cb5ee680fd84dea322a8a24f6e26e77_icgraph" id="wpUser_8ino_a0cb5ee680fd84dea322a8a24f6e26e77_icgraph">
+<area shape="rect" id="node2" href="wpAuto_8ino.html#afed4915ead06746e4c683ee93642d8cb" title="Ruft die für den automatischen Betrieb nötigen Funktionen auf. " alt="" coords="669,5,757,32"/>
+<area shape="rect" id="node4" href="wpRegler_8ino.html#a802a6ca104db722b268f0693497b7094" title="Zustandsautomat für den Heizungsvorlauf&#45;Temperaturregler. " alt="" coords="163,31,297,57"/>
+<area shape="rect" id="node3" href="wpMain_8ino.html#afe461d27b9c48d5921c00d521181f12f" title="Main&#45;Funktion welche ständig wiederholt wird. " alt="" coords="805,5,852,32"/>
+<area shape="rect" id="node5" href="wpControl_8ino.html#ae710165b7dd2b053ad08f96dba48d54c" title="Statemachine für die Low&#45;Level Steuerung der Wärmepumpe. " alt="" coords="345,31,464,57"/>
+<area shape="rect" id="node6" href="wpSpeicherladung_8ino.html#a1c0cf0ef9357ae514777ada14e9a8edd" title="Führt die Speicherladung und Abtauung mittels Zustandsautomat durch. " alt="" coords="512,31,621,57"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aede7defca79c2f53957ba9b5a4d97e55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aede7defca79c2f53957ba9b5a4d97e55">&#9670;&nbsp;</a></span>readLocalKurvenstufe()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t readLocalKurvenstufe </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Auslesen der lokalen, Stufenwahl der Heizkurve. </p>
+<p>Liest den Wert des Analogeingangs <a class="el" href="wpMain_8h.html#a9545a1563d147434e84831942b8c594f">PIN_HEIZKURVENSTUFE</a> an welchem die Steigung der Heizkurvenfunktion per Drehregler, für die lokale respektive die Notbedienung, eingestellt werden kann. Die Funktion rechnet den Eingangswert in die Stufen 1...11 um.</p>
+<dl class="section return"><dt>Rückgabe</dt><dd>Eingestellte Stufe im Bereich 1...11 als <code>int8_t</code>. </dd></dl>
+
+<p class="definition">Definiert in Zeile <a class="el" href="wpUser_8ino_source.html#l00348">348</a> der Datei <a class="el" href="wpUser_8ino_source.html">wpUser.ino</a>.</p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, wo diese Funktion aufgerufen wird:</div>
+<div class="dyncontent">
+<div class="center"><img src="wpUser_8ino_aede7defca79c2f53957ba9b5a4d97e55_icgraph.png" border="0" usemap="#wpUser_8ino_aede7defca79c2f53957ba9b5a4d97e55_icgraph" alt=""/></div>
+<map name="wpUser_8ino_aede7defca79c2f53957ba9b5a4d97e55_icgraph" id="wpUser_8ino_aede7defca79c2f53957ba9b5a4d97e55_icgraph">
+<area shape="rect" id="node2" href="wpUser_8ino.html#ab814931318f1238c9776e2df701131f8" title="Erzwingt die Verwendung der lokal eingestellten Parametern. " alt="" coords="199,5,341,32"/>
+<area shape="rect" id="node3" href="wpUser_8ino.html#ab3d6a2608aa113517ff811539024869a" title="Benutzersteuerungs Hauptfunktion zum Aufruf im Mainloop. " alt="" coords="389,5,464,32"/>
+<area shape="rect" id="node4" href="wpMain_8ino.html#afe461d27b9c48d5921c00d521181f12f" title="Main&#45;Funktion welche ständig wiederholt wird. " alt="" coords="512,5,559,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a36a7fa0457f950d3dbcd648e66580f81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36a7fa0457f950d3dbcd648e66580f81">&#9670;&nbsp;</a></span>readLocalParallelvsNorm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t readLocalParallelvsNorm </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Auslesen der lokalen, normalen Parallelverschiebungsstufe. </p>
+<p>Liest den Wert des Analogeingangs <a class="el" href="wpMain_8h.html#af2c4cae975bebcc7f0139bfba3a50da9">PIN_PARALLELVS_NORM</a> an welchem die Verschiebungsstufe der Heizkurve im normalen Betrieb per Drehregler, für die lokale respektive die Notbedienung, eingestellt werden kann. Die Funktion rechnet den Eingangswert in die Stufen -5...+5 um.</p>
+<dl class="section return"><dt>Rückgabe</dt><dd>Eingestellte Stufe im Bereich -5...+5 als <code>int8_t</code>. </dd></dl>
+
+<p class="definition">Definiert in Zeile <a class="el" href="wpUser_8ino_source.html#l00320">320</a> der Datei <a class="el" href="wpUser_8ino_source.html">wpUser.ino</a>.</p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, wo diese Funktion aufgerufen wird:</div>
+<div class="dyncontent">
+<div class="center"><img src="wpUser_8ino_a36a7fa0457f950d3dbcd648e66580f81_icgraph.png" border="0" usemap="#wpUser_8ino_a36a7fa0457f950d3dbcd648e66580f81_icgraph" alt=""/></div>
+<map name="wpUser_8ino_a36a7fa0457f950d3dbcd648e66580f81_icgraph" id="wpUser_8ino_a36a7fa0457f950d3dbcd648e66580f81_icgraph">
+<area shape="rect" id="node2" href="wpUser_8ino.html#ab814931318f1238c9776e2df701131f8" title="Erzwingt die Verwendung der lokal eingestellten Parametern. " alt="" coords="217,5,360,32"/>
+<area shape="rect" id="node3" href="wpUser_8ino.html#ab3d6a2608aa113517ff811539024869a" title="Benutzersteuerungs Hauptfunktion zum Aufruf im Mainloop. " alt="" coords="408,5,483,32"/>
+<area shape="rect" id="node4" href="wpMain_8ino.html#afe461d27b9c48d5921c00d521181f12f" title="Main&#45;Funktion welche ständig wiederholt wird. " alt="" coords="531,5,577,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ae08b1d7a0b684b7a72a8129f9e370dc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae08b1d7a0b684b7a72a8129f9e370dc4">&#9670;&nbsp;</a></span>readLocalParallelvsRed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t readLocalParallelvsRed </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Auslesen der lokalen, reduzierten Parallelverschiebungsstufe. </p>
+<p>Liest den Wert des Analogeingangs <a class="el" href="wpMain_8h.html#a7a9de7494094d1d743d47bd00a85f6d9">PIN_PARALLELVS_RED</a> an welchem die Verschiebungsstufe der Heizkurve im reduzierten Betrieb per Drehregler, für die lokale respektive die Notbedienung, eingestellt werden kann. Die Funktion rechnet den Eingangswert in die Stufen -5...+5 um.</p>
+<dl class="section return"><dt>Rückgabe</dt><dd>Eingestellte Stufe im Bereich -5...+5 als <code>int8_t</code>. </dd></dl>
+
+<p class="definition">Definiert in Zeile <a class="el" href="wpUser_8ino_source.html#l00292">292</a> der Datei <a class="el" href="wpUser_8ino_source.html">wpUser.ino</a>.</p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, wo diese Funktion aufgerufen wird:</div>
+<div class="dyncontent">
+<div class="center"><img src="wpUser_8ino_ae08b1d7a0b684b7a72a8129f9e370dc4_icgraph.png" border="0" usemap="#wpUser_8ino_ae08b1d7a0b684b7a72a8129f9e370dc4_icgraph" alt=""/></div>
+<map name="wpUser_8ino_ae08b1d7a0b684b7a72a8129f9e370dc4_icgraph" id="wpUser_8ino_ae08b1d7a0b684b7a72a8129f9e370dc4_icgraph">
+<area shape="rect" id="node2" href="wpUser_8ino.html#ab814931318f1238c9776e2df701131f8" title="Erzwingt die Verwendung der lokal eingestellten Parametern. " alt="" coords="209,5,352,32"/>
+<area shape="rect" id="node3" href="wpUser_8ino.html#ab3d6a2608aa113517ff811539024869a" title="Benutzersteuerungs Hauptfunktion zum Aufruf im Mainloop. " alt="" coords="400,5,475,32"/>
+<area shape="rect" id="node4" href="wpMain_8ino.html#afe461d27b9c48d5921c00d521181f12f" title="Main&#45;Funktion welche ständig wiederholt wird. " alt="" coords="523,5,569,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="afe3300f6a466de2905be5dcb04724d49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe3300f6a466de2905be5dcb04724d49">&#9670;&nbsp;</a></span>receiveSerialData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void receiveSerialData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Liest über UART empfangene Daten ein und legt sie als Einstellung ab. </p>
+<p>Wenn am Serialport 1 vom HMI gesendete Daten anstehen, wird die Funktion <a class="el" href="wpUser_8ino.html#afe3300f6a466de2905be5dcb04724d49" title="Liest über UART empfangene Daten ein und legt sie als Einstellung ab. ">receiveSerialData()</a> von der Funktion <a class="el" href="wpMain_8ino.html#a97b956ff09bc13415695bc8d09a0cd0b" title="Funktion, welche den Serial Empfangsbuffer auf neue Daten prüft. ">serialEvent1()</a> aufgerufen.<br />
+ Die im Schnittstellen-Buffer enthaltene Daten werden eingelesen bis ein LINEFEED als Terminator erkannt wird, das Empfangsarray <code>rxbuffer</code> voll ist oder 20ms keine weiteren Daten empfangen werden.<br />
+ Mittels <a class="el" href="wpMain_8h.html#a607259d02e629ff71ad86b24501a26db">RX_BUFFERSIZE</a> kann die Anzahl empfangbarer ASCII-Zeichen/Bytes pro Empfangseinheit definiert werden, wobei gilt:<br />
+ Buffersize= empfangbare Zeichen + 3<br />
+ Durch die Begrenzung der Befehlslänge kann ein Buffer-Overflow resp. eine Out of bounds Exception effektiv verhindert werden.<br />
+ Die Funktion teilt empfangene Zeichenkette in Namen- und Wertteil auf wobei sie folgendes Befehlsformat erwartet:<br />
+ Datapaket &lt;=RX_BUFFERSIZE= PARAMNAME:PARAMVALUE'NL' (PARAMVALUE &lt; +/-32767)<br />
+ Der Namenteil wird anschliessend mit den Namensfelder der Einträge im Strukturarray <a class="el" href="wpMain_8ino.html#a296db861de9d0718f4f894ed6bb20ab0">Usersettings</a> verglichen. Bei Übereinstimmung wird der empfangene Wertteil beim gefundenen Eintrag im Feld <code>value</code> abgelegt. Wird nur ein Befehlsname ohne Wert gesendet, wird der Defaultwert -99 zugewiesen und der Wert nicht gespeichert.</p>
+<dl class="section remark"><dt>Bemerkungen</dt><dd>Das alleinige Senden des Namenteils hat aktuell keine Anwendung. Eine denkbare und möglicherweise folgende Anwendung ist, das alleinige Senden des Namens als Request zur Rücksendung des Aktualwertes, welcher beim Empfänger gespeichert ist.</dd></dl>
+<dl class="section return"><dt>Rückgabe</dt><dd><code>void</code> </dd></dl>
+
+<p class="definition">Definiert in Zeile <a class="el" href="wpUser_8ino_source.html#l00050">50</a> der Datei <a class="el" href="wpUser_8ino_source.html">wpUser.ino</a>.</p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, wo diese Funktion aufgerufen wird:</div>
+<div class="dyncontent">
+<div class="center"><img src="wpUser_8ino_afe3300f6a466de2905be5dcb04724d49_icgraph.png" border="0" usemap="#wpUser_8ino_afe3300f6a466de2905be5dcb04724d49_icgraph" alt=""/></div>
+<map name="wpUser_8ino_afe3300f6a466de2905be5dcb04724d49_icgraph" id="wpUser_8ino_afe3300f6a466de2905be5dcb04724d49_icgraph">
+<area shape="rect" id="node2" href="wpMain_8ino.html#a97b956ff09bc13415695bc8d09a0cd0b" title="Funktion, welche den Serial Empfangsbuffer auf neue Daten prüft. " alt="" coords="176,5,268,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a88b61e21d57753aeb25ca4bbdcb04617"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88b61e21d57753aeb25ca4bbdcb04617">&#9670;&nbsp;</a></span>transmitSerialData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void transmitSerialData </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>settingindex</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sendet Daten aus der Variable Systemsettings über die UART Schnittstelle. </p>
+<p>Die Funktion <a class="el" href="wpUser_8ino.html#a88b61e21d57753aeb25ca4bbdcb04617" title="Sendet Daten aus der Variable Systemsettings über die UART Schnittstelle. ">transmitSerialData()</a> ist das Gegenstück zur Funktion <a class="el" href="wpUser_8ino.html#afe3300f6a466de2905be5dcb04724d49" title="Liest über UART empfangene Daten ein und legt sie als Einstellung ab. ">receiveSerialData()</a>. Sie liest die abgelegten Werte des Datenarrays <a class="el" href="wpMain_8ino.html#a85fcac8cf4deef17c29f61087ec90280">Systemsettings</a> beim Index, welcher als Funktionsargument (uint8_t) übergeben werden muss.</p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">settingindex</td><td>Wählt den Index des Array Systemsettings dessen Inhalte, sprich die Datenfelder Systemsettings::action und Systemsettings::value, gesendet werden sollen.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd><code>void</code> </dd></dl>
+<dl class="section note"><dt>Zu beachten</dt><dd>Die Befehlslänge darf die Anzahl Zeichen definiert in <a class="el" href="wpMain_8h.html#a607259d02e629ff71ad86b24501a26db">RX_BUFFERSIZE</a> nicht überschreiten! Der Overhead beträgt jeweils drei Zeichen, weshalb die die nutzbare Zeichenlänge jeweils RX_BUFFERSIZE -3 beträgt. </dd></dl>
+
+<p class="definition">Definiert in Zeile <a class="el" href="wpUser_8ino_source.html#l00112">112</a> der Datei <a class="el" href="wpUser_8ino_source.html">wpUser.ino</a>.</p>
+<div class="dynheader">
+Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
+<div class="dyncontent">
+<div class="center"><img src="wpUser_8ino_a88b61e21d57753aeb25ca4bbdcb04617_cgraph.png" border="0" usemap="#wpUser_8ino_a88b61e21d57753aeb25ca4bbdcb04617_cgraph" alt=""/></div>
+<map name="wpUser_8ino_a88b61e21d57753aeb25ca4bbdcb04617_cgraph" id="wpUser_8ino_a88b61e21d57753aeb25ca4bbdcb04617_cgraph">
+<area shape="rect" id="node2" href="wpUser_8ino.html#a9371d894cd5ac0125c1fd1449e88de4d" title="Fasst die Zustände aller Bitfelder der Variable Systemzustand zusammen. " alt="" coords="183,5,321,32"/>
+</map>
+</div>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, wo diese Funktion aufgerufen wird:</div>
+<div class="dyncontent">
+<div class="center"><img src="wpUser_8ino_a88b61e21d57753aeb25ca4bbdcb04617_icgraph.png" border="0" usemap="#wpUser_8ino_a88b61e21d57753aeb25ca4bbdcb04617_icgraph" alt=""/></div>
+<map name="wpUser_8ino_a88b61e21d57753aeb25ca4bbdcb04617_icgraph" id="wpUser_8ino_a88b61e21d57753aeb25ca4bbdcb04617_icgraph">
+<area shape="rect" id="node2" href="wpUser_8ino.html#a4c596e6694414c50339477d311d4f242" title="Periodisches Update der Werte ans HMI senden. " alt="" coords="183,5,267,32"/>
+<area shape="rect" id="node3" href="wpUser_8ino.html#ab3d6a2608aa113517ff811539024869a" title="Benutzersteuerungs Hauptfunktion zum Aufruf im Mainloop. " alt="" coords="315,5,389,32"/>
+<area shape="rect" id="node4" href="wpMain_8ino.html#afe461d27b9c48d5921c00d521181f12f" title="Main&#45;Funktion welche ständig wiederholt wird. " alt="" coords="437,5,484,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a4c596e6694414c50339477d311d4f242"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c596e6694414c50339477d311d4f242">&#9670;&nbsp;</a></span>updateHMI()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void updateHMI </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Periodisches Update der Werte ans HMI senden. </p>
+<p>Aktualisiert die Werte für das HMI periodisch. Alle Einträge des Arrays <a class="el" href="wpMain_8ino.html#a85fcac8cf4deef17c29f61087ec90280">Systemsettings</a> werden dabei nacheinander an die Funktion <a class="el" href="wpUser_8ino.html#a88b61e21d57753aeb25ca4bbdcb04617" title="Sendet Daten aus der Variable Systemsettings über die UART Schnittstelle. ">transmitSerialData()</a> übergeben und von dieser an das HMI gesendet. Die Aktualisierung erfolgt jede Sekunde. </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="wpUser_8ino_source.html#l00137">137</a> der Datei <a class="el" href="wpUser_8ino_source.html">wpUser.ino</a>.</p>
+<div class="dynheader">
+Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
+<div class="dyncontent">
+<div class="center"><img src="wpUser_8ino_a4c596e6694414c50339477d311d4f242_cgraph.png" border="0" usemap="#wpUser_8ino_a4c596e6694414c50339477d311d4f242_cgraph" alt=""/></div>
+<map name="wpUser_8ino_a4c596e6694414c50339477d311d4f242_cgraph" id="wpUser_8ino_a4c596e6694414c50339477d311d4f242_cgraph">
+<area shape="rect" id="node2" href="wpUser_8ino.html#a88b61e21d57753aeb25ca4bbdcb04617" title="Sendet Daten aus der Variable Systemsettings über die UART Schnittstelle. " alt="" coords="137,5,267,32"/>
+<area shape="rect" id="node3" href="wpUser_8ino.html#a9371d894cd5ac0125c1fd1449e88de4d" title="Fasst die Zustände aller Bitfelder der Variable Systemzustand zusammen. " alt="" coords="315,5,453,32"/>
+</map>
+</div>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, wo diese Funktion aufgerufen wird:</div>
+<div class="dyncontent">
+<div class="center"><img src="wpUser_8ino_a4c596e6694414c50339477d311d4f242_icgraph.png" border="0" usemap="#wpUser_8ino_a4c596e6694414c50339477d311d4f242_icgraph" alt=""/></div>
+<map name="wpUser_8ino_a4c596e6694414c50339477d311d4f242_icgraph" id="wpUser_8ino_a4c596e6694414c50339477d311d4f242_icgraph">
+<area shape="rect" id="node2" href="wpUser_8ino.html#ab3d6a2608aa113517ff811539024869a" title="Benutzersteuerungs Hauptfunktion zum Aufruf im Mainloop. " alt="" coords="137,5,212,32"/>
+<area shape="rect" id="node3" href="wpMain_8ino.html#afe461d27b9c48d5921c00d521181f12f" title="Main&#45;Funktion welche ständig wiederholt wird. " alt="" coords="260,5,307,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ab3d6a2608aa113517ff811539024869a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3d6a2608aa113517ff811539024869a">&#9670;&nbsp;</a></span>userMain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void userMain </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Benutzersteuerungs Hauptfunktion zum Aufruf im Mainloop. </p>
+<p>Oberste Ebene der Benutzersteuerung, welche die weiteren Benutzerfunktionen direkt oder indirekt aufruft. </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="wpUser_8ino_source.html#l00538">538</a> der Datei <a class="el" href="wpUser_8ino_source.html">wpUser.ino</a>.</p>
+<div class="dynheader">
+Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
+<div class="dyncontent">
+<div class="center"><img src="wpUser_8ino_ab3d6a2608aa113517ff811539024869a_cgraph.png" border="0" usemap="#wpUser_8ino_ab3d6a2608aa113517ff811539024869a_cgraph" alt=""/></div>
+<map name="wpUser_8ino_ab3d6a2608aa113517ff811539024869a_cgraph" id="wpUser_8ino_ab3d6a2608aa113517ff811539024869a_cgraph">
+<area shape="rect" id="node2" href="wpUser_8ino.html#ab814931318f1238c9776e2df701131f8" title="Erzwingt die Verwendung der lokal eingestellten Parametern. " alt="" coords="128,107,271,133"/>
+<area shape="rect" id="node7" href="wpUser_8ino.html#a4c596e6694414c50339477d311d4f242" title="Periodisches Update der Werte ans HMI senden. " alt="" coords="157,183,241,209"/>
+<area shape="rect" id="node3" href="wpUser_8ino.html#aede7defca79c2f53957ba9b5a4d97e55" title="Auslesen der lokalen, Stufenwahl der Heizkurve. " alt="" coords="328,5,473,32"/>
+<area shape="rect" id="node4" href="wpUser_8ino.html#ae08b1d7a0b684b7a72a8129f9e370dc4" title="Auslesen der lokalen, reduzierten Parallelverschiebungsstufe. " alt="" coords="323,56,479,83"/>
+<area shape="rect" id="node5" href="wpUser_8ino.html#a36a7fa0457f950d3dbcd648e66580f81" title="Auslesen der lokalen, normalen Parallelverschiebungsstufe. " alt="" coords="319,107,483,133"/>
+<area shape="rect" id="node6" href="wpUser_8ino.html#afd01b1ed5116b92e8869efff7de97a68" title="Aktualisiert den Betriebsmodus und zeigt diesen lokal an. " alt="" coords="337,157,464,184"/>
+<area shape="rect" id="node8" href="wpUser_8ino.html#a88b61e21d57753aeb25ca4bbdcb04617" title="Sendet Daten aus der Variable Systemsettings über die UART Schnittstelle. " alt="" coords="336,208,465,235"/>
+<area shape="rect" id="node9" href="wpUser_8ino.html#a9371d894cd5ac0125c1fd1449e88de4d" title="Fasst die Zustände aller Bitfelder der Variable Systemzustand zusammen. " alt="" coords="531,208,669,235"/>
+</map>
+</div>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, wo diese Funktion aufgerufen wird:</div>
+<div class="dyncontent">
+<div class="center"><img src="wpUser_8ino_ab3d6a2608aa113517ff811539024869a_icgraph.png" border="0" usemap="#wpUser_8ino_ab3d6a2608aa113517ff811539024869a_icgraph" alt=""/></div>
+<map name="wpUser_8ino_ab3d6a2608aa113517ff811539024869a_icgraph" id="wpUser_8ino_ab3d6a2608aa113517ff811539024869a_icgraph">
+<area shape="rect" id="node2" href="wpMain_8ino.html#afe461d27b9c48d5921c00d521181f12f" title="Main&#45;Funktion welche ständig wiederholt wird. " alt="" coords="128,5,175,32"/>
+</map>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="wpUser_8ino.html">wpUser.ino</a></li>
+    <li class="footer">Erzeugt von
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
+  </ul>
+</div>
+</body>
+</html>

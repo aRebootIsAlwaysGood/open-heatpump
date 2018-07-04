@@ -1,0 +1,7 @@
+<map id="modeReduziert" name="modeReduziert">
+<area shape="rect" id="node2" href="$wpAuto_8ino.html#afed4915ead06746e4c683ee93642d8cb" title="Ruft die für den automatischen Betrieb nötigen Funktionen auf. " alt="" coords="669,5,757,32"/>
+<area shape="rect" id="node4" href="$wpRegler_8ino.html#a802a6ca104db722b268f0693497b7094" title="Zustandsautomat für den Heizungsvorlauf&#45;Temperaturregler. " alt="" coords="163,31,297,57"/>
+<area shape="rect" id="node3" href="$wpMain_8ino.html#afe461d27b9c48d5921c00d521181f12f" title="Main&#45;Funktion welche ständig wiederholt wird. " alt="" coords="805,5,852,32"/>
+<area shape="rect" id="node5" href="$wpControl_8ino.html#ae710165b7dd2b053ad08f96dba48d54c" title="Statemachine für die Low&#45;Level Steuerung der Wärmepumpe. " alt="" coords="345,31,464,57"/>
+<area shape="rect" id="node6" href="$wpSpeicherladung_8ino.html#a1c0cf0ef9357ae514777ada14e9a8edd" title="Führt die Speicherladung und Abtauung mittels Zustandsautomat durch. " alt="" coords="512,31,621,57"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="updateHMI" name="updateHMI">
+<area shape="rect" id="node2" href="$wpUser_8ino.html#a88b61e21d57753aeb25ca4bbdcb04617" title="Sendet Daten aus der Variable Systemsettings über die UART Schnittstelle. " alt="" coords="137,5,267,32"/>
+<area shape="rect" id="node3" href="$wpUser_8ino.html#a9371d894cd5ac0125c1fd1449e88de4d" title="Fasst die Zustände aller Bitfelder der Variable Systemzustand zusammen. " alt="" coords="315,5,453,32"/>
+</map>

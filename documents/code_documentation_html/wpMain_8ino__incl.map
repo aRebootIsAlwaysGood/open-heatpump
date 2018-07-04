@@ -1,0 +1,10 @@
+<map id="wpMain.ino" name="wpMain.ino">
+<area shape="rect" id="node3" href="$wpMain_8h.html" title="Main Header Datei für grundlegende Strukturen und Pin&#45;Definitionen. " alt="" coords="122,80,199,107"/>
+<area shape="rect" id="node4" href="$wpAuto_8h.html" title="Header zum Modul Automatikbetrieb. " alt="" coords="224,80,300,107"/>
+<area shape="rect" id="node5" href="$wpControl_8h.html" title="Header zum Steuer&#45; und Sicherheitsmodul. " alt="" coords="325,80,415,107"/>
+<area shape="rect" id="node6" href="$wpManuell_8h.html" title="Header zum manuellen Betriebsmodus. " alt="" coords="440,80,535,107"/>
+<area shape="rect" id="node7" href="$wpRegler_8h.html" title="Header&#45;Datei zum Modul Regler mit Datenstrukturen. " alt="" coords="559,80,645,107"/>
+<area shape="rect" id="node8" href="$wpSensorik_8h.html" title="Header zum Sensorikmodul. " alt="" coords="669,80,769,107"/>
+<area shape="rect" id="node9" href="$wpSpeicherladung_8h.html" title="Header zum Modul Speicherladung. " alt="" coords="794,80,933,107"/>
+<area shape="rect" id="node10" href="$wpUser_8h.html" title="Header zum Modul Benutzersteuerung. " alt="" coords="957,80,1033,107"/>
+</map>

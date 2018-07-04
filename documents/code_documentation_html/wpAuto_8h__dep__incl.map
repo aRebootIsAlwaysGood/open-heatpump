@@ -1,0 +1,4 @@
+<map id="wpAuto.h" name="wpAuto.h">
+<area shape="rect" id="node2" href="$wpAuto_8ino.html" title="Automatikbetrieb der Wärmepumpe. " alt="" coords="5,80,92,107"/>
+<area shape="rect" id="node3" href="$wpMain_8ino.html" title="Hauptmodul welches die oberste Programmebene darstellt. " alt="" coords="116,80,203,107"/>
+</map>

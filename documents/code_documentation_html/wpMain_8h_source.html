@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Wärmepumpensteuerung: wpMain.h Quellcode</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(initResizable);
+/* @license-end */</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Wärmepumpensteuerung
+   &#160;<span id="projectnumber">1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Erzeugt von Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Suchen');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('wpMain_8h_source.html','');});
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">wpMain.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="wpMain_8h.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#ifndef WPMAIN_H</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define WPMAIN_H</span></div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// ***** PIN ASSIGNMENTS *****</span></div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">/***** DIGITAL INPUTS *****/</span></div><div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="wpMain_8h.html#ae0855c7bb0f3d6adc1054c5c13ead360">   14</a></span>&#160;<span class="preprocessor">#define PIN_ND 22           </span></div><div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="wpMain_8h.html#aa8a74ab63a28ac6415d8bfa2b329448c">   15</a></span>&#160;<span class="preprocessor">#define PIN_HD 23           </span></div><div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="wpMain_8h.html#aa68e489db660748065aa85949921ccc0">   16</a></span>&#160;<span class="preprocessor">#define PIN_MOTPROTECT 24   </span></div><div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="wpMain_8h.html#ab6bcc7b9a324fd6c34ac75c451c29c35">   17</a></span>&#160;<span class="preprocessor">#define PIN_ZUST_KSTART 25  </span></div><div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a4da1348acf9f20ff3ae11158698fcb7d">   18</a></span>&#160;<span class="preprocessor">#define PIN_ZUST_KBETR 26   </span></div><div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a7b7316b6bec7c9f17425ef6116b4a2b8">   19</a></span>&#160;<span class="preprocessor">#define PIN_TARIFSPERRE 27  </span></div><div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a72332ad5f12c378840cda74929f12aaa">   20</a></span>&#160;<span class="preprocessor">#define PIN_DI_RESERVE1 28  </span></div><div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="wpMain_8h.html#ac86832ae51970397957b9779e0fe1e6b">   21</a></span>&#160;<span class="preprocessor">#define PIN_DI_RESERVE2 29  </span></div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor"></span><span class="comment">/***** DIGITAL OUTPUTS *****/</span><span class="preprocessor"></span></div><div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a5ec7930c3e263fc1e6386f049d8b9f5b">   24</a></span>&#160;<span class="preprocessor">#define PIN_SUMPFHEIZUNG 30 </span></div><div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a362dca7f02cbace35352b31e21dc7d66">   25</a></span>&#160;<span class="preprocessor">#define PIN_K_ANLAUF 31     </span></div><div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="wpMain_8h.html#ac9d0204618fa7b4532f8de1d7a4d13e0">   26</a></span>&#160;<span class="preprocessor">#define PIN_K_BETRIEB 32    </span></div><div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a1b11ddaf81867095dd71695d2c8223c7">   27</a></span>&#160;<span class="preprocessor">#define PIN_BYPASS 33       </span></div><div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="wpMain_8h.html#af252989f02f19245f83cc3b6a0ec0171">   28</a></span>&#160;<span class="preprocessor">#define PIN_VENTILATOR 34   </span></div><div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a15dcb1500feed26ed2100150e1f78ca5">   29</a></span>&#160;<span class="preprocessor">#define PIN_LADEPUMPE 35    </span></div><div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="wpMain_8h.html#ae48aa2f51a37ea307cc43d4bec6f30d5">   30</a></span>&#160;<span class="preprocessor">#define PIN_HEIZPUMPE 36    </span></div><div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a947933987b396b50f0be6a12b51130d3">   31</a></span>&#160;<span class="preprocessor">#define PIN_MISCHER_AUF 37  </span></div><div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a802334438ae2a358d4e31364a659d450">   32</a></span>&#160;<span class="preprocessor">#define PIN_MISCHER_ZU 38   </span></div><div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a17ba575d353a6dfcb457596b2f6a7977">   33</a></span>&#160;<span class="preprocessor">#define PIN_SAMMELALARM 39  </span></div><div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a5fe1546945f9f357b3d830e11dab7d78">   34</a></span>&#160;<span class="preprocessor">#define PIN_DO_RESERVE1 40  </span></div><div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="wpMain_8h.html#aa9e548d7eb4e25c3e5750da169da2c51">   35</a></span>&#160;<span class="preprocessor">#define PIN_DO_RESERVE2 41  </span></div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor"></span><span class="comment">/***** TEMPERATUR INPUTS (AI) *****/</span><span class="preprocessor"></span></div><div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="wpMain_8h.html#acd6002c5801ea80efc6eb394bfc5ce18">   38</a></span>&#160;<span class="preprocessor">#define PIN_T_AUSSEN A0     </span></div><div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a2d8e531192124dc0cb1f4be07bf0d34d">   39</a></span>&#160;<span class="preprocessor">#define PIN_T_KONDENSATOR A1</span></div><div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="wpMain_8h.html#aef9751851e9846c6c2f9451d7c79a458">   40</a></span>&#160;<span class="preprocessor">#define PIN_T_SPEICHER A2   </span></div><div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a901839082b6964b8670d8b8f636d9b7a">   41</a></span>&#160;<span class="preprocessor">#define PIN_T_VORLAUF A3    </span></div><div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a941ff7b35c59fb99583cef911b68ddfd">   42</a></span>&#160;<span class="preprocessor">#define PIN_AI_RESERVE1 A4  </span></div><div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a07b22530ab28295294bcdc1799e842b8">   43</a></span>&#160;<span class="preprocessor">#define PIN_AI_RESERVE2 A5  </span></div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor"></span><span class="comment">/***** USER IO (DI,DO,AI) *****/</span><span class="preprocessor"></span></div><div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="wpMain_8h.html#af2c4cae975bebcc7f0139bfba3a50da9">   46</a></span>&#160;<span class="preprocessor">#define PIN_PARALLELVS_NORM A10</span></div><div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a7a9de7494094d1d743d47bd00a85f6d9">   47</a></span>&#160;<span class="preprocessor">#define PIN_PARALLELVS_RED A11</span></div><div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a9545a1563d147434e84831942b8c594f">   48</a></span>&#160;<span class="preprocessor">#define PIN_HEIZKURVENSTUFE A12 </span></div><div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a1719f6103d40e442f38ab2db431589f6">   49</a></span>&#160;<span class="preprocessor">#define PIN_LOCALBUTTONS A13    </span></div><div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a21fb125b2b618f1405c88c421bde61f1">   50</a></span>&#160;<span class="preprocessor">#define PIN_FORCE_LOCAL 2       </span></div><div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a980fc89a65d309095942f8d2a190ba2c">   51</a></span>&#160;<span class="preprocessor">#define PIN_LED_STBY 3      </span></div><div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a95827ef4e23e358fde4063de48d88f33">   52</a></span>&#160;<span class="preprocessor">#define PIN_LED_MAN 4   </span></div><div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a88c90d5adfdab41803ea461aaff32272">   53</a></span>&#160;<span class="preprocessor">#define PIN_LED_AUTORED 5       </span></div><div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a4a70e11a12c88653c25598ab6bd1ed74">   54</a></span>&#160;<span class="preprocessor">#define PIN_LED_AUTONORM 6      </span></div><div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="wpMain_8h.html#acc93ed08d194a4be284dbcc0276dffa8">   55</a></span>&#160;<span class="preprocessor">#define PIN_LED_HDND 7  </span></div><div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="wpMain_8h.html#ad413c063bcf29c18010fe7715d043aeb">   56</a></span>&#160;<span class="preprocessor">#define PIN_LED_ALARM 8         </span></div><div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a5f3c503f01bb57bf102c0b5e11473fa7">   57</a></span>&#160;<span class="preprocessor">#define PIN_LED_POWERON 9   </span></div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor"></span><span class="comment">/***** MAKROS ZUR BETRIEBSANPASSUNG *****/</span><span class="preprocessor"></span></div><div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="wpMain_8h.html#aa4f74971880432741f84594fca7d1d62">   60</a></span>&#160;<span class="preprocessor">#define T_ANLASS 1000       </span></div><div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a5cf7d3b45c722f4ef747ccf4007e5c5e">   61</a></span>&#160;<span class="preprocessor">#define T_MISCHERSTELLZEIT 155000   </span></div><div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a31cdbe16e8dce3f363d210dfbe4f1d5a">   62</a></span>&#160;<span class="preprocessor">#define T_NACHLAUF 100000 </span></div><div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a8839a1680212fdf7404ebffa16113929">   63</a></span>&#160;<span class="preprocessor">#define TEMP_DEFROST_REQUIRED 10 </span></div><div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a66bcbafea1eba06c0acc403bd93289ae">   64</a></span>&#160;<span class="preprocessor">#define T_MAX_LADEN 2400000 </span></div><div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a85d732c67f01838ebab2fc4fa15e81ee">   65</a></span>&#160;<span class="preprocessor">#define T_WIEDERANLAUFSPERRE 900000 </span></div><div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="wpMain_8h.html#ac082d8edf66febf4510d69ec0cc006e4">   66</a></span>&#160;<span class="preprocessor">#define T_DEFROSTSPERRE 210000 </span></div><div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a607259d02e629ff71ad86b24501a26db">   67</a></span>&#160;<span class="preprocessor">#define RX_BUFFERSIZE 21 </span></div><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor"></span><span class="comment">/***** DEBUGGING MACROS *****/</span><span class="preprocessor"></span></div><div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="wpMain_8h.html#ad0174f5975f76e630bb093a44d863a8e">   70</a></span>&#160;<span class="preprocessor">#define DEBUG_PROGRAM_FLOW </span></div><div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a1b043aa71046a5c8a363156f891686ec">   71</a></span>&#160;<span class="preprocessor">#define DEBUG_INPUTVALUES </span></div><div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a54f4ba5d4b13bc7dd83441d892facb8d">   72</a></span>&#160;<span class="preprocessor">#define DEBUG_OUTPUTVALUES </span></div><div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="wpMain_8h.html#a9dcd09d01379cad01053d605ec1d37c7">   73</a></span>&#160;<span class="preprocessor">#define DEBUG_SYSTEMZUSTAND </span></div><div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="wpMain_8h.html#acdc7faac84eafc231e83639cc97283b1">   74</a></span>&#160;<span class="preprocessor">#define DEBUG_SETTINGS </span></div><div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="wpMain_8h.html#afc1a00539f0843b63f85f44586a04b6d">   75</a></span>&#160;<span class="preprocessor">#define DEBUG_COMMUNICATION </span></div><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">void blinkFunction();</span></div><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div><div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#endif</span></div></div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="wpMain_8h.html">wpMain.h</a></li>
+    <li class="footer">Erzeugt von
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
+  </ul>
+</div>
+</body>
+</html>

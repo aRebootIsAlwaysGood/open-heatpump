@@ -1,0 +1,5 @@
+<map id="getBetriebsmodus" name="getBetriebsmodus">
+<area shape="rect" id="node2" href="$wpUser_8ino.html#ab814931318f1238c9776e2df701131f8" title="Erzwingt die Verwendung der lokal eingestellten Parametern. " alt="" coords="180,5,323,32"/>
+<area shape="rect" id="node3" href="$wpUser_8ino.html#ab3d6a2608aa113517ff811539024869a" title="Benutzersteuerungs Hauptfunktion zum Aufruf im Mainloop. " alt="" coords="371,5,445,32"/>
+<area shape="rect" id="node4" href="$wpMain_8ino.html#afe461d27b9c48d5921c00d521181f12f" title="Main&#45;Funktion welche ständig wiederholt wird. " alt="" coords="493,5,540,32"/>
+</map>

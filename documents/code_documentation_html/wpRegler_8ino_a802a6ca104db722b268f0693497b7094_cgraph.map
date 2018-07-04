@@ -1,0 +1,9 @@
+<map id="reglerStatemachine" name="reglerStatemachine">
+<area shape="rect" id="node2" href="$wpRegler_8ino.html#afb8c37e2ac60ef06ab2ca3e72945031f" title="Berechnet Solltemperatur des Heizungsvorlauf mittels Heizkurve. " alt="" coords="200,5,289,32"/>
+<area shape="rect" id="node3" href="$wpSensorik_8h.html#aeb03ba2c8dc0be735f75d2bbee8064b1" title="Messung der aktuellen Aussentemperatur in Grad Celsius. " alt="" coords="188,56,301,83"/>
+<area shape="rect" id="node4" href="$wpUser_8h.html#a6132506f43bcc6cffd99023797a83699" title="Bereitstellen der eingestellten Heizkurvenstufe. " alt="" coords="191,107,298,133"/>
+<area shape="rect" id="node5" href="$wpUser_8h.html#a92568e4f841036f5ae061e46f09dbde5" title="Gibt die vom User eingestellte Heizkurven&#45;Parallelverschiebung zurück. " alt="" coords="197,157,292,184"/>
+<area shape="rect" id="node6" href="$wpUser_8h.html#a0cb5ee680fd84dea322a8a24f6e26e77" title="Prüft ob eine reduzierte Vorlauftemperatur gewünscht wird. " alt="" coords="190,208,299,235"/>
+<area shape="rect" id="node7" href="$wpRegler_8ino.html#aedd27125fe6a72dd6e137c3b8a3d1a13" title="Quasi&#45;stegiger Dreipunktregler für Dreiweg&#45;Mischventil. " alt="" coords="195,259,294,285"/>
+<area shape="rect" id="node8" href="$wpSensorik_8h.html#a1fdd7775b19d4c50f37b9ee8174f4989" title="Messung der aktuellen Heizungs&#45;Vorlauftemperatur in Grad Celsius. " alt="" coords="190,309,299,336"/>
+</map>

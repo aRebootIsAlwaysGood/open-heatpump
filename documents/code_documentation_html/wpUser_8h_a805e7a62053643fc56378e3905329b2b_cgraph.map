@@ -1,0 +1,6 @@
+<map id="forceLocalBedienung" name="forceLocalBedienung">
+<area shape="rect" id="node2" href="$wpUser_8ino.html#aede7defca79c2f53957ba9b5a4d97e55" title="Auslesen der lokalen, Stufenwahl der Heizkurve. " alt="" coords="205,5,351,32"/>
+<area shape="rect" id="node3" href="$wpUser_8ino.html#ae08b1d7a0b684b7a72a8129f9e370dc4" title="Auslesen der lokalen, reduzierten Parallelverschiebungsstufe. " alt="" coords="200,56,356,83"/>
+<area shape="rect" id="node4" href="$wpUser_8ino.html#a36a7fa0457f950d3dbcd648e66580f81" title="Auslesen der lokalen, normalen Parallelverschiebungsstufe. " alt="" coords="196,107,360,133"/>
+<area shape="rect" id="node5" href="$wpUser_8ino.html#afd01b1ed5116b92e8869efff7de97a68" title="Aktualisiert den Betriebsmodus und zeigt diesen lokal an. " alt="" coords="215,157,341,184"/>
+</map>

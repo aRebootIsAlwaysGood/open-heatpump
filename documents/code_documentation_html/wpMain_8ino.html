@@ -1,0 +1,446 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Wärmepumpensteuerung: wpMain.ino-Dateireferenz</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(initResizable);
+/* @license-end */</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Wärmepumpensteuerung
+   &#160;<span id="projectnumber">1.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Erzeugt von Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Suchen');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('wpMain_8ino.html','');});
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Funktionen</a> &#124;
+<a href="#var-members">Variablen</a>  </div>
+  <div class="headertitle">
+<div class="title">wpMain.ino-Dateireferenz</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Hauptmodul welches die oberste Programmebene darstellt.  
+<a href="#details">Mehr ...</a></p>
+<div class="textblock"><code>#include &lt;Streaming.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="wpMain_8h_source.html">wpMain.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="wpAuto_8h_source.html">wpAuto.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="wpControl_8h_source.html">wpControl.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="wpManuell_8h_source.html">wpManuell.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="wpRegler_8h_source.html">wpRegler.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="wpSensorik_8h_source.html">wpSensorik.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="wpSpeicherladung_8h_source.html">wpSpeicherladung.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="wpUser_8h_source.html">wpUser.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include-Abhängigkeitsdiagramm für wpMain.ino:</div>
+<div class="dyncontent">
+<div class="center"><img src="wpMain_8ino__incl.png" border="0" usemap="#wpMain_8ino" alt=""/></div>
+<map name="wpMain_8ino" id="wpMain_8ino">
+<area shape="rect" id="node3" href="wpMain_8h.html" title="Main Header Datei für grundlegende Strukturen und Pin&#45;Definitionen. " alt="" coords="122,80,199,107"/>
+<area shape="rect" id="node4" href="wpAuto_8h.html" title="Header zum Modul Automatikbetrieb. " alt="" coords="224,80,300,107"/>
+<area shape="rect" id="node5" href="wpControl_8h.html" title="Header zum Steuer&#45; und Sicherheitsmodul. " alt="" coords="325,80,415,107"/>
+<area shape="rect" id="node6" href="wpManuell_8h.html" title="Header zum manuellen Betriebsmodus. " alt="" coords="440,80,535,107"/>
+<area shape="rect" id="node7" href="wpRegler_8h.html" title="Header&#45;Datei zum Modul Regler mit Datenstrukturen. " alt="" coords="559,80,645,107"/>
+<area shape="rect" id="node8" href="wpSensorik_8h.html" title="Header zum Sensorikmodul. " alt="" coords="669,80,769,107"/>
+<area shape="rect" id="node9" href="wpSpeicherladung_8h.html" title="Header zum Modul Speicherladung. " alt="" coords="794,80,933,107"/>
+<area shape="rect" id="node10" href="wpUser_8h.html" title="Header zum Modul Benutzersteuerung. " alt="" coords="957,80,1033,107"/>
+</map>
+</div>
+</div>
+<p><a href="wpMain_8ino_source.html">gehe zum Quellcode dieser Datei</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funktionen</h2></td></tr>
+<tr class="memitem:a02bc6268639816f7b86a4764e9b4ab66"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wpMain_8ino.html#a02bc6268639816f7b86a4764e9b4ab66">blinkFunction</a> ()</td></tr>
+<tr class="memdesc:a02bc6268639816f7b86a4764e9b4ab66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Blinkfunktion, welche ein binäres Taktsignal von 1Hz liefert.  <a href="#a02bc6268639816f7b86a4764e9b4ab66">Mehr ...</a><br /></td></tr>
+<tr class="separator:a02bc6268639816f7b86a4764e9b4ab66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fc01d736fe50cf5b977f755b675f11d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wpMain_8ino.html#a4fc01d736fe50cf5b977f755b675f11d">setup</a> ()</td></tr>
+<tr class="memdesc:a4fc01d736fe50cf5b977f755b675f11d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup-Funktion welche zum Programmstart einmalig ausgeführt wird.  <a href="#a4fc01d736fe50cf5b977f755b675f11d">Mehr ...</a><br /></td></tr>
+<tr class="separator:a4fc01d736fe50cf5b977f755b675f11d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe461d27b9c48d5921c00d521181f12f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wpMain_8ino.html#afe461d27b9c48d5921c00d521181f12f">loop</a> ()</td></tr>
+<tr class="memdesc:afe461d27b9c48d5921c00d521181f12f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main-Funktion welche ständig wiederholt wird.  <a href="#afe461d27b9c48d5921c00d521181f12f">Mehr ...</a><br /></td></tr>
+<tr class="separator:afe461d27b9c48d5921c00d521181f12f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97b956ff09bc13415695bc8d09a0cd0b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wpMain_8ino.html#a97b956ff09bc13415695bc8d09a0cd0b">serialEvent1</a> ()</td></tr>
+<tr class="memdesc:a97b956ff09bc13415695bc8d09a0cd0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funktion, welche den Serial Empfangsbuffer auf neue Daten prüft.  <a href="#a97b956ff09bc13415695bc8d09a0cd0b">Mehr ...</a><br /></td></tr>
+<tr class="separator:a97b956ff09bc13415695bc8d09a0cd0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variablen</h2></td></tr>
+<tr class="memitem:a7d356cc08e5802e59a06f7800133fa4d"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structDI__STATES.html">DI_STATES</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wpMain_8ino.html#a7d356cc08e5802e59a06f7800133fa4d">DiStates</a> = {0,0,0,0,0,0,0,0}</td></tr>
+<tr class="memdesc:a7d356cc08e5802e59a06f7800133fa4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enthält die Main- und Initialisierungsfunktion des gesamten Projektes.  <a href="#a7d356cc08e5802e59a06f7800133fa4d">Mehr ...</a><br /></td></tr>
+<tr class="separator:a7d356cc08e5802e59a06f7800133fa4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d245ff9bded6a031abf01a964d72e05"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structSYSTEMZUSTAND.html">SYSTEMZUSTAND</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wpMain_8ino.html#a3d245ff9bded6a031abf01a964d72e05">Systemzustand</a> = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}</td></tr>
+<tr class="separator:a3d245ff9bded6a031abf01a964d72e05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a296db861de9d0718f4f894ed6bb20ab0"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structSETTINGS.html">SETTINGS</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wpMain_8ino.html#a296db861de9d0718f4f894ed6bb20ab0">Usersettings</a> [15]</td></tr>
+<tr class="separator:a296db861de9d0718f4f894ed6bb20ab0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85fcac8cf4deef17c29f61087ec90280"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structSETTINGS.html">SETTINGS</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wpMain_8ino.html#a85fcac8cf4deef17c29f61087ec90280">Systemsettings</a> [8]</td></tr>
+<tr class="separator:a85fcac8cf4deef17c29f61087ec90280"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0dc9af285b4c48da6ff485336dbc014"><td class="memItemLeft" align="right" valign="top"><a class="el" href="wpControl_8h.html#ad91207ae77befb7bc86d2bd1b7cef720">wpState_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wpMain_8ino.html#aa0dc9af285b4c48da6ff485336dbc014">wpState</a> = <a class="el" href="wpControl_8h.html#ad91207ae77befb7bc86d2bd1b7cef720afc0222f5f8e94ea72d549d73124668d2">WP_STATE_IDLE</a></td></tr>
+<tr class="separator:aa0dc9af285b4c48da6ff485336dbc014"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2e03e063df016737f06bb115a29e07e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="wpSpeicherladung_8h.html#a7747c4229de69b5a5392b0d4dc034fd8">ladenState_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wpMain_8ino.html#ab2e03e063df016737f06bb115a29e07e">ladenState</a> = <a class="el" href="wpSpeicherladung_8h.html#a7747c4229de69b5a5392b0d4dc034fd8a74f686550596814240d32d2edc696a73">LADEN_STATE_IDLE</a></td></tr>
+<tr class="separator:ab2e03e063df016737f06bb115a29e07e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa24a79eb52dcb19bf156bc10525ec32"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="wpMain_8ino.html#aaa24a79eb52dcb19bf156bc10525ec32">blink1Hz</a></td></tr>
+<tr class="separator:aaa24a79eb52dcb19bf156bc10525ec32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Ausführliche Beschreibung</h2>
+<div class="textblock"><p>Hauptmodul welches die oberste Programmebene darstellt. </p>
+
+<p class="definition">Definiert in Datei <a class="el" href="wpMain_8ino_source.html">wpMain.ino</a>.</p>
+</div><h2 class="groupheader">Dokumentation der Funktionen</h2>
+<a id="a02bc6268639816f7b86a4764e9b4ab66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02bc6268639816f7b86a4764e9b4ab66">&#9670;&nbsp;</a></span>blinkFunction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void blinkFunction </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Blinkfunktion, welche ein binäres Taktsignal von 1Hz liefert. </p>
+<p>Globale Blinkvariable gesteuert durch <a class="el" href="wpMain_8ino.html#a02bc6268639816f7b86a4764e9b4ab66" title="Blinkfunktion, welche ein binäres Taktsignal von 1Hz liefert. ">blinkFunction()</a>. <br />
+Mittels der Blinkfunktion wird ein ständiges Taktsignal von 1Hz erzeugt, welches die globale Variable blink1Hz aktualisiert. Somit kann diese eingelesen werden und somit entfällt die ständige Notwendigkeit, auf die millis() Funktion zurückzugreifen. </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="wpMain_8ino_source.html#l00104">104</a> der Datei <a class="el" href="wpMain_8ino_source.html">wpMain.ino</a>.</p>
+<div class="dynheader">
+Hier ist ein Graph der zeigt, wo diese Funktion aufgerufen wird:</div>
+<div class="dyncontent">
+<div class="center"><img src="wpMain_8ino_a02bc6268639816f7b86a4764e9b4ab66_icgraph.png" border="0" usemap="#wpMain_8ino_a02bc6268639816f7b86a4764e9b4ab66_icgraph" alt=""/></div>
+<map name="wpMain_8ino_a02bc6268639816f7b86a4764e9b4ab66_icgraph" id="wpMain_8ino_a02bc6268639816f7b86a4764e9b4ab66_icgraph">
+<area shape="rect" id="node2" href="wpMain_8ino.html#afe461d27b9c48d5921c00d521181f12f" title="Main&#45;Funktion welche ständig wiederholt wird. " alt="" coords="152,5,199,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="afe461d27b9c48d5921c00d521181f12f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe461d27b9c48d5921c00d521181f12f">&#9670;&nbsp;</a></span>loop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void loop </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Main-Funktion welche ständig wiederholt wird. </p>
+<p>Enthält Funktionen welche vom Hauptprogramm direkt aufgerufen werden.</p>
+<dl class="section return"><dt>Rückgabe</dt><dd><code>void</code> </dd></dl>
+
+<p class="definition">Definiert in Zeile <a class="el" href="wpMain_8ino_source.html#l00177">177</a> der Datei <a class="el" href="wpMain_8ino_source.html">wpMain.ino</a>.</p>
+<div class="dynheader">
+Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
+<div class="dyncontent">
+<div class="center"><img src="wpMain_8ino_afe461d27b9c48d5921c00d521181f12f_cgraph.png" border="0" usemap="#wpMain_8ino_afe461d27b9c48d5921c00d521181f12f_cgraph" alt=""/></div>
+<map name="wpMain_8ino_afe461d27b9c48d5921c00d521181f12f_cgraph" id="wpMain_8ino_afe461d27b9c48d5921c00d521181f12f_cgraph">
+<area shape="rect" id="node2" href="wpUser_8h.html#ab3d6a2608aa113517ff811539024869a" title="Benutzersteuerungs Hauptfunktion zum Aufruf im Mainloop. " alt="" coords="112,208,187,235"/>
+<area shape="rect" id="node11" href="wpAuto_8h.html#afed4915ead06746e4c683ee93642d8cb" title="Ruft die für den automatischen Betrieb nötigen Funktionen auf. " alt="" coords="105,372,193,399"/>
+<area shape="rect" id="node27" href="wpMain_8ino.html#a02bc6268639816f7b86a4764e9b4ab66" title="Blinkfunktion, welche ein binäres Taktsignal von 1Hz liefert. " alt="" coords="100,423,199,449"/>
+<area shape="rect" id="node3" href="wpUser_8ino.html#ab814931318f1238c9776e2df701131f8" title="Erzwingt die Verwendung der lokal eingestellten Parametern. " alt="" coords="247,107,389,133"/>
+<area shape="rect" id="node8" href="wpUser_8ino.html#a4c596e6694414c50339477d311d4f242" title="Periodisches Update der Werte ans HMI senden. " alt="" coords="276,208,360,235"/>
+<area shape="rect" id="node4" href="wpUser_8ino.html#aede7defca79c2f53957ba9b5a4d97e55" title="Auslesen der lokalen, Stufenwahl der Heizkurve. " alt="" coords="447,56,592,83"/>
+<area shape="rect" id="node5" href="wpUser_8ino.html#ae08b1d7a0b684b7a72a8129f9e370dc4" title="Auslesen der lokalen, reduzierten Parallelverschiebungsstufe. " alt="" coords="441,107,597,133"/>
+<area shape="rect" id="node6" href="wpUser_8ino.html#a36a7fa0457f950d3dbcd648e66580f81" title="Auslesen der lokalen, normalen Parallelverschiebungsstufe. " alt="" coords="437,157,601,184"/>
+<area shape="rect" id="node7" href="wpUser_8ino.html#afd01b1ed5116b92e8869efff7de97a68" title="Aktualisiert den Betriebsmodus und zeigt diesen lokal an. " alt="" coords="456,5,583,32"/>
+<area shape="rect" id="node9" href="wpUser_8ino.html#a88b61e21d57753aeb25ca4bbdcb04617" title="Sendet Daten aus der Variable Systemsettings über die UART Schnittstelle. " alt="" coords="455,208,584,235"/>
+<area shape="rect" id="node10" href="wpUser_8ino.html#a9371d894cd5ac0125c1fd1449e88de4d" title="Fasst die Zustände aller Bitfelder der Variable Systemzustand zusammen. " alt="" coords="649,208,788,235"/>
+<area shape="rect" id="node12" href="wpRegler_8h.html#afb8c37e2ac60ef06ab2ca3e72945031f" title="Berechnet Solltemperatur des Heizungsvorlauf mittels Heizkurve. " alt="" coords="273,372,363,399"/>
+<area shape="rect" id="node13" href="wpSensorik_8h.html#aeb03ba2c8dc0be735f75d2bbee8064b1" title="Messung der aktuellen Aussentemperatur in Grad Celsius. " alt="" coords="836,512,949,539"/>
+<area shape="rect" id="node14" href="wpUser_8h.html#a6132506f43bcc6cffd99023797a83699" title="Bereitstellen der eingestellten Heizkurvenstufe. " alt="" coords="839,625,946,652"/>
+<area shape="rect" id="node15" href="wpUser_8h.html#a92568e4f841036f5ae061e46f09dbde5" title="Gibt die vom User eingestellte Heizkurven&#45;Parallelverschiebung zurück. " alt="" coords="845,259,940,285"/>
+<area shape="rect" id="node16" href="wpUser_8h.html#a0cb5ee680fd84dea322a8a24f6e26e77" title="Prüft ob eine reduzierte Vorlauftemperatur gewünscht wird. " alt="" coords="838,309,947,336"/>
+<area shape="rect" id="node17" href="wpSpeicherladung_8h.html#a1c0cf0ef9357ae514777ada14e9a8edd" title="Führt die Speicherladung und Abtauung mittels Zustandsautomat durch. " alt="" coords="263,448,373,475"/>
+<area shape="rect" id="node18" href="wpSensorik_8h.html#a3beeed1703375ffa184789ba09aaadda" title="Messung der aktuellen Pufferspeichertemperatur in Grad Celsius. " alt="" coords="459,499,579,525"/>
+<area shape="rect" id="node19" href="wpSensorik_8h.html#aede17587aa59ebd5d0ebad2e41ed795c" title="Messung der aktuellen Wassertemperatur vor dem Wärmetauscher. " alt="" coords="459,549,579,576"/>
+<area shape="rect" id="node20" href="wpControl_8h.html#ae710165b7dd2b053ad08f96dba48d54c" title="Statemachine für die Low&#45;Level Steuerung der Wärmepumpe. " alt="" coords="460,397,579,424"/>
+<area shape="rect" id="node21" href="wpControl_8ino.html#ac6682d7877400789b32bf521ebd3b843" title="Einlesen der Zustände von Digital&#45;Eingänge und Ausgänge. " alt="" coords="669,461,768,488"/>
+<area shape="rect" id="node22" href="wpRegler_8h.html#a802a6ca104db722b268f0693497b7094" title="Zustandsautomat für den Heizungsvorlauf&#45;Temperaturregler. " alt="" coords="651,411,786,437"/>
+<area shape="rect" id="node26" href="wpRegler_8h.html#aed1136d4cbd9952d22b46b8e3893c4a5" title="Reinitialisieren des Dreipunktreglers. " alt="" coords="681,360,757,387"/>
+<area shape="rect" id="node23" href="wpRegler_8ino.html#afb8c37e2ac60ef06ab2ca3e72945031f" title="Berechnet Solltemperatur des Heizungsvorlauf mittels Heizkurve. " alt="" coords="848,461,937,488"/>
+<area shape="rect" id="node24" href="wpRegler_8ino.html#aedd27125fe6a72dd6e137c3b8a3d1a13" title="Quasi&#45;stegiger Dreipunktregler für Dreiweg&#45;Mischventil. " alt="" coords="843,360,942,387"/>
+<area shape="rect" id="node25" href="wpSensorik_8h.html#a1fdd7775b19d4c50f37b9ee8174f4989" title="Messung der aktuellen Heizungs&#45;Vorlauftemperatur in Grad Celsius. " alt="" coords="838,411,947,437"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a97b956ff09bc13415695bc8d09a0cd0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97b956ff09bc13415695bc8d09a0cd0b">&#9670;&nbsp;</a></span>serialEvent1()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void serialEvent1 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funktion, welche den Serial Empfangsbuffer auf neue Daten prüft. </p>
+<p>Die Funktion wird jeweils nach Abarbeiten der Funktion <a class="el" href="wpMain_8ino.html#afe461d27b9c48d5921c00d521181f12f" title="Main-Funktion welche ständig wiederholt wird. ">loop()</a> aufgerufen. Falls Daten im Empfangsbuffer anstehen, ruft sie <a class="el" href="wpUser_8h.html#afe3300f6a466de2905be5dcb04724d49" title="Liest über UART empfangene Daten ein und legt sie als Einstellung ab. ">receiveSerialData()</a> auf, welche den Buffer ausliest.</p>
+<dl class="section return"><dt>Rückgabe</dt><dd><code>void</code> </dd></dl>
+
+<p class="definition">Definiert in Zeile <a class="el" href="wpMain_8ino_source.html#l00202">202</a> der Datei <a class="el" href="wpMain_8ino_source.html">wpMain.ino</a>.</p>
+<div class="dynheader">
+Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
+<div class="dyncontent">
+<div class="center"><img src="wpMain_8ino_a97b956ff09bc13415695bc8d09a0cd0b_cgraph.png" border="0" usemap="#wpMain_8ino_a97b956ff09bc13415695bc8d09a0cd0b_cgraph" alt=""/></div>
+<map name="wpMain_8ino_a97b956ff09bc13415695bc8d09a0cd0b_cgraph" id="wpMain_8ino_a97b956ff09bc13415695bc8d09a0cd0b_cgraph">
+<area shape="rect" id="node2" href="wpUser_8h.html#afe3300f6a466de2905be5dcb04724d49" title="Liest über UART empfangene Daten ein und legt sie als Einstellung ab. " alt="" coords="145,5,268,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a4fc01d736fe50cf5b977f755b675f11d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fc01d736fe50cf5b977f755b675f11d">&#9670;&nbsp;</a></span>setup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setup </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Setup-Funktion welche zum Programmstart einmalig ausgeführt wird. </p>
+<p>Initialisiert Pins und externe Interruptquellen sowie weitere Schnittstellen. Daneben werden spezifische Initialisierungsfunktion aufgerufen.</p>
+<dl class="section return"><dt>Rückgabe</dt><dd><code>void</code> </dd></dl>
+
+<p class="definition">Definiert in Zeile <a class="el" href="wpMain_8ino_source.html#l00128">128</a> der Datei <a class="el" href="wpMain_8ino_source.html">wpMain.ino</a>.</p>
+<div class="dynheader">
+Hier ist ein Graph, der zeigt, was diese Funktion aufruft:</div>
+<div class="dyncontent">
+<div class="center"><img src="wpMain_8ino_a4fc01d736fe50cf5b977f755b675f11d_cgraph.png" border="0" usemap="#wpMain_8ino_a4fc01d736fe50cf5b977f755b675f11d_cgraph" alt=""/></div>
+<map name="wpMain_8ino_a4fc01d736fe50cf5b977f755b675f11d_cgraph" id="wpMain_8ino_a4fc01d736fe50cf5b977f755b675f11d_cgraph">
+<area shape="rect" id="node2" href="wpControl_8h.html#a31c86cc69d98b5b7b1da74c1f97146b3" title="Initialisieren der Steuerein&#45; und Ausgänge sowie deren Zustandsvariablen. " alt="" coords="108,5,213,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Variablen-Dokumentation</h2>
+<a id="aaa24a79eb52dcb19bf156bc10525ec32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa24a79eb52dcb19bf156bc10525ec32">&#9670;&nbsp;</a></span>blink1Hz</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t blink1Hz</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Speicherladung Zustandsautomaten-Variable. </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="wpMain_8ino_source.html#l00093">93</a> der Datei <a class="el" href="wpMain_8ino_source.html">wpMain.ino</a>.</p>
+
+</div>
+</div>
+<a id="a7d356cc08e5802e59a06f7800133fa4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d356cc08e5802e59a06f7800133fa4d">&#9670;&nbsp;</a></span>DiStates</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structDI__STATES.html">DI_STATES</a> DiStates = {0,0,0,0,0,0,0,0}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enthält die Main- und Initialisierungsfunktion des gesamten Projektes. </p>
+<p>Hier sind die Top-Level Funktionen definiert, welche alle anderen aufrufen. Da die Setup-Funktion bei Programmstart als erste ausgeführt wird, müssen hier alle notwendigen Initialisierungsfunktion aufgerufen werden. Globale Variablen und Objekte sind desweiteren hier zu finden. </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="wpMain_8ino_source.html#l00049">49</a> der Datei <a class="el" href="wpMain_8ino_source.html">wpMain.ino</a>.</p>
+
+</div>
+</div>
+<a id="ab2e03e063df016737f06bb115a29e07e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2e03e063df016737f06bb115a29e07e">&#9670;&nbsp;</a></span>ladenState</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="wpSpeicherladung_8h.html#a7747c4229de69b5a5392b0d4dc034fd8">ladenState_t</a> ladenState = <a class="el" href="wpSpeicherladung_8h.html#a7747c4229de69b5a5392b0d4dc034fd8a74f686550596814240d32d2edc696a73">LADEN_STATE_IDLE</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Switch-Case Variable für WP Betriebszustände. </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="wpMain_8ino_source.html#l00090">90</a> der Datei <a class="el" href="wpMain_8ino_source.html">wpMain.ino</a>.</p>
+
+</div>
+</div>
+<a id="a85fcac8cf4deef17c29f61087ec90280"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85fcac8cf4deef17c29f61087ec90280">&#9670;&nbsp;</a></span>Systemsettings</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structSETTINGS.html">SETTINGS</a> Systemsettings[8]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initialisierung:</b><div class="fragment"><div class="line">=</div><div class="line">{</div><div class="line">    {<span class="stringliteral">&quot;SYSready&quot;</span>,1},     </div><div class="line">    {<span class="stringliteral">&quot;SYStaussen&quot;</span>,0},   </div><div class="line">    {<span class="stringliteral">&quot;SYStvorl&quot;</span>,0},     </div><div class="line">    {<span class="stringliteral">&quot;SYStkond&quot;</span>,0},     </div><div class="line">    {<span class="stringliteral">&quot;SYStspeich&quot;</span>,0},   </div><div class="line">    {<span class="stringliteral">&quot;SYSsysZust&quot;</span>,0},   </div><div class="line">    {<span class="stringliteral">&quot;SYSuser1&quot;</span>,0},     </div><div class="line">    {<span class="stringliteral">&quot;SYSuser2&quot;</span>,0}      </div><div class="line">}</div></div><!-- fragment --><p>Structarray mit Infos, welche an das HMI gesendet werden </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="wpMain_8ino_source.html#l00075">75</a> der Datei <a class="el" href="wpMain_8ino_source.html">wpMain.ino</a>.</p>
+
+</div>
+</div>
+<a id="a3d245ff9bded6a031abf01a964d72e05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d245ff9bded6a031abf01a964d72e05">&#9670;&nbsp;</a></span>Systemzustand</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structSYSTEMZUSTAND.html">SYSTEMZUSTAND</a> Systemzustand = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>ausgelesene DI-Werte als Bitfields mit 0 initialisieren. </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="wpMain_8ino_source.html#l00051">51</a> der Datei <a class="el" href="wpMain_8ino_source.html">wpMain.ino</a>.</p>
+
+</div>
+</div>
+<a id="a296db861de9d0718f4f894ed6bb20ab0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a296db861de9d0718f4f894ed6bb20ab0">&#9670;&nbsp;</a></span>Usersettings</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structSETTINGS.html">SETTINGS</a> Usersettings[15]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initialisierung:</b><div class="fragment"><div class="line">=</div><div class="line">{</div><div class="line">    </div><div class="line">    {<span class="stringliteral">&quot;HMIready&quot;</span>,1},  </div><div class="line">    {<span class="stringliteral">&quot;HMIbmode&quot;</span>,1}, </div><div class="line">    {<span class="stringliteral">&quot;HMIversN&quot;</span>,0}, </div><div class="line">    {<span class="stringliteral">&quot;HMIversR&quot;</span>,0}, </div><div class="line">    {<span class="stringliteral">&quot;HMIstufe&quot;</span>,4}, </div><div class="line">    {<span class="stringliteral">&quot;HMItimeNow&quot;</span>,0},   </div><div class="line">    {<span class="stringliteral">&quot;HMIdateNow&quot;</span>,0},   </div><div class="line">    {<span class="stringliteral">&quot;HMIyearNow&quot;</span>,0},   </div><div class="line">    {<span class="stringliteral">&quot;HMItimerON&quot;</span>,0},   </div><div class="line">    {<span class="stringliteral">&quot;HMItimerOFF&quot;</span>,0},  </div><div class="line">    {<span class="stringliteral">&quot;HMItimerDay&quot;</span>,0},  </div><div class="line">    {<span class="stringliteral">&quot;HMIdevToggle&quot;</span>,0}, </div><div class="line">    {<span class="stringliteral">&quot;HMIuser1&quot;</span>,0}, </div><div class="line">    {<span class="stringliteral">&quot;HMIuser2&quot;</span>,0}, </div><div class="line">    {<span class="stringliteral">&quot;HMIuser3&quot;</span>,0}  </div><div class="line">}</div></div><!-- fragment --><p>Systemzustand als Bitfields. Structarray mit Einstellungen welche vom User am HMI vorgenommen werden </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="wpMain_8ino_source.html#l00054">54</a> der Datei <a class="el" href="wpMain_8ino_source.html">wpMain.ino</a>.</p>
+
+</div>
+</div>
+<a id="aa0dc9af285b4c48da6ff485336dbc014"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0dc9af285b4c48da6ff485336dbc014">&#9670;&nbsp;</a></span>wpState</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="wpControl_8h.html#ad91207ae77befb7bc86d2bd1b7cef720">wpState_t</a> wpState = <a class="el" href="wpControl_8h.html#ad91207ae77befb7bc86d2bd1b7cef720afc0222f5f8e94ea72d549d73124668d2">WP_STATE_IDLE</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="wpMain_8ino_source.html#l00087">87</a> der Datei <a class="el" href="wpMain_8ino_source.html">wpMain.ino</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="wpMain_8ino.html">wpMain.ino</a></li>
+    <li class="footer">Erzeugt von
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<map id="autoBetrieb" name="autoBetrieb">
+<area shape="rect" id="node2" href="$wpRegler_8h.html#afb8c37e2ac60ef06ab2ca3e72945031f" title="Berechnet Solltemperatur des Heizungsvorlauf mittels Heizkurve. " alt="" coords="151,5,241,32"/>
+<area shape="rect" id="node3" href="$wpSensorik_8h.html#aeb03ba2c8dc0be735f75d2bbee8064b1" title="Messung der aktuellen Aussentemperatur in Grad Celsius. " alt="" coords="649,107,763,133"/>
+<area shape="rect" id="node4" href="$wpUser_8h.html#a6132506f43bcc6cffd99023797a83699" title="Bereitstellen der eingestellten Heizkurvenstufe. " alt="" coords="653,309,759,336"/>
+<area shape="rect" id="node5" href="$wpUser_8h.html#a92568e4f841036f5ae061e46f09dbde5" title="Gibt die vom User eingestellte Heizkurven&#45;Parallelverschiebung zurück. " alt="" coords="659,360,753,387"/>
+<area shape="rect" id="node6" href="$wpUser_8h.html#a0cb5ee680fd84dea322a8a24f6e26e77" title="Prüft ob eine reduzierte Vorlauftemperatur gewünscht wird. " alt="" coords="651,411,761,437"/>
+<area shape="rect" id="node7" href="$wpSpeicherladung_8h.html#a1c0cf0ef9357ae514777ada14e9a8edd" title="Führt die Speicherladung und Abtauung mittels Zustandsautomat durch. " alt="" coords="141,208,251,235"/>
+<area shape="rect" id="node8" href="$wpSensorik_8h.html#a3beeed1703375ffa184789ba09aaadda" title="Messung der aktuellen Pufferspeichertemperatur in Grad Celsius. " alt="" coords="299,208,419,235"/>
+<area shape="rect" id="node9" href="$wpSensorik_8h.html#aede17587aa59ebd5d0ebad2e41ed795c" title="Messung der aktuellen Wassertemperatur vor dem Wärmetauscher. " alt="" coords="299,259,419,285"/>
+<area shape="rect" id="node10" href="$wpControl_8h.html#ae710165b7dd2b053ad08f96dba48d54c" title="Statemachine für die Low&#45;Level Steuerung der Wärmepumpe. " alt="" coords="299,157,418,184"/>
+<area shape="rect" id="node11" href="$wpControl_8ino.html#ac6682d7877400789b32bf521ebd3b843" title="Einlesen der Zustände von Digital&#45;Eingänge und Ausgänge. " alt="" coords="485,259,583,285"/>
+<area shape="rect" id="node12" href="$wpRegler_8h.html#a802a6ca104db722b268f0693497b7094" title="Zustandsautomat für den Heizungsvorlauf&#45;Temperaturregler. " alt="" coords="467,208,601,235"/>
+<area shape="rect" id="node16" href="$wpRegler_8h.html#aed1136d4cbd9952d22b46b8e3893c4a5" title="Reinitialisieren des Dreipunktreglers. " alt="" coords="496,157,572,184"/>
+<area shape="rect" id="node13" href="$wpRegler_8ino.html#afb8c37e2ac60ef06ab2ca3e72945031f" title="Berechnet Solltemperatur des Heizungsvorlauf mittels Heizkurve. " alt="" coords="661,259,751,285"/>
+<area shape="rect" id="node14" href="$wpRegler_8ino.html#aedd27125fe6a72dd6e137c3b8a3d1a13" title="Quasi&#45;stegiger Dreipunktregler für Dreiweg&#45;Mischventil. " alt="" coords="657,157,755,184"/>
+<area shape="rect" id="node15" href="$wpSensorik_8h.html#a1fdd7775b19d4c50f37b9ee8174f4989" title="Messung der aktuellen Heizungs&#45;Vorlauftemperatur in Grad Celsius. " alt="" coords="651,208,761,235"/>
+</map>

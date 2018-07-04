@@ -1,0 +1,4 @@
+<map id="speicherladung" name="speicherladung">
+<area shape="rect" id="node2" href="$wpAuto_8ino.html#afed4915ead06746e4c683ee93642d8cb" title="Ruft die für den automatischen Betrieb nötigen Funktionen auf. " alt="" coords="163,5,251,32"/>
+<area shape="rect" id="node3" href="$wpMain_8ino.html#afe461d27b9c48d5921c00d521181f12f" title="Main&#45;Funktion welche ständig wiederholt wird. " alt="" coords="299,5,345,32"/>
+</map>

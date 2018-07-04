@@ -1,0 +1,4 @@
+<map id="updateHMI" name="updateHMI">
+<area shape="rect" id="node2" href="$wpUser_8ino.html#ab3d6a2608aa113517ff811539024869a" title="Benutzersteuerungs Hauptfunktion zum Aufruf im Mainloop. " alt="" coords="137,5,212,32"/>
+<area shape="rect" id="node3" href="$wpMain_8ino.html#afe461d27b9c48d5921c00d521181f12f" title="Main&#45;Funktion welche ständig wiederholt wird. " alt="" coords="260,5,307,32"/>
+</map>
